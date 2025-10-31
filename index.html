@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Krilay AI — Practical AI Solutions</title>
+  <meta name="description" content="Krilay AI builds practical AI solutions for SMBs. Auri is our showcase conversational advisor that turns website visitors into qualified leads.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%230d9488'/%3E%3Ctext x='50' y='62' font-family='Arial,Helvetica,sans-serif' font-size='62' text-anchor='middle' fill='white'%3EK%3C/text%3E%3C/svg%3E" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* subtle fade-in */
+    .fade-in { animation: fade 0.6s ease-out both; }
+    @keyframes fade { from { opacity: 0; transform: translateY(6px);} to { opacity: 1; transform: none; } }
+  </style>
+</head>
+<body class="bg-white text-slate-800 selection:bg-teal-200/60">
+  <!-- Top bar -->
+  <header class="sticky top-0 z-30 bg-white/80 backdrop-blur border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2">
+        <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-teal-600 text-white font-bold">K</span>
+        <span class="font-semibold">Krilay AI</span>
+      </a>
+      <nav class="hidden sm:flex gap-6 text-sm">
+        <a href="#offerings" class="hover:text-teal-700">Offerings</a>
+        <a href="#auri" class="hover:text-teal-700">Auri</a>
+        <a href="#how" class="hover:text-teal-700">How it works</a>
+        <a href="#contact" class="hover:text-teal-700">Contact</a>
+      </nav>
+      <a href="#contact" class="text-sm px-3 py-2 rounded-xl bg-teal-600 text-white hover:bg-teal-700">Talk to us</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-b from-teal-50 to-white border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-24 grid md:grid-cols-2 gap-10 items-center">
+      <div class="fade-in">
+        <h1 class="text-3xl sm:text-5xl font-semibold leading-tight">Practical AI that grows your business</h1>
+        <p class="mt-4 text-slate-600 text-lg">We design and deploy useful AI for small & mid‑sized teams. Start with <span class="font-semibold text-teal-700">Auri</span> — our conversational advisor that turns website visitors into qualified leads.</p>
+        <div class="mt-6 flex gap-3">
+          <a href="#auri" class="px-5 py-3 rounded-xl bg-teal-600 text-white hover:bg-teal-700">See Auri</a>
+          <a href="#offerings" class="px-5 py-3 rounded-xl border border-slate-300 hover:border-slate-400">All offerings</a>
+        </div>
+        <p class="mt-3 text-xs text-slate-500">Made in Melbourne • Privacy‑first • No lock‑in</p>
+      </div>
+      <div class="fade-in">
+        <div class="relative rounded-2xl border border-slate-200 shadow-sm p-4 bg-white">
+          <div class="text-xs uppercase tracking-wide text-slate-500 mb-2">Auri demo</div>
+          <div class="rounded-xl border border-slate-200 p-3">
+            <div class="text-sm text-slate-600">“Hi! I’m Auri. Tell me what you’re looking for and I’ll guide you.”</div>
+            <div class="mt-3 flex gap-2 text-xs">
+              <span class="px-2 py-1 rounded-lg bg-slate-100">Lead capture</span>
+              <span class="px-2 py-1 rounded-lg bg-slate-100">Website embed</span>
+              <span class="px-2 py-1 rounded-lg bg-slate-100">CRM friendly</span>
+            </div>
+          </div>
+          <div class="mt-4 grid grid-cols-3 gap-3 text-center">
+            <div class="p-3 rounded-lg bg-teal-50 border border-teal-100">
+              <div class="text-2xl font-semibold">+38%</div>
+              <div class="text-xs text-slate-500">More enquiries*</div>
+            </div>
+            <div class="p-3 rounded-lg bg-teal-50 border border-teal-100">
+              <div class="text-2xl font-semibold">24/7</div>
+              <div class="text-xs text-slate-500">Always on</div>
+            </div>
+            <div class="p-3 rounded-lg bg-teal-50 border border-teal-100">
+              <div class="text-2xl font-semibold">5‑10 min</div>
+              <div class="text-xs text-slate-500">Setup time</div>
+            </div>
+          </div>
+          <p class="mt-2 text-[11px] text-slate-500">*Illustrative. Replace with your own metric later.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Offerings -->
+  <section id="offerings" class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+    <h2 class="text-2xl sm:text-3xl font-semibold">What we offer</h2>
+    <p class="mt-2 text-slate-600">Start simple, scale as you grow.</p>
+    <div class="mt-8 grid md:grid-cols-3 gap-6">
+      <!-- Card 1 -->
+      <div class="p-6 rounded-2xl border border-slate-200 hover:shadow-sm">
+        <div class="text-sm uppercase tracking-wide text-teal-700">Showcase</div>
+        <h3 class="mt-2 font-semibold">Auri — Conversational Advisor</h3>
+        <p class="mt-2 text-sm text-slate-600">Capture leads, answer FAQs, and guide customers. Embed on your site in minutes. Connect to Zoho/Salesforce/HubSpot.</p>
+      </div>
+      <!-- Card 2 -->
+      <div class="p-6 rounded-2xl border border-slate-200 hover:shadow-sm">
+        <div class="text-sm uppercase tracking-wide text-teal-700">Services</div>
+        <h3 class="mt-2 font-semibold">AI Implementation for SMBs</h3>
+        <p class="mt-2 text-sm text-slate-600">Discovery → Pilot → Roll‑out. We integrate chat, search, and automations with your existing tools.</p>
+      </div>
+      <!-- Card 3 -->
+      <div class="p-6 rounded-2xl border border-slate-200 hover:shadow-sm">
+        <div class="text-sm uppercase tracking-wide text-teal-700">Data</div>
+        <h3 class="mt-2 font-semibold">Knowledge Centre & Lead Scoring</h3>
+        <p class="mt-2 text-sm text-slate-600">Centralise content, enable semantic search, and prioritise enquiries using engagement signals.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Auri section -->
+  <section id="auri" class="bg-slate-50 border-y border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <h2 class="text-2xl sm:text-3xl font-semibold">Meet Auri</h2>
+          <p class="mt-3 text-slate-600">Auri is a consultant‑style chat experience. It asks smart follow‑ups, captures contact details, and routes hot leads to your CRM instantly.</p>
+          <ul class="mt-4 space-y-2 text-sm text-slate-700 list-disc list-inside">
+            <li>Embeds in any website (one script tag)</li>
+            <li>Privacy‑first, brand‑aligned responses</li>
+            <li>Exports to Zoho/Salesforce/HubSpot or email</li>
+          </ul>
+          <a href="#contact" class="mt-5 inline-block px-5 py-3 rounded-xl bg-teal-600 text-white hover:bg-teal-700">Add Auri to my site</a>
+        </div>
+        <div>
+          <div class="rounded-2xl border border-slate-200 p-6 bg-white">
+            <div class="text-sm font-medium">Example conversation</div>
+            <div class="mt-4 space-y-3 text-sm">
+              <div class="p-3 rounded-xl bg-slate-100 w-fit">“We’re a plumbing business in Melbourne. Can Auri book jobs?”</div>
+              <div class="p-3 rounded-xl bg-teal-600 text-white w-fit ml-auto">“Yes — Auri collects details and can create a job in your CRM or send an email to dispatch.”</div>
+              <div class="p-3 rounded-xl bg-slate-100 w-fit">“Can it qualify leads?”</div>
+              <div class="p-3 rounded-xl bg-teal-600 text-white w-fit ml-auto">“It ranks interest as Low/Medium/High using engagement signals and your rules.”</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how" class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+    <h2 class="text-2xl sm:text-3xl font-semibold">How we work</h2>
+    <div class="mt-8 grid md:grid-cols-3 gap-6">
+      <div class="p-6 rounded-2xl border border-slate-200">
+        <div class="text-xs uppercase tracking-wide text-slate-500">Step 1</div>
+        <h3 class="font-semibold mt-1">Quick discovery</h3>
+        <p class="text-sm text-slate-600 mt-2">30‑min chat to map goals, content sources, and success metrics.</p>
+      </div>
+      <div class="p-6 rounded-2xl border border-slate-200">
+        <div class="text-xs uppercase tracking-wide text-slate-500">Step 2</div>
+        <h3 class="font-semibold mt-1">Pilot</h3>
+        <p class="text-sm text-slate-600 mt-2">We deploy Auri on a test page, measure results, refine.</p>
+      </div>
+      <div class="p-6 rounded-2xl border border-slate-200">
+        <div class="text-xs uppercase tracking-wide text-slate-500">Step 3</div>
+        <h3 class="font-semibold mt-1">Roll‑out</h3>
+        <p class="text-sm text-slate-600 mt-2">Embed across your site, connect CRM, and enable analytics.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="bg-teal-50 border-y border-teal-100">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <h2 class="text-2xl sm:text-3xl font-semibold">Let’s talk</h2>
+          <p class="mt-3 text-slate-700">Tell us about your business and we’ll share a simple plan to get value from AI in weeks, not months.</p>
+          <ul class="mt-4 text-sm text-slate-700 list-disc list-inside">
+            <li>Email: <a class="text-teal-700 underline" href="mailto:hello@krilay.com">hello@krilay.com</a></li>
+            <li>Phone: <a class="text-teal-700 underline" href="tel:+61xxxxxxxxx">+61 xxxxx xxx xx</a></li>
+          </ul>
+        </div>
+        <form class="p-6 rounded-2xl border border-slate-200 bg-white" onsubmit="event.preventDefault(); alert('Thanks! We\'ll get back to you shortly.');">
+          <label class="block text-sm">Name<input required class="mt-1 w-full border rounded-lg px-3 py-2" type="text"/></label>
+          <label class="block text-sm mt-4">Email<input required class="mt-1 w-full border rounded-lg px-3 py-2" type="email"/></label>
+          <label class="block text-sm mt-4">How can we help?<textarea required class="mt-1 w-full border rounded-lg px-3 py-2" rows="4"></textarea></label>
+          <button class="mt-4 w-full px-4 py-2 rounded-xl bg-teal-600 text-white hover:bg-teal-700">Send</button>
+          <p class="mt-2 text-[11px] text-slate-500">Submits locally for now. We’ll connect this to your email or CRM later.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-10 text-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="text-slate-500">© <span id="y"></span> Krilay AI. All rights reserved.</div>
+      <div class="flex gap-4 text-slate-500">
+        <a href="#" class="hover:text-teal-700">Privacy</a>
+        <a href="#" class="hover:text-teal-700">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+</body>
+</html>
