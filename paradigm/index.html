@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Paradigm Chat • 3-Pane Layout</title>
+<style>
+  :root { --bg:#f5f7fb; --panel:#ffffff; --accent:#155EEF; --text:#0b1220; --muted:#475569; --border:#e3e8f4; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:system-ui, Segoe UI, Roboto, Arial, sans-serif; background:var(--bg); color:var(--text); height:100vh; }
+
+  /* ===== Layout: 70% chat (left), 30% right column split vertically ===== */
+  .layout { display:grid; grid-template-columns: 70% 30%; grid-template-rows: 100%; height:100vh; }
+  .left { display:flex; }
+  .right { display:grid; grid-template-rows: 1fr 1fr; gap:10px; padding:10px; }
+
+  /* ===== Chat panel (left) — UNCHANGED ===== */
+  .chat { flex:1; display:flex; flex-direction:column; padding:16px; gap:10px; }
+  .chat-card { background:var(--panel); border:1px solid var(--border); border-radius:20px; padding:16px; box-shadow:0 10px 30px rgba(0,0,0,.35); display:flex; flex-direction:column; height:100%; }
+  .header { font-weight:600; letter-spacing:.2px; margin-bottom:4px; display:flex; gap:10px; align-items:center; justify-content:space-between; }
+  .header-left { display:flex; align-items:center; gap:10px; }
+  .dot { width:10px; height:10px; border-radius:50%; background:var(--accent); box-shadow:0 0 12px var(--accent); }
+  .logo { height:40px; width:auto; }
+  .typing { font-size:12px; color:var(--muted); margin-left:4px; }
+
+  .messages-wrap { flex:1; min-height:0; }
+  .messages { height:100%; overflow:auto; padding:8px; display:flex; flex-direction:column; gap:10px; }
+  .bubble { max-width:80%; padding:10px 12px; border-radius:14px; line-height:1.35; white-space:pre-wrap; }
+  .bubble a { color: var(--accent); text-decoration: underline; }
+  .bubble a:hover { opacity: .85; }
+  .user { align-self:flex-end; background:#e8f0ff; color:#0b1220; }
+  .bot  { align-self:flex-start; background:#f6f7fb; border:1px solid #e3e8f4; color:#0b1220; }
+
+  .footer { display:flex; gap:8px; margin-top:8px; }
+  input[type=text]{ flex:1; padding:12px 14px; border-radius:12px; border:1px solid var(--border); background:#0d1526; color:#e6eefc; outline:none; }
+  button { padding:12px 16px; border-radius:12px; border:0; background:var(--accent); color:#071225; font-weight:600; cursor:pointer; }
+  .hint { color:var(--muted); font-size:12px; margin-top:6px; text-align:center; }
+
+  /* ===== Right column panels ===== */
+  .panel { background:var(--panel); border:1px solid var(--border); border-radius:20px; padding:16px; position:relative; overflow:hidden; box-shadow:0 6px 24px rgba(8, 15, 40, .08); }
+
+  /* --- ADS (Top) : softened background + centered light card --- */
+  .ads {
+    /* soft, light background (no harsh dark-to-light) */
+    background: linear-gradient(135deg, #f9fbff 0%, #f2f8ff 55%, #f6fff9 100%);
+    display:flex; align-items:center; justify-content:center;
+  }
+
+  /* link fills panel but acts as a centering flexbox for the card */
+  .ad-link {
+    position:relative; display:flex; align-items:center; justify-content:center;
+    width:100%; height:100%; text-decoration:none; color:inherit;
+  }
+
+  /* background image remains absolute but is purely decorative */
+  .ad-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.15; filter:saturate(1.05) contrast(1.02); }
+  .ad-img.hidden { display:none; }
+
+  /* much lighter fallback if image missing */
+  .ad-fallback { position:absolute; inset:0; background:linear-gradient(135deg,#e6f0ff 0%, #f3fff4 100%); }
+
+  /* light, centered overlay card (no bottom anchor, no dark glass) */
+  .ad-overlay {
+    position:relative; /* not absolute; centers within .ad-link */
+    background: rgba(255,255,255,.96);
+    color: #0f172a;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(16,24,40,.08);
+    width: min(92%, 560px);
+    padding: 22px 24px;
+    z-index:1;
+  }
+  .ad-title { font-weight:800; font-size:20px; margin:0 0 6px; }
+  .ad-tag { color:#475467; font-size:14px; margin:0 0 12px; }
+
+  .cta { padding:10px 14px; border-radius:10px; border:0; font-weight:700; cursor:pointer; background:var(--accent); color:#fff; box-shadow:0 6px 18px rgba(21,94,239,.25); }
+  .cta:hover{ filter:brightness(.95); }
+
+  /* --- FACTS (Bottom) --- */
+  .facts { display:flex; align-items:center; justify-content:center; text-align:left; }
+  .fact { font-size:16px; line-height:1.4; }
+  .fact small { display:block; color:var(--muted); margin-top:6px; }
+
+  /* Simple fade for rotations */
+  .fade { animation: fade 600ms ease; }
+  @keyframes fade { from { opacity:0 } to { opacity:1 } }
+
+  /* Responsive tweaks */
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; grid-auto-rows: auto auto auto; height:auto; }
+    .right { grid-template-rows: 300px 300px; }
+  }
+</style>
+</head>
+<body>
+  <div class="layout">
+    <!-- Left: Chat (70%) — UNCHANGED -->
+    <section class="left">
+      <div class="chat chat-card">
+        <div class="header">
+          <div class="header-left">
+            <div class="dot"></div>
+            <!-- If you want to brand the header for Paradigm, replace the next two lines with:
+            <div>Paradigm Seniors Advisor</div>
+            </div>
+            <a href="https://www.paradigmseniors.com/" target="_blank" rel="noopener">
+              <img src="assets/paradigm-logo.png" alt="Paradigm Seniors" class="logo" />
+            </a>
+            -->
+            <div>Paradigm Advisor</div>
+          </div>
+          <a href="https://www.paradigmseniors.com" target="_blank" rel="noopener">
+            <img src="paradigm-logo.svg" alt="Paradigm" class="logo" />
+          </a>
+          <div class="typing" id="typing" hidden>typing…</div>
+        </div>
+
+        <div class="messages-wrap">
+          <div class="messages" id="messages"></div>
+        </div>
+
+        <div class="footer">
+          <input id="input" type="text" placeholder="Type a message and press Enter…" autocomplete="off" />
+          <button id="send">Send</button>
+        </div>
+        <div class="hint">Powered by n8n • This is a demo chat.</div>
+      </div>
+    </section>
+
+    <!-- Right: Top Ads (50%), Bottom Facts (50%) -->
+    <aside class="right">
+      <div class="panel ads">
+        <a id="adLink" class="ad-link" href="#" target="_blank" rel="noopener">
+          <img id="adImage" class="ad-img" alt="Paradigm banner" />
+          <div id="adFallback" class="ad-fallback"></div>
+          <!-- LIGHT CARD (centered) -->
+          <div class="ad-overlay">
+            <div id="adTitle" class="ad-title"></div>
+            <div id="adTag" class="ad-tag"></div>
+            <button id="adCta" class="cta" type="button">Learn more</button>
+          </div>
+        </a>
+      </div>
+
+      <div class="panel facts">
+        <div id="factBox" class="fact"></div>
+      </div>
+    </aside>
+  </div>
+
+<script>
+/* ===== Chat wiring — UNCHANGED ===== */
+const WEBHOOK_URL = "https://c0319fdf6f2b.ngrok-free.app/webhook/Zoho"; // ← set yours
+const API_KEY     = ""; // optional
+
+const el = {
+  msgs: document.getElementById('messages'),
+  input: document.getElementById('input'),
+  send: document.getElementById('send'),
+  typing: document.getElementById('typing'),
+};
+const sessionId = crypto.randomUUID();
+
+function escapeHTML(s) {
+  return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[m]));
+}
+// Escape HTML, then support Markdown links + newlines
+function renderRichText(text) {
+  let safe = escapeHTML(text ?? '');
+  safe = safe.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1<\/a>');
+  safe = safe.replace(/\n/g, '<br>');
+  return safe;
+}
+function addBubble(text, who='bot') {
+  const b = document.createElement('div');
+  b.className = 'bubble ' + (who === 'user' ? 'user' : 'bot');
+  b.innerHTML = renderRichText(text);
+  el.msgs.appendChild(b);
+  el.msgs.scrollTop = el.msgs.scrollHeight;
+}
+async function sendMessage() {
+  const text = el.input.value.trim();
+  if (!text) return;
+  addBubble(text, 'user');
+  el.input.value = '';
+  el.input.disabled = true;
+  el.send.disabled = true;
+  el.typing.hidden = false;
+  try {
+    const res = await fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ message: text, sessionId })
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json().catch(()=> ({}));
+    const reply = (data && typeof data.reply === 'string') ? data.reply : '(no reply)';
+    addBubble(reply, 'bot');
+  } catch (e) {
+    addBubble('Sorry, something went wrong. (' + e.message + ')', 'bot');
+  } finally {
+    el.typing.hidden = true;
+    el.input.disabled = false;
+    el.send.disabled = false;
+    el.input.focus();
+  }
+}
+el.send.addEventListener('click', sendMessage);
+el.input.addEventListener('keydown', (e)=> { if (e.key === 'Enter') sendMessage(); });
+addBubble("Welcome to Paradigm! What brings you here today?", 'bot');
+
+/* ===== Right column content rotation (Paradigm Seniors) ===== */
+const ads = [
+  {
+    image: 'assets/paradigm-va.png',
+    href: 'https://www.paradigmseniors.com/va',
+    title: 'VA Claims Management for Home Care',
+    tag: 'Automate claims, reduce denials, and get veterans’ care reimbursed on time.', // homepage + VA page
+    cta: 'See how it works'
+  },
+  {
+    image: 'assets/paradigm-medicaid.png',
+    href: 'https://www.paradigmseniors.com/home-care-medicaid-rate',
+    title: 'Medicaid Billing & Rate Lookup',
+    tag: 'Find state rates fast and streamline Medicaid billing with payer-specific guidance.',
+    cta: 'Open rate tool'
+  },
+  {
+    image: 'assets/paradigm-automation.png',
+    href: 'https://www.paradigmseniors.com/',
+    title: 'Automation That Pays Off',
+    tag: 'Cut manual work so your team can focus on clients, not claims.',
+    cta: 'Learn more'
+  },
+  {
+    image: 'assets/paradigm-book.png',
+    href: 'https://www.paradigmseniors.com/bookings',
+    title: 'Join 3,500+ Agencies',
+    tag: 'Get pricing, onboarding, and payer guidance tailored to your state.',
+    cta: 'Book a demo'
+  }
+];
+
+const facts = [
+  'Paradigm helps home care agencies automate claims and cut denials so teams can focus on clients, not paperwork.',           // home page
+  'Specialized VA billing support guides providers through authorizations, HCPCS-driven billing, and reimbursement steps.',  // VA + VA Vault
+  'Medicaid Rate Lookup gives quick answers on state rates and billing details in your area.',                               // Medicaid rate tool
+  'You can book a call to review pricing, implementation, and payer processes—Paradigm supports 3,500+ agencies.'            // bookings page
+];
+
+const ROTATE_MS = 30000; // 30 seconds
+let adIdx = 0, factIdx = 0;
+
+const adLink = document.getElementById('adLink');
+const adImage = document.getElementById('adImage');
+const adTitle = document.getElementById('adTitle');
+const adTag = document.getElementById('adTag');
+const adCta = document.getElementById('adCta');
+const adFallback = document.getElementById('adFallback');
+
+function showAd(i){
+  const a = ads[i % ads.length];
+  adLink.href = a.href;
+
+  // image handling with soft fallback
+  adImage.classList.remove('hidden');
+  adImage.src = a.image || '';
+  adImage.onerror = () => { adImage.classList.add('hidden'); };
+  adImage.onload  = () => { adImage.classList.remove('hidden'); };
+
+  adFallback.style.background = 'linear-gradient(135deg,#e6f0ff 0%, #f3fff4 100%)';
+
+  adTitle.textContent = a.title;
+  adTag.textContent = a.tag;
+  adCta.textContent = a.cta || 'Learn more';
+
+  // tiny fade
+  [adTitle, adTag, adCta].forEach(n => { n.classList.remove('fade'); void n.offsetWidth; n.classList.add('fade'); });
+}
+function rotateAd(){ adIdx = (adIdx + 1) % ads.length; showAd(adIdx); }
+
+const factBox = document.getElementById('factBox');
+function showFact(i){
+  const text = facts[i % facts.length];
+  const p = document.createElement('div');
+  p.textContent = text;
+  p.className = 'fade';
+  factBox.replaceChildren(p);
+}
+function rotateFact(){ factIdx = (factIdx + 1) % facts.length; showFact(factIdx); }
+
+// init
+if(ads.length){ showAd(adIdx); setInterval(rotateAd, ROTATE_MS); }
+if(facts.length){ showFact(factIdx); setInterval(rotateFact, ROTATE_MS); }
+</script>
+</body>
+</html>
