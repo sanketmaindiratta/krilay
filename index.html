@@ -58,6 +58,18 @@
 .snapper{height:100svh;overflow-y:auto;scroll-snap-type:y mandatory}
 .page{opacity:0;transition:opacity .5s ease, transform .5s ease;transform:translateY(12px)}
 .page.page-in{opacity:1;transform:none}
+.dots{position:fixed;right:14px;top:50%;transform:translateY(-50%);z-index:70;display:flex;flex-direction:column;gap:10px}
+.dotnav{width:10px;height:10px;border-radius:50%;background:#c8d8ff;border:1px solid #b7ccff;opacity:.9;cursor:pointer}
+.dotnav.active{background:linear-gradient(180deg,var(--accent1),var(--accent2));box-shadow:0 0 0 3px rgba(43,116,255,.15)}
+
+/* FULLPAGE: hide native scrollbars and animate via transform */
+html,body{height:100%; overflow:hidden;}
+#fullpage{position:relative;height:100vh;width:100vw;overflow:hidden;}
+#stage{position:absolute;inset:0; display:block; transition:transform .72s cubic-bezier(.22,.61,.36,1); will-change:transform;}
+.page{height:100vh; width:100vw; opacity:0; transform:translateY(12px); transition:opacity .45s ease, transform .45s ease;}
+.page.page-in, #stage{opacity:1; transform:none}
+/* Light performance tweaks */
+.card, .benefit, .stat{will-change:transform}
 </style>
 </head>
 <body>
@@ -65,128 +77,130 @@
   <div class="nav">
     <div class="brand"><div class="logo"></div> Auri <small>Intelligent Sales Advisor by Krilay</small></div>
     <nav>
-      <a data-goto="hero" class="active">Home</a>
-      <a data-goto="what">What is Auri</a>
-      <a data-goto="why">Why Auri</a>
-      <a data-goto="results">Results</a>
-      <a data-goto="demo">Demo</a>
+      <a data-goto="0" class="active">Home</a>
+      <a data-goto="1">What is Auri</a>
+      <a data-goto="2">Why Auri</a>
+      <a data-goto="3">Results</a>
+      <a data-goto="4">Demo</a>
     </nav>
-    <button class="cta" data-goto="demo">Try Auri</button>
+    <button class="cta" data-goto="4">Try Auri</button>
   </div>
 </header>
 
-<!-- Snap-scrolling container -->
-<div class="snapper" id="snapper">
-  <!-- HERO -->
-  <section class="page p-hero" id="hero">
-    <div class="wrap center">
-      <h1 class="headline">Meet <span class="grad">Auri</span> — the intelligent way to grow your sales pipeline</h1>
-      <p class="sub">Auri helps small and medium businesses capture visitors, qualify intent, and convert conversations into customers — intelligently, instantly, and at scale.</p>
-      <div class="hero-cta"><button class="btn primary" data-goto="demo">See Auri in action</button><button class="btn" data-goto="what">Learn More</button></div>
-    </div>
-  </section>
-
-  <!-- WHAT IS AURI -->
-  <section class="page section-light p-what" id="what">
-    <div class="wrap center">
-      <h2>What is Auri?</h2>
-      <p class="sub">Auri is a conversational sales advisor that acts as your always-on front desk — engaging prospects, qualifying interest, and helping close deals even while you’re offline.</p>
-      <div class="grid features">
-        <div class="card"><h3>Conversational intelligence</h3><p>Auri understands context, tone, and business needs — not just keywords — ensuring every conversation feels personal and on-brand.</p></div>
-        <div class="card"><h3>Revenue-driven focus</h3><p>Built to identify high-intent prospects, shorten lead response time, and guide them seamlessly from chat to booking or inquiry.</p></div>
-        <div class="card"><h3>Effortless deployment</h3><p>Launch quickly with minimal setup and connect to your existing sales channels — no disruption, just smarter conversations.</p></div>
+<!-- FULLPAGE: no native scrollbars, fluid transitions -->
+<div id="fullpage" aria-live="polite">
+  <div id="stage">
+    <!-- 0: HERO -->
+    <section class="page p-hero" id="hero">
+      <div class="wrap center">
+        <h1 class="headline">Meet <span class="grad">Auri</span> — the intelligent way to grow your sales pipeline</h1>
+        <p class="sub">Auri helps small and medium businesses capture visitors, qualify intent, and convert conversations into customers — intelligently, instantly, and at scale.</p>
+        <div class="hero-cta"><button class="btn primary" data-goto="4">See Auri in action</button><button class="btn" data-goto="1">Learn More</button></div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- WHY AURI (BUSINESS BENEFITS) -->
-  <section class="page p-why" id="why">
-    <div class="wrap center">
-      <h2>Why businesses choose Auri</h2>
-      <p class="sub">Designed for growing teams that need sales intelligence, not scripts.</p>
-      <div class="grid benefits">
-        <div class="benefit"><h4>Qualifies in real time</h4><p>Understands intent instantly and filters serious prospects from casual visitors.</p></div>
-        <div class="benefit"><h4>Converts faster</h4><p>Answers intelligently and encourages booking or next steps while interest is high.</p></div>
-        <div class="benefit"><h4>Always available</h4><p>Captures and nurtures inquiries 24/7 so you never miss a lead.</p></div>
+    <!-- 1: WHAT -->
+    <section class="page section-light p-what" id="what">
+      <div class="wrap center">
+        <h2>What is Auri?</h2>
+        <p class="sub">Auri is an intelligent sales advisor that engages prospects, qualifies interest, and helps close deals — even while you're offline.</p>
+        <div class="grid features">
+          <div class="card"><h3>Conversational intelligence</h3><p>Understands context and business needs — every conversation feels personal and on‑brand.</p></div>
+          <div class="card"><h3>Revenue‑driven focus</h3><p>Identifies high‑intent prospects and guides them to booking or inquiry while interest is high.</p></div>
+          <div class="card"><h3>Effortless deployment</h3><p>Launch quickly and connect to your existing sales channels with minimal change.</p></div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- RESULTS -->
-  <section class="page section-light p-results" id="results">
-    <div class="wrap center">
-      <h2>Results that matter</h2>
-      <p class="sub">Teams using Auri see measurable impact within weeks.</p>
-      <div class="grid stat-grid">
-        <div class="stat"><div class="num" data-count="45">0</div><div class="cap">% more qualified leads</div></div>
-        <div class="stat"><div class="num" data-count="60">0</div><div class="cap">% faster first responses</div></div>
-        <div class="stat"><div class="num" data-count="25">0</div><div class="cap">% fewer missed opportunities</div></div>
+    <!-- 2: WHY -->
+    <section class="page p-why" id="why">
+      <div class="wrap center">
+        <h2>Why businesses choose Auri</h2>
+        <p class="sub">Designed for growing teams that need sales intelligence, not scripts.</p>
+        <div class="grid benefits">
+          <div class="benefit"><h4>Qualifies in real time</h4><p>Understands intent instantly and filters serious prospects from casual visitors.</p></div>
+          <div class="benefit"><h4>Converts faster</h4><p>Answers intelligently and encourages booking or next steps while interest is high.</p></div>
+          <div class="benefit"><h4>Always available</h4><p>Captures and nurtures inquiries 24/7 so you never miss a lead.</p></div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- DEMO -->
-  <section class="page p-demo" id="demo">
-    <div class="wrap center">
-      <h2>Try Auri live</h2>
-      <p class="sub">Experience how Auri engages visitors, asks the right questions, and drives conversion naturally.</p>
-      <div style="max-width:520px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:16px;text-align:left;">
-        <div id="chatbox" style="height:340px;overflow:auto;display:flex;flex-direction:column;gap:10px;margin-bottom:10px;padding:6px;border:1px solid var(--line);border-radius:12px;background:#f4f8ff;"></div>
-        <div style="display:flex;gap:8px;"><input id="input" type="text" placeholder="Type a message…" style="flex:1;padding:10px 12px;border-radius:10px;border:1px solid var(--line);"><button id="send" class="cta">Send</button></div>
+    <!-- 3: RESULTS -->
+    <section class="page section-light p-results" id="results">
+      <div class="wrap center">
+        <h2>Results that matter</h2>
+        <p class="sub">Teams using Auri see measurable impact within weeks.</p>
+        <div class="grid stat-grid">
+          <div class="stat"><div class="num" data-count="45">0</div><div class="cap">% more qualified leads</div></div>
+          <div class="stat"><div class="num" data-count="60">0</div><div class="cap">% faster first responses</div></div>
+          <div class="stat"><div class="num" data-count="25">0</div><div class="cap">% fewer missed opportunities</div></div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- 4: DEMO -->
+    <section class="page p-demo" id="demo">
+      <div class="wrap center">
+        <h2>Try Auri live</h2>
+        <p class="sub">Experience how Auri engages visitors, asks the right questions, and drives conversion naturally.</p>
+        <div style="max-width:520px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:16px;text-align:left;">
+          <div id="chatbox" style="height:340px;overflow:auto;display:flex;flex-direction:column;gap:10px;margin-bottom:10px;padding:6px;border:1px solid var(--line);border-radius:12px;background:#f4f8ff;"></div>
+          <div style="display:flex;gap:8px;"><input id="input" type="text" placeholder="Type a message…" style="flex:1;padding:10px 12px;border-radius:10px;border:1px solid var(--line);"><button id="send" class="cta">Send</button></div>
+        </div>
+      </div>
+    </section>
+  </div>
 </div>
 
-<!-- Page dots -->
+<!-- Dots -->
 <div class="dots" id="dots"></div>
 
 <footer>© <span id="year"></span> Krilay AI — Auri: Intelligent Sales Advisor for SMB Growth</footer>
 
 <script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // Build dot navigation for full-page snap feel
+  // ====== Layout & navigation state ======
+  const yearEl = document.getElementById('year'); if(yearEl) yearEl.textContent = new Date().getFullYear();
+  const stage = document.getElementById('stage');
   const pages = Array.from(document.querySelectorAll('.page'));
+  const navLinks = Array.from(document.querySelectorAll('nav a,[data-goto].cta,.btn'));
   const dots = document.getElementById('dots');
-  pages.forEach((sec,i)=>{ const d=document.createElement('button'); d.className='dotnav'; d.title=sec.id; d.addEventListener('click',()=>sec.scrollIntoView({behavior:'smooth'})); dots.appendChild(d); });
+  let index = 0, animating = false;
 
-  // Activate sections as they come into view (page-load feel)
-  const navLinks = Array.from(document.querySelectorAll('nav a'));
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        const id = e.target.id;
-        // nav highlight
-        navLinks.forEach(a=>a.classList.toggle('active', a.dataset.goto===id));
-        // dot highlight
-        const idx = pages.indexOf(e.target);
-        document.querySelectorAll('.dotnav').forEach((n,j)=>n.classList.toggle('active', j===idx));
-        // trigger counters when results enters
-        if(id==='results') e.target.querySelectorAll('.num').forEach(animateCount);
-        // add page-in transition class
-        e.target.classList.add('page-in');
-      }
-    });
-  },{threshold:.7});
-  pages.forEach(p=>io.observe(p));
+  // Build dots
+  pages.forEach((_,i)=>{const d=document.createElement('button');d.className='dotnav';d.title=pages[i].id||('Page '+(i+1));d.addEventListener('click',()=>go(i));dots.appendChild(d)});
 
-  // Smooth nav buttons
-  document.querySelectorAll('[data-goto]').forEach(el=>el.addEventListener('click',()=>{
-    const id=el.dataset.goto, t=document.getElementById(id); if(t) t.scrollIntoView({behavior:'smooth'});
-  }));
-
-  // Animated counters (only when section rolls in)
-  function animateCount(el){
-    const end=parseFloat(el.dataset.count); const dur=1400; const start=performance.now();
-    function step(t){ const p=Math.min(1,(t-start)/dur); const eased=1-Math.pow(1-p,3); const val=end*eased; el.textContent=Math.round(val); if(p<1) requestAnimationFrame(step); }
-    requestAnimationFrame(step);
+  function setActive(){
+    document.querySelectorAll('.dotnav').forEach((n,i)=>n.classList.toggle('active', i===index));
+    document.querySelectorAll('nav a').forEach(a=>a.classList.toggle('active', Number(a.dataset.goto)===index));
+    // Animate numbers when entering Results
+    if(pages[index].id==='results') pages[index].querySelectorAll('.num').forEach(animateCount);
   }
 
-  // Minimal chat demo (neutral)
+  function go(i){ if(animating||i===index||i<0||i>pages.length-1) return; animating=true; index=i; stage.style.transform = `translate3d(0, ${-index*100}vh, 0)`; setActive(); setTimeout(()=>animating=false, 720); }
+
+  // Nav clicks
+  navLinks.forEach(el=>{
+    const tgt = el.dataset.goto; if(tgt!==undefined){ el.addEventListener('click',()=>go(Number(tgt))); }
+  });
+
+  // Wheel / touch handlers for fluid, single-scroll behavior
+  let touchY=null; 
+  window.addEventListener('wheel', (e)=>{ e.preventDefault(); if(animating) return; if(e.deltaY>10) go(index+1); else if(e.deltaY<-10) go(index-1); }, {passive:false});
+  window.addEventListener('touchstart',(e)=>{ touchY = e.touches[0].clientY; },{passive:true});
+  window.addEventListener('touchmove',(e)=>{ if(touchY==null) return; const dy = e.touches[0].clientY - touchY; if(Math.abs(dy)>60){ e.preventDefault(); if(!animating){ if(dy<0) go(index+1); else go(index-1);} touchY=null; } },{passive:false});
+
+  // Initial state
+  setActive();
+
+  // Counters
+  function animateCount(el){ if(el.dataset._done) return; el.dataset._done = '1'; const end=parseFloat(el.dataset.count); const dur=1200; const start=performance.now();
+    function step(t){ const p=Math.min(1,(t-start)/dur); const eased=1-Math.pow(1-p,3); const val=end*eased; el.textContent=Math.round(val); if(p<1) requestAnimationFrame(step); }
+    requestAnimationFrame(step); }
+
+  // Demo chat
   const chat=document.getElementById('chatbox'); const input=document.getElementById('input'); const send=document.getElementById('send');
   function addMsg(txt,cls='bot'){const d=document.createElement('div');d.textContent=txt;d.style.padding='8px 10px';d.style.borderRadius='10px';d.style.maxWidth='80%';d.style.background=cls==='bot'?'#eef4ff':'#dceaff';d.style.alignSelf=cls==='bot'?'flex-start':'flex-end';chat.appendChild(d);chat.scrollTop=chat.scrollHeight;}
-  function sendMsg(){const t=input.value.trim(); if(!t) return; addMsg(t,'user'); input.value=''; setTimeout(()=>addMsg('Auri: I help capture and qualify more leads so your team closes faster. Ask how to get started.'),'700');}
+  function sendMsg(){const t=input.value.trim(); if(!t) return; addMsg(t,'user'); input.value=''; setTimeout(()=>addMsg('Auri: I help capture and qualify more leads so your team closes faster. Ask how to get started.'),600);} 
   if(send){send.addEventListener('click',sendMsg); input.addEventListener('keydown',e=>{if(e.key==='Enter')sendMsg();}); addMsg('👋 Welcome! See how Auri grows pipeline with smart conversations.');}
 </script>
 </body>
