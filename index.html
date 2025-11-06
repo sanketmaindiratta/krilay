@@ -1,190 +1,326 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Krilay AI — Practical AI Solutions</title>
-  <meta name="description" content="Krilay AI builds practical AI solutions for SMBs. Auri is our showcase conversational advisor that turns website visitors into qualified leads.">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%230d9488'/%3E%3Ctext x='50' y='62' font-family='Arial,Helvetica,sans-serif' font-size='62' text-anchor='middle' fill='white'%3EK%3C/text%3E%3C/svg%3E" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    /* subtle fade-in */
-    .fade-in { animation: fade 0.6s ease-out both; }
-    @keyframes fade { from { opacity: 0; transform: translateY(6px);} to { opacity: 1; transform: none; } }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Auri – Conversational Sales Advisor</title>
+<meta name="description" content="Auri by Krilay – a smart, sales‑savvy conversational agent for lead capture, qualification, and follow‑ups."/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0f1a; --panel:#0f1624; --muted:#9fb0d1; --text:#eaf2ff; --line:#1e2a44;
+    --accent1:#8ab4f8; --accent2:#a78bfa; --accent3:#34d399; --accent4:#f472b6;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:radial-gradient(1200px 1200px at 10% -10%,#15213a 0%,transparent 60%),
+       radial-gradient(1200px 1200px at 110% 10%,#131f35 0%,transparent 60%),
+       var(--bg);color:var(--text);}
+
+  /* ===== Layout & nav ===== */
+  header{position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(255,255,255,.06);
+    backdrop-filter:saturate(140%) blur(10px);background:linear-gradient(180deg,rgba(10,15,26,.85),rgba(10,15,26,.55));}
+  .nav{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
+  .brand{display:flex;gap:10px;align-items:center;font-weight:800;letter-spacing:.2px}
+  .brand .logo{width:28px;height:28px;border-radius:8px;background:conic-gradient(from 0deg,var(--accent1),var(--accent2),var(--accent4),var(--accent3),var(--accent1));
+    box-shadow:0 0 0 2px #0b1220,0 0 25px rgba(138,180,248,.35)}
+  .nav a{color:var(--muted);text-decoration:none;margin:0 10px;font-weight:600}
+  .nav a:hover{color:var(--text)}
+  .cta{padding:10px 14px;border-radius:12px;background:linear-gradient(90deg,var(--accent2),var(--accent1));color:#071225;font-weight:800;border:0}
+
+  /* ===== Sections ===== */
+  section{scroll-margin-top:80px}
+  .wrap{max-width:1200px;margin:0 auto;padding:80px 20px}
+  .center{text-align:center}
+  .muted{color:var(--muted)}
+  .grid{display:grid;gap:20px}
+
+  /* ===== Hero with motion blobs ===== */
+  .hero{position:relative;overflow:hidden}
+  .hero .wrap{padding:120px 20px}
+  .headline{font-size:clamp(32px,6vw,64px);line-height:1.05;font-weight:800;letter-spacing:-.5px}
+  .headline .grad{background:linear-gradient(90deg,var(--accent1),var(--accent2),var(--accent4));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{max-width:780px;margin:16px auto 28px;color:var(--muted);font-size:clamp(16px,2.5vw,18px)}
+  .hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .btn{padding:14px 18px;border-radius:14px;border:1px solid var(--line);background:#111a2b;color:var(--text);font-weight:700;cursor:pointer}
+  .btn.primary{background:linear-gradient(90deg,var(--accent3),var(--accent1));color:#041018;border:0}
+
+  .blob{position:absolute;filter:blur(40px);opacity:.45;mix-blend:screen}
+  .b1{width:420px;height:420px;background:radial-gradient(circle,var(--accent1),transparent 60%);top:-60px;left:-80px;animation:float1 12s ease-in-out infinite}
+  .b2{width:520px;height:520px;background:radial-gradient(circle,var(--accent2),transparent 60%);bottom:-120px;right:-60px;animation:float2 16s ease-in-out infinite}
+  @keyframes float1{50%{transform:translate(20px,40px)}}
+  @keyframes float2{50%{transform:translate(-25px,-35px)}}
+
+  /* ===== Feature cards ===== */
+  .features{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+  .card{background:linear-gradient(180deg,#0f1624,#0c1320);border:1px solid var(--line);border-radius:16px;padding:18px;position:relative;overflow:hidden}
+  .card .tag{font-size:12px;color:var(--muted);letter-spacing:.3px}
+  .card h3{margin:6px 0 10px}
+  .card svg{width:28px;height:28px}
+  .shine::after{content:"";position:absolute;inset:-1px;background:linear-gradient(120deg,transparent,rgba(255,255,255,.08),transparent);transform:translateX(-100%);animation:shine 5s linear infinite}
+  @keyframes shine{to{transform:translateX(100%)}}
+
+  /* ===== Marquee ===== */
+  .marquee{overflow:hidden;mask-image:linear-gradient(90deg,transparent,black 10%,black 90%,transparent)}
+  .marquee .track{display:flex;gap:30px;animation:scroll 35s linear infinite;white-space:nowrap}
+  .pill{border:1px dashed var(--line);padding:8px 12px;border-radius:999px;color:var(--muted)}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+
+  /* ===== Stats counters ===== */
+  .stats{grid-template-columns:repeat(4,1fr)}
+  .stat{padding:20px;border-radius:14px;background:#0e1626;border:1px solid var(--line);text-align:center}
+  .stat .num{font-size:34px;font-weight:800}
+  .stat .cap{color:var(--muted)}
+
+  /* ===== Testimonials (snap carousel) ===== */
+  .carousel{display:flex;gap:16px;overflow:auto;scroll-snap-type:x mandatory;padding-bottom:6px}
+  .carousel::-webkit-scrollbar{height:8px}
+  .carousel .item{scroll-snap-align:center;min-width:320px;max-width:420px}
+  .quote{background:#101a2c;border:1px solid var(--line);border-radius:16px;padding:18px}
+  .quote .who{margin-top:10px;color:var(--muted);font-size:14px}
+
+  /* ===== Chat demo section ===== */
+  .chatwrap{display:grid;grid-template-columns:1.2fr 1fr;gap:24px}
+  .mini{background:#0f1626;border:1px solid var(--line);border-radius:20px;padding:16px;display:flex;flex-direction:column;height:540px}
+  .mini .header{font-weight:700;letter-spacing:.2px;margin-bottom:8px;display:flex;gap:8px;align-items:center}
+  .dot{width:10px;height:10px;border-radius:50%;background:var(--accent1);box-shadow:0 0 12px var(--accent1)}
+  .messages{flex:1;overflow:auto;padding:8px;display:flex;flex-direction:column;gap:10px}
+  .bubble{max-width:80%;padding:10px 12px;border-radius:14px;line-height:1.35}
+  .user{align-self:flex-end;background:#1e2a44}
+  .bot{align-self:flex-start;background:#0f1a30;border:1px solid #1e2a44}
+  .footer{display:flex;gap:8px;margin-top:8px}
+  input[type=text]{flex:1;padding:12px 14px;border-radius:12px;border:1px solid #22314f;background:#0d1526;color:var(--text);outline:none}
+  button{padding:12px 16px;border-radius:12px;border:0;background:var(--accent1);color:#071225;font-weight:700;cursor:pointer}
+  .hint{color:var(--muted);font-size:12px;margin-top:6px}
+
+  /* ===== Reveal on scroll ===== */
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ===== Footer ===== */
+  footer{border-top:1px solid rgba(255,255,255,.06)}
+  .foot{max-width:1200px;margin:0 auto;padding:40px 20px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+  /* ===== Responsive ===== */
+  @media (max-width:980px){.chatwrap{grid-template-columns:1fr}}
+</style>
 </head>
-<body class="bg-white text-slate-800 selection:bg-teal-200/60">
-  <!-- Top bar -->
-  <header class="sticky top-0 z-30 bg-white/80 backdrop-blur border-b border-slate-200">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
-      <a href="#" class="flex items-center gap-2">
-        <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-teal-600 text-white font-bold">K</span>
-        <span class="font-semibold">Krilay AI</span>
-      </a>
-      <nav class="hidden sm:flex gap-6 text-sm">
-        <a href="#offerings" class="hover:text-teal-700">Offerings</a>
-        <a href="#auri" class="hover:text-teal-700">Auri</a>
-        <a href="#how" class="hover:text-teal-700">How it works</a>
-        <a href="#contact" class="hover:text-teal-700">Contact</a>
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand"><div class="logo"></div> Auri</div>
+      <nav>
+        <a href="#what">What is Auri</a>
+        <a href="#features">Features</a>
+        <a href="#results">Results</a>
+        <a href="#demo">Live Demo</a>
       </nav>
-      <a href="#contact" class="text-sm px-3 py-2 rounded-xl bg-teal-600 text-white hover:bg-teal-700">Talk to us</a>
+      <button class="cta" onclick="document.querySelector('#demo').scrollIntoView({behavior:'smooth'})">Try the demo</button>
     </div>
   </header>
 
-  <!-- Hero -->
-  <section class="bg-gradient-to-b from-teal-50 to-white border-b border-slate-200">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-24 grid md:grid-cols-2 gap-10 items-center">
-      <div class="fade-in">
-        <h1 class="text-3xl sm:text-5xl font-semibold leading-tight">Practical AI that grows your business</h1>
-        <p class="mt-4 text-slate-600 text-lg">We design and deploy useful AI for small & mid‑sized teams. Start with <span class="font-semibold text-teal-700">Auri</span> — our conversational advisor that turns website visitors into qualified leads.</p>
-        <div class="mt-6 flex gap-3">
-          <a href="#auri" class="px-5 py-3 rounded-xl bg-teal-600 text-white hover:bg-teal-700">See Auri</a>
-          <a href="#offerings" class="px-5 py-3 rounded-xl border border-slate-300 hover:border-slate-400">All offerings</a>
-        </div>
-        <p class="mt-3 text-xs text-slate-500">Made in Melbourne • Privacy‑first • No lock‑in</p>
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="top">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="wrap center">
+      <h1 class="headline reveal">Meet <span class="grad">Auri</span>, your on‑site <span class="grad">Sales Advisor</span>.</h1>
+      <p class="sub reveal">Auri greets visitors, qualifies leads, books appointments, and nudges follow‑ups automatically. Built for high‑intent, hyper‑local selling.</p>
+      <div class="hero-cta reveal">
+        <button class="btn primary" onclick="document.querySelector('#demo').scrollIntoView({behavior:'smooth'})">Chat with Auri</button>
+        <a class="btn" href="#features">See how it works</a>
       </div>
-      <div class="fade-in">
-        <div class="relative rounded-2xl border border-slate-200 shadow-sm p-4 bg-white">
-          <div class="text-xs uppercase tracking-wide text-slate-500 mb-2">Auri demo</div>
-          <div class="rounded-xl border border-slate-200 p-3">
-            <div class="text-sm text-slate-600">“Hi! I’m Auri. Tell me what you’re looking for and I’ll guide you.”</div>
-            <div class="mt-3 flex gap-2 text-xs">
-              <span class="px-2 py-1 rounded-lg bg-slate-100">Lead capture</span>
-              <span class="px-2 py-1 rounded-lg bg-slate-100">Website embed</span>
-              <span class="px-2 py-1 rounded-lg bg-slate-100">CRM friendly</span>
-            </div>
-          </div>
-          <div class="mt-4 grid grid-cols-3 gap-3 text-center">
-            <div class="p-3 rounded-lg bg-teal-50 border border-teal-100">
-              <div class="text-2xl font-semibold">+38%</div>
-              <div class="text-xs text-slate-500">More enquiries*</div>
-            </div>
-            <div class="p-3 rounded-lg bg-teal-50 border border-teal-100">
-              <div class="text-2xl font-semibold">24/7</div>
-              <div class="text-xs text-slate-500">Always on</div>
-            </div>
-            <div class="p-3 rounded-lg bg-teal-50 border border-teal-100">
-              <div class="text-2xl font-semibold">5‑10 min</div>
-              <div class="text-xs text-slate-500">Setup time</div>
-            </div>
-          </div>
-          <p class="mt-2 text-[11px] text-slate-500">*Illustrative. Replace with your own metric later.</p>
+    </div>
+  </section>
+
+  <!-- ===== WHAT ===== -->
+  <section id="what">
+    <div class="wrap grid" style="grid-template-columns:1.1fr 1fr;align-items:center;gap:28px">
+      <div>
+        <h2 class="reveal">What is Auri?</h2>
+        <p class="muted reveal">Auri is a conversation‑first lead engine that understands context, remembers visitors, and acts like a diligent sales coordinator across your website, emails, and SMS.</p>
+        <ul class="reveal" style="line-height:1.9;color:var(--text);padding-left:18px">
+          <li>Understands natural language, captures structured details</li>
+          <li>Scores and routes leads, books calendar slots</li>
+          <li>Follows up with nudges and reminders automatically</li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <div class="card shine">
+          <span class="tag">Playbook snapshot</span>
+          <h3>Clarify → Answer → Lead</h3>
+          <p class="muted">Auri asks just enough to qualify, answers from your knowledge, then moves qualified prospects to book or leave details.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Offerings -->
-  <section id="offerings" class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
-    <h2 class="text-2xl sm:text-3xl font-semibold">What we offer</h2>
-    <p class="mt-2 text-slate-600">Start simple, scale as you grow.</p>
-    <div class="mt-8 grid md:grid-cols-3 gap-6">
-      <!-- Card 1 -->
-      <div class="p-6 rounded-2xl border border-slate-200 hover:shadow-sm">
-        <div class="text-sm uppercase tracking-wide text-teal-700">Showcase</div>
-        <h3 class="mt-2 font-semibold">Auri — Conversational Advisor</h3>
-        <p class="mt-2 text-sm text-slate-600">Capture leads, answer FAQs, and guide customers. Embed on your site in minutes. Connect to Zoho/Salesforce/HubSpot.</p>
-      </div>
-      <!-- Card 2 -->
-      <div class="p-6 rounded-2xl border border-slate-200 hover:shadow-sm">
-        <div class="text-sm uppercase tracking-wide text-teal-700">Services</div>
-        <h3 class="mt-2 font-semibold">AI Implementation for SMBs</h3>
-        <p class="mt-2 text-sm text-slate-600">Discovery → Pilot → Roll‑out. We integrate chat, search, and automations with your existing tools.</p>
-      </div>
-      <!-- Card 3 -->
-      <div class="p-6 rounded-2xl border border-slate-200 hover:shadow-sm">
-        <div class="text-sm uppercase tracking-wide text-teal-700">Data</div>
-        <h3 class="mt-2 font-semibold">Knowledge Centre & Lead Scoring</h3>
-        <p class="mt-2 text-sm text-slate-600">Centralise content, enable semantic search, and prioritise enquiries using engagement signals.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Auri section -->
-  <section id="auri" class="bg-slate-50 border-y border-slate-200">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
-      <div class="grid md:grid-cols-2 gap-10 items-center">
-        <div>
-          <h2 class="text-2xl sm:text-3xl font-semibold">Meet Auri</h2>
-          <p class="mt-3 text-slate-600">Auri is a consultant‑style chat experience. It asks smart follow‑ups, captures contact details, and routes hot leads to your CRM instantly.</p>
-          <ul class="mt-4 space-y-2 text-sm text-slate-700 list-disc list-inside">
-            <li>Embeds in any website (one script tag)</li>
-            <li>Privacy‑first, brand‑aligned responses</li>
-            <li>Exports to Zoho/Salesforce/HubSpot or email</li>
-          </ul>
-          <a href="#contact" class="mt-5 inline-block px-5 py-3 rounded-xl bg-teal-600 text-white hover:bg-teal-700">Add Auri to my site</a>
+  <!-- ===== FEATURES ===== -->
+  <section id="features">
+    <div class="wrap">
+      <h2 class="center reveal">Power features that convert</h2>
+      <p class="center muted reveal">Everything you need to turn visits into conversations — and conversations into revenue.</p>
+      <div class="grid features" style="margin-top:22px">
+        <div class="card reveal shine">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15a4 4 0 0 1-4 4H7l-4 4V7a4 4 0 0 1 4-4h6"/></svg>
+          <h3>Lead Capture & Scoring</h3>
+          <p class="muted">Structured capture of name, email, intent, location; auto‑scored against your ICP with explainable reasons.</p>
         </div>
-        <div>
-          <div class="rounded-2xl border border-slate-200 p-6 bg-white">
-            <div class="text-sm font-medium">Example conversation</div>
-            <div class="mt-4 space-y-3 text-sm">
-              <div class="p-3 rounded-xl bg-slate-100 w-fit">“We’re a plumbing business in Melbourne. Can Auri book jobs?”</div>
-              <div class="p-3 rounded-xl bg-teal-600 text-white w-fit ml-auto">“Yes — Auri collects details and can create a job in your CRM or send an email to dispatch.”</div>
-              <div class="p-3 rounded-xl bg-slate-100 w-fit">“Can it qualify leads?”</div>
-              <div class="p-3 rounded-xl bg-teal-600 text-white w-fit ml-auto">“It ranks interest as Low/Medium/High using engagement signals and your rules.”</div>
-            </div>
-          </div>
+        <div class="card reveal shine">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <h3>Bookings & Reminders</h3>
+          <p class="muted">Real‑time calendar booking and smart SMS/email nudges that keep prospects engaged.</p>
+        </div>
+        <div class="card reveal shine">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z"/></svg>
+          <h3>Multi‑tenant Playbooks</h3>
+          <p class="muted">Tenant‑aware rules and knowledge so one Auri brain can power many brands safely.</p>
+        </div>
+        <div class="card reveal shine">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 12h16M4 6h16M4 18h16"/></svg>
+          <h3>CRM‑ready Data</h3>
+          <p class="muted">Clean JSON payloads for HubSpot, Zoho, Salesforce. No wrangling required.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- How it works -->
-  <section id="how" class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
-    <h2 class="text-2xl sm:text-3xl font-semibold">How we work</h2>
-    <div class="mt-8 grid md:grid-cols-3 gap-6">
-      <div class="p-6 rounded-2xl border border-slate-200">
-        <div class="text-xs uppercase tracking-wide text-slate-500">Step 1</div>
-        <h3 class="font-semibold mt-1">Quick discovery</h3>
-        <p class="text-sm text-slate-600 mt-2">30‑min chat to map goals, content sources, and success metrics.</p>
-      </div>
-      <div class="p-6 rounded-2xl border border-slate-200">
-        <div class="text-xs uppercase tracking-wide text-slate-500">Step 2</div>
-        <h3 class="font-semibold mt-1">Pilot</h3>
-        <p class="text-sm text-slate-600 mt-2">We deploy Auri on a test page, measure results, refine.</p>
-      </div>
-      <div class="p-6 rounded-2xl border border-slate-200">
-        <div class="text-xs uppercase tracking-wide text-slate-500">Step 3</div>
-        <h3 class="font-semibold mt-1">Roll‑out</h3>
-        <p class="text-sm text-slate-600 mt-2">Embed across your site, connect CRM, and enable analytics.</p>
+  <!-- ===== MARQUEE ===== -->
+  <section>
+    <div class="wrap marquee">
+      <div class="track">
+        <span class="pill">24/7 Concierge</span>
+        <span class="pill">Lead Scoring</span>
+        <span class="pill">Bookings</span>
+        <span class="pill">Follow‑ups</span>
+        <span class="pill">Knowledge‑backed Answers</span>
+        <span class="pill">Hyper‑local Targeting</span>
+        <span class="pill">Multi‑tenant</span>
+        <span class="pill">Low‑code Workflows</span>
+        <span class="pill">24/7 Concierge</span>
+        <span class="pill">Lead Scoring</span>
+        <span class="pill">Bookings</span>
+        <span class="pill">Follow‑ups</span>
       </div>
     </div>
   </section>
 
-  <!-- Contact -->
-  <section id="contact" class="bg-teal-50 border-y border-teal-100">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
-      <div class="grid md:grid-cols-2 gap-10 items-center">
-        <div>
-          <h2 class="text-2xl sm:text-3xl font-semibold">Let’s talk</h2>
-          <p class="mt-3 text-slate-700">Tell us about your business and we’ll share a simple plan to get value from AI in weeks, not months.</p>
-          <ul class="mt-4 text-sm text-slate-700 list-disc list-inside">
-            <li>Email: <a class="text-teal-700 underline" href="mailto:hello@krilay.com">hello@krilay.com</a></li>
-            <li>Phone: <a class="text-teal-700 underline" href="tel:+61xxxxxxxxx">+61 xxxxx xxx xx</a></li>
-          </ul>
+  <!-- ===== RESULTS / STATS ===== -->
+  <section id="results">
+    <div class="wrap">
+      <h2 class="center reveal">Outcomes you can point to</h2>
+      <div class="grid stats" style="margin-top:20px">
+        <div class="stat reveal"><div class="num" data-count="34">0</div><div class="cap">Avg. lift in qualified leads</div></div>
+        <div class="stat reveal"><div class="num" data-count="62">0</div><div class="cap">Faster first response</div></div>
+        <div class="stat reveal"><div class="num" data-count="18">0</div><div class="cap">Reduction in no‑shows</div></div>
+        <div class="stat reveal"><div class="num" data-count="3.5">0</div><div class="cap">Weeks to go live</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section>
+    <div class="wrap">
+      <h2 class="center reveal">Loved by sales‑minded teams</h2>
+      <div class="carousel" aria-label="Testimonials">
+        <div class="item reveal">
+          <div class="quote">“Auri feels like our best coordinator who never sleeps. Leads are warmer and meetings are fuller.”<div class="who">Practice Manager – Healthcare</div></div>
         </div>
-        <form class="p-6 rounded-2xl border border-slate-200 bg-white" onsubmit="event.preventDefault(); alert('Thanks! We\'ll get back to you shortly.');">
-          <label class="block text-sm">Name<input required class="mt-1 w-full border rounded-lg px-3 py-2" type="text"/></label>
-          <label class="block text-sm mt-4">Email<input required class="mt-1 w-full border rounded-lg px-3 py-2" type="email"/></label>
-          <label class="block text-sm mt-4">How can we help?<textarea required class="mt-1 w-full border rounded-lg px-3 py-2" rows="4"></textarea></label>
-          <button class="mt-4 w-full px-4 py-2 rounded-xl bg-teal-600 text-white hover:bg-teal-700">Send</button>
-          <p class="mt-2 text-[11px] text-slate-500">Submits locally for now. We’ll connect this to your email or CRM later.</p>
-        </form>
+        <div class="item reveal">
+          <div class="quote">“Data goes straight into CRM with context. Reps start conversations, not spreadsheets.”<div class="who">Head of Growth – Property</div></div>
+        </div>
+        <div class="item reveal">
+          <div class="quote">“From idea to first demo in 3 weeks. The playbook approach just… works.”<div class="who">Founder – SMB Services</div></div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="py-10 text-sm">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div class="text-slate-500">© <span id="y"></span> Krilay AI. All rights reserved.</div>
-      <div class="flex gap-4 text-slate-500">
-        <a href="#" class="hover:text-teal-700">Privacy</a>
-        <a href="#" class="hover:text-teal-700">Terms</a>
+  <!-- ===== LIVE DEMO (Chat) ===== -->
+  <section id="demo">
+    <div class="wrap chatwrap">
+      <div>
+        <h2 class="reveal">Try Auri now</h2>
+        <p class="muted reveal">Ask anything about your product or book a test appointment. This demo uses a simple webhook and a session‑aware chat panel.</p>
+        <ul class="muted">
+          <li>Type naturally — Auri will clarify if needed</li>
+          <li>Watch how it structures details and proposes next steps</li>
+          <li>Swap the webhook to your n8n endpoint to go live</li>
+        </ul>
       </div>
+      <div class="mini reveal">
+        <div class="header"><div class="dot"></div> Auri Assistant <div class="typing" id="typing" style="margin-left:6px;font-size:12px;color:var(--muted)" hidden>typing…</div></div>
+        <div class="messages" id="messages"></div>
+        <div class="footer">
+          <input id="input" type="text" placeholder="Type a message and press Enter…" autocomplete="off"/>
+          <button id="send">Send</button>
+        </div>
+        <div class="hint">Powered by n8n • Demo chat</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot">
+      <div>© <span id="year"></span> Krilay • Auri</div>
+      <div>Need a custom playbook or CRM handoff? <a href="#demo" style="color:var(--accent1)">Talk to Auri</a></div>
     </div>
   </footer>
 
-  <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+<script>
+  // ===== Reveal on scroll
+  const io = new IntersectionObserver((entries)=>{
+    for (const e of entries){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }
+  },{threshold:.16});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // ===== Animated counters
+  function animateCount(el){
+    const end = parseFloat(el.dataset.count);
+    const isFloat = !Number.isInteger(end);
+    const dur = 1400, start = performance.now();
+    function tick(t){
+      const p = Math.min(1,(t-start)/dur);
+      const val = end * (0.1 + 0.9 * (1- Math.pow(1-p,3)));
+      el.textContent = isFloat ? val.toFixed(1) : Math.round(val);
+      if(p<1) requestAnimationFrame(tick); else el.textContent = isFloat ? end.toFixed(1) : end;
+    }
+    requestAnimationFrame(tick);
+  }
+  const io2 = new IntersectionObserver((entries)=>{
+    for(const e of entries){ if(e.isIntersecting){ animateCount(e.target.querySelector('.num')); io2.unobserve(e.target);} }
+  },{threshold:.6});
+  document.querySelectorAll('.stat').forEach(s=>io2.observe(s));
+
+  // ===== Simple chat (kept close to your original)
+  const WEBHOOK_URL = "https://63c6eeef6505.ngrok-free.app/webhook/chatbot"; // swap to your n8n endpoint
+  const API_KEY = ""; // optional header
+  const el = {
+    msgs: document.getElementById('messages'),
+    input: document.getElementById('input'),
+    send: document.getElementById('send'),
+    typing: document.getElementById('typing'),
+  };
+  const sessionId = (crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now());
+  function addBubble(text, who='bot'){
+    const b = document.createElement('div'); b.className = 'bubble '+(who==='user'?'user':'bot'); b.textContent = text; el.msgs.appendChild(b); el.msgs.scrollTop = el.msgs.scrollHeight; }
+  async function sendMessage(){
+    const text = el.input.value.trim(); if(!text) return; addBubble(text,'user'); el.input.value=''; el.input.disabled=true; el.send.disabled=true; el.typing.hidden=false;
+    try{
+      const res = await fetch(WEBHOOK_URL,{method:'POST', headers:{'Content-Type':'application/json', ...(API_KEY?{'x-api-key':API_KEY}:{})}, body:JSON.stringify({message:text, sessionId})});
+      if(!res.ok) throw new Error('HTTP '+res.status);
+      const data = await res.json().catch(()=>({}));
+      addBubble((data && data.reply)? data.reply : '(no reply)','bot');
+    }catch(e){ addBubble('Sorry—something went wrong. ('+e.message+')','bot'); }
+    finally{ el.typing.hidden=true; el.input.disabled=false; el.send.disabled=false; el.input.focus(); }
+  }
+  el.send.addEventListener('click', sendMessage);
+  el.input.addEventListener('keydown', e=>{ if(e.key==='Enter') sendMessage();});
+  addBubble('Welcome to Auri! How can I help today?','bot');
+
+  // misc
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
