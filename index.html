@@ -3,324 +3,191 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Auri – Conversational Sales Advisor</title>
-<meta name="description" content="Auri by Krilay – a smart, sales‑savvy conversational agent for lead capture, qualification, and follow‑ups."/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<title>Auri by Krilay — Intelligent Sales Advisor for SMBs</title>
+<meta name="description" content="Auri helps small and medium businesses convert more website visitors into paying customers — intelligently and effortlessly."/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#0a0f1a; --panel:#0f1624; --muted:#9fb0d1; --text:#eaf2ff; --line:#1e2a44;
-    --accent1:#8ab4f8; --accent2:#a78bfa; --accent3:#34d399; --accent4:#f472b6;
+  :root {
+    --bg:#f8fbff; --bg2:#eef5ff; --panel:#ffffff; --ink:#0a2240; --muted:#5a6d8c; --line:#dce7ff;
+    --accent1:#2b74ff; --accent2:#00b3ff; --accent3:#14b87a; --shadow:0 10px 25px rgba(20,62,120,.08);
   }
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:radial-gradient(1200px 1200px at 10% -10%,#15213a 0%,transparent 60%),
-       radial-gradient(1200px 1200px at 110% 10%,#131f35 0%,transparent 60%),
-       var(--bg);color:var(--text);}
+  * { box-sizing: border-box; }
+  html,body { margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Arial; background:var(--bg); color:var(--ink); scroll-behavior:smooth; }
 
-  /* ===== Layout & nav ===== */
-  header{position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(255,255,255,.06);
-    backdrop-filter:saturate(140%) blur(10px);background:linear-gradient(180deg,rgba(10,15,26,.85),rgba(10,15,26,.55));}
-  .nav{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
-  .brand{display:flex;gap:10px;align-items:center;font-weight:800;letter-spacing:.2px}
-  .brand .logo{width:28px;height:28px;border-radius:8px;background:conic-gradient(from 0deg,var(--accent1),var(--accent2),var(--accent4),var(--accent3),var(--accent1));
-    box-shadow:0 0 0 2px #0b1220,0 0 25px rgba(138,180,248,.35)}
-  .nav a{color:var(--muted);text-decoration:none;margin:0 10px;font-weight:600}
-  .nav a:hover{color:var(--text)}
-  .cta{padding:10px 14px;border-radius:12px;background:linear-gradient(90deg,var(--accent2),var(--accent1));color:#071225;font-weight:800;border:0}
+  header { position:fixed;top:0;left:0;right:0;z-index:60; backdrop-filter:saturate(140%) blur(8px); background:rgba(248,251,255,0.9); border-bottom:1px solid var(--line); }
+  .nav { max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between; }
+  .brand { display:flex;align-items:center;gap:10px;font-weight:800; }
+  .brand small { display:block;color:var(--muted);font-weight:600; }
+  .logo { width:28px;height:28px;border-radius:8px;background:conic-gradient(from 0deg,var(--accent1),var(--accent2),#7ad1ff,var(--accent3),var(--accent1));box-shadow:0 0 0 2px #fff,0 0 16px rgba(43,116,255,.25); }
+  .nav a { color:var(--muted);margin:0 8px;text-decoration:none;font-weight:600; }
+  .nav a.active { color:var(--ink); }
+  .cta { padding:10px 16px;border-radius:12px;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#fff;font-weight:800;border:0;cursor:pointer;box-shadow:var(--shadow); }
 
-  /* ===== Sections ===== */
-  section{scroll-margin-top:80px}
-  .wrap{max-width:1200px;margin:0 auto;padding:80px 20px}
-  .center{text-align:center}
-  .muted{color:var(--muted)}
-  .grid{display:grid;gap:20px}
+  .page { min-height:100svh;display:grid;place-items:center;padding:120px 20px;scroll-snap-align:start; }
+  .wrap { max-width:1100px;width:100%; }
+  .center { text-align:center; }
+  .headline { font-size:clamp(36px,6vw,68px);font-weight:800;line-height:1.1;letter-spacing:-.5px; }
+  .grad { background:linear-gradient(90deg,var(--accent1),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent; }
+  .sub { max-width:800px;margin:18px auto;color:var(--muted);font-size:18px;line-height:1.6;text-align:center; }
+  .btn { padding:14px 18px;border-radius:14px;border:1px solid var(--line);background:#fff;color:var(--ink);font-weight:700;cursor:pointer;box-shadow:var(--shadow); }
+  .btn.primary { background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#fff;border:0; }
+  .hero-cta { display:flex;gap:12px;justify-content:center;flex-wrap:wrap; }
 
-  /* ===== Hero with motion blobs ===== */
-  .hero{position:relative;overflow:hidden}
-  .hero .wrap{padding:120px 20px}
-  .headline{font-size:clamp(32px,6vw,64px);line-height:1.05;font-weight:800;letter-spacing:-.5px}
-  .headline .grad{background:linear-gradient(90deg,var(--accent1),var(--accent2),var(--accent4));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .sub{max-width:780px;margin:16px auto 28px;color:var(--muted);font-size:clamp(16px,2.5vw,18px)}
-  .hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-  .btn{padding:14px 18px;border-radius:14px;border:1px solid var(--line);background:#111a2b;color:var(--text);font-weight:700;cursor:pointer}
-  .btn.primary{background:linear-gradient(90deg,var(--accent3),var(--accent1));color:#041018;border:0}
+  .section-light { background:var(--bg2); }
+  .grid { display:grid;gap:20px; }
+  .features { grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
+  .card { background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow); }
+  .card h3 { margin:6px 0 10px;font-weight:700; }
 
-  .blob{position:absolute;filter:blur(40px);opacity:.45;mix-blend:screen}
-  .b1{width:420px;height:420px;background:radial-gradient(circle,var(--accent1),transparent 60%);top:-60px;left:-80px;animation:float1 12s ease-in-out infinite}
-  .b2{width:520px;height:520px;background:radial-gradient(circle,var(--accent2),transparent 60%);bottom:-120px;right:-60px;animation:float2 16s ease-in-out infinite}
-  @keyframes float1{50%{transform:translate(20px,40px)}}
-  @keyframes float2{50%{transform:translate(-25px,-35px)}}
+  .benefits { grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:24px; }
+  .benefit { background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;text-align:left;box-shadow:var(--shadow); }
+  .benefit h4 { margin:6px 0;font-weight:700; }
+  .benefit p { color:var(--muted);font-size:15px;line-height:1.5; }
 
-  /* ===== Feature cards ===== */
-  .features{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-  .card{background:linear-gradient(180deg,#0f1624,#0c1320);border:1px solid var(--line);border-radius:16px;padding:18px;position:relative;overflow:hidden}
-  .card .tag{font-size:12px;color:var(--muted);letter-spacing:.3px}
-  .card h3{margin:6px 0 10px}
-  .card svg{width:28px;height:28px}
-  .shine::after{content:"";position:absolute;inset:-1px;background:linear-gradient(120deg,transparent,rgba(255,255,255,.08),transparent);transform:translateX(-100%);animation:shine 5s linear infinite}
-  @keyframes shine{to{transform:translateX(100%)}}
+  .stat-grid { grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:20px; }
+  .stat { text-align:center;padding:20px;border-radius:16px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow); }
+  .stat .num { font-size:34px;font-weight:800;color:var(--accent1); }
+  .stat .cap { color:var(--muted); }
 
-  /* ===== Marquee ===== */
-  .marquee{overflow:hidden;mask-image:linear-gradient(90deg,transparent,black 10%,black 90%,transparent)}
-  .marquee .track{display:flex;gap:30px;animation:scroll 35s linear infinite;white-space:nowrap}
-  .pill{border:1px dashed var(--line);padding:8px 12px;border-radius:999px;color:var(--muted)}
-  @keyframes scroll{to{transform:translateX(-50%)}}
+  footer { text-align:center;padding:30px 0;color:var(--muted);font-size:15px; }
+.dots{position:fixed;right:14px;top:50%;transform:translateY(-50%);z-index:70;display:flex;flex-direction:column;gap:10px}
+.dotnav{width:10px;height:10px;border-radius:50%;background:#c8d8ff;border:1px solid #b7ccff;opacity:.9;cursor:pointer}
+.dotnav.active{background:linear-gradient(180deg,var(--accent1),var(--accent2));box-shadow:0 0 0 3px rgba(43,116,255,.15)}
 
-  /* ===== Stats counters ===== */
-  .stats{grid-template-columns:repeat(4,1fr)}
-  .stat{padding:20px;border-radius:14px;background:#0e1626;border:1px solid var(--line);text-align:center}
-  .stat .num{font-size:34px;font-weight:800}
-  .stat .cap{color:var(--muted)}
-
-  /* ===== Testimonials (snap carousel) ===== */
-  .carousel{display:flex;gap:16px;overflow:auto;scroll-snap-type:x mandatory;padding-bottom:6px}
-  .carousel::-webkit-scrollbar{height:8px}
-  .carousel .item{scroll-snap-align:center;min-width:320px;max-width:420px}
-  .quote{background:#101a2c;border:1px solid var(--line);border-radius:16px;padding:18px}
-  .quote .who{margin-top:10px;color:var(--muted);font-size:14px}
-
-  /* ===== Chat demo section ===== */
-  .chatwrap{display:grid;grid-template-columns:1.2fr 1fr;gap:24px}
-  .mini{background:#0f1626;border:1px solid var(--line);border-radius:20px;padding:16px;display:flex;flex-direction:column;height:540px}
-  .mini .header{font-weight:700;letter-spacing:.2px;margin-bottom:8px;display:flex;gap:8px;align-items:center}
-  .dot{width:10px;height:10px;border-radius:50%;background:var(--accent1);box-shadow:0 0 12px var(--accent1)}
-  .messages{flex:1;overflow:auto;padding:8px;display:flex;flex-direction:column;gap:10px}
-  .bubble{max-width:80%;padding:10px 12px;border-radius:14px;line-height:1.35}
-  .user{align-self:flex-end;background:#1e2a44}
-  .bot{align-self:flex-start;background:#0f1a30;border:1px solid #1e2a44}
-  .footer{display:flex;gap:8px;margin-top:8px}
-  input[type=text]{flex:1;padding:12px 14px;border-radius:12px;border:1px solid #22314f;background:#0d1526;color:var(--text);outline:none}
-  button{padding:12px 16px;border-radius:12px;border:0;background:var(--accent1);color:#071225;font-weight:700;cursor:pointer}
-  .hint{color:var(--muted);font-size:12px;margin-top:6px}
-
-  /* ===== Reveal on scroll ===== */
-  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
-  .reveal.in{opacity:1;transform:none}
-
-  /* ===== Footer ===== */
-  footer{border-top:1px solid rgba(255,255,255,.06)}
-  .foot{max-width:1200px;margin:0 auto;padding:40px 20px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
-
-  /* ===== Responsive ===== */
-  @media (max-width:980px){.chatwrap{grid-template-columns:1fr}}
+/* Snap scroll container + full-page fade-in */
+.snapper{height:100svh;overflow-y:auto;scroll-snap-type:y mandatory}
+.page{opacity:0;transition:opacity .5s ease, transform .5s ease;transform:translateY(12px)}
+.page.page-in{opacity:1;transform:none}
 </style>
 </head>
 <body>
-  <header>
-    <div class="nav">
-      <div class="brand"><div class="logo"></div> Auri</div>
-      <nav>
-        <a href="#what">What is Auri</a>
-        <a href="#features">Features</a>
-        <a href="#results">Results</a>
-        <a href="#demo">Live Demo</a>
-      </nav>
-      <button class="cta" onclick="document.querySelector('#demo').scrollIntoView({behavior:'smooth'})">Try the demo</button>
-    </div>
-  </header>
+<header>
+  <div class="nav">
+    <div class="brand"><div class="logo"></div> Auri <small>Intelligent Sales Advisor by Krilay</small></div>
+    <nav>
+      <a data-goto="hero" class="active">Home</a>
+      <a data-goto="what">What is Auri</a>
+      <a data-goto="why">Why Auri</a>
+      <a data-goto="results">Results</a>
+      <a data-goto="demo">Demo</a>
+    </nav>
+    <button class="cta" data-goto="demo">Try Auri</button>
+  </div>
+</header>
 
-  <!-- ===== HERO ===== -->
-  <section class="hero" id="top">
-    <div class="blob b1"></div>
-    <div class="blob b2"></div>
+<!-- Snap-scrolling container -->
+<div class="snapper" id="snapper">
+  <!-- HERO -->
+  <section class="page p-hero" id="hero">
     <div class="wrap center">
-      <h1 class="headline reveal">Meet <span class="grad">Auri</span>, your on‑site <span class="grad">Sales Advisor</span>.</h1>
-      <p class="sub reveal">Auri greets visitors, qualifies leads, books appointments, and nudges follow‑ups automatically. Built for high‑intent, hyper‑local selling.</p>
-      <div class="hero-cta reveal">
-        <button class="btn primary" onclick="document.querySelector('#demo').scrollIntoView({behavior:'smooth'})">Chat with Auri</button>
-        <a class="btn" href="#features">See how it works</a>
+      <h1 class="headline">Meet <span class="grad">Auri</span> — the intelligent way to grow your sales pipeline</h1>
+      <p class="sub">Auri helps small and medium businesses capture visitors, qualify intent, and convert conversations into customers — intelligently, instantly, and at scale.</p>
+      <div class="hero-cta"><button class="btn primary" data-goto="demo">See Auri in action</button><button class="btn" data-goto="what">Learn More</button></div>
+    </div>
+  </section>
+
+  <!-- WHAT IS AURI -->
+  <section class="page section-light p-what" id="what">
+    <div class="wrap center">
+      <h2>What is Auri?</h2>
+      <p class="sub">Auri is a conversational sales advisor that acts as your always-on front desk — engaging prospects, qualifying interest, and helping close deals even while you’re offline.</p>
+      <div class="grid features">
+        <div class="card"><h3>Conversational intelligence</h3><p>Auri understands context, tone, and business needs — not just keywords — ensuring every conversation feels personal and on-brand.</p></div>
+        <div class="card"><h3>Revenue-driven focus</h3><p>Built to identify high-intent prospects, shorten lead response time, and guide them seamlessly from chat to booking or inquiry.</p></div>
+        <div class="card"><h3>Effortless deployment</h3><p>Launch quickly with minimal setup and connect to your existing sales channels — no disruption, just smarter conversations.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- ===== WHAT ===== -->
-  <section id="what">
-    <div class="wrap grid" style="grid-template-columns:1.1fr 1fr;align-items:center;gap:28px">
-      <div>
-        <h2 class="reveal">What is Auri?</h2>
-        <p class="muted reveal">Auri is a conversation‑first lead engine that understands context, remembers visitors, and acts like a diligent sales coordinator across your website, emails, and SMS.</p>
-        <ul class="reveal" style="line-height:1.9;color:var(--text);padding-left:18px">
-          <li>Understands natural language, captures structured details</li>
-          <li>Scores and routes leads, books calendar slots</li>
-          <li>Follows up with nudges and reminders automatically</li>
-        </ul>
-      </div>
-      <div class="reveal">
-        <div class="card shine">
-          <span class="tag">Playbook snapshot</span>
-          <h3>Clarify → Answer → Lead</h3>
-          <p class="muted">Auri asks just enough to qualify, answers from your knowledge, then moves qualified prospects to book or leave details.</p>
-        </div>
+  <!-- WHY AURI (BUSINESS BENEFITS) -->
+  <section class="page p-why" id="why">
+    <div class="wrap center">
+      <h2>Why businesses choose Auri</h2>
+      <p class="sub">Designed for growing teams that need sales intelligence, not scripts.</p>
+      <div class="grid benefits">
+        <div class="benefit"><h4>Qualifies in real time</h4><p>Understands intent instantly and filters serious prospects from casual visitors.</p></div>
+        <div class="benefit"><h4>Converts faster</h4><p>Answers intelligently and encourages booking or next steps while interest is high.</p></div>
+        <div class="benefit"><h4>Always available</h4><p>Captures and nurtures inquiries 24/7 so you never miss a lead.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- ===== FEATURES ===== -->
-  <section id="features">
-    <div class="wrap">
-      <h2 class="center reveal">Power features that convert</h2>
-      <p class="center muted reveal">Everything you need to turn visits into conversations — and conversations into revenue.</p>
-      <div class="grid features" style="margin-top:22px">
-        <div class="card reveal shine">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15a4 4 0 0 1-4 4H7l-4 4V7a4 4 0 0 1 4-4h6"/></svg>
-          <h3>Lead Capture & Scoring</h3>
-          <p class="muted">Structured capture of name, email, intent, location; auto‑scored against your ICP with explainable reasons.</p>
-        </div>
-        <div class="card reveal shine">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          <h3>Bookings & Reminders</h3>
-          <p class="muted">Real‑time calendar booking and smart SMS/email nudges that keep prospects engaged.</p>
-        </div>
-        <div class="card reveal shine">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z"/></svg>
-          <h3>Multi‑tenant Playbooks</h3>
-          <p class="muted">Tenant‑aware rules and knowledge so one Auri brain can power many brands safely.</p>
-        </div>
-        <div class="card reveal shine">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 12h16M4 6h16M4 18h16"/></svg>
-          <h3>CRM‑ready Data</h3>
-          <p class="muted">Clean JSON payloads for HubSpot, Zoho, Salesforce. No wrangling required.</p>
-        </div>
+  <!-- RESULTS -->
+  <section class="page section-light p-results" id="results">
+    <div class="wrap center">
+      <h2>Results that matter</h2>
+      <p class="sub">Teams using Auri see measurable impact within weeks.</p>
+      <div class="grid stat-grid">
+        <div class="stat"><div class="num" data-count="45">0</div><div class="cap">% more qualified leads</div></div>
+        <div class="stat"><div class="num" data-count="60">0</div><div class="cap">% faster first responses</div></div>
+        <div class="stat"><div class="num" data-count="25">0</div><div class="cap">% fewer missed opportunities</div></div>
       </div>
     </div>
   </section>
 
-  <!-- ===== MARQUEE ===== -->
-  <section>
-    <div class="wrap marquee">
-      <div class="track">
-        <span class="pill">24/7 Concierge</span>
-        <span class="pill">Lead Scoring</span>
-        <span class="pill">Bookings</span>
-        <span class="pill">Follow‑ups</span>
-        <span class="pill">Knowledge‑backed Answers</span>
-        <span class="pill">Hyper‑local Targeting</span>
-        <span class="pill">Multi‑tenant</span>
-        <span class="pill">Low‑code Workflows</span>
-        <span class="pill">24/7 Concierge</span>
-        <span class="pill">Lead Scoring</span>
-        <span class="pill">Bookings</span>
-        <span class="pill">Follow‑ups</span>
+  <!-- DEMO -->
+  <section class="page p-demo" id="demo">
+    <div class="wrap center">
+      <h2>Try Auri live</h2>
+      <p class="sub">Experience how Auri engages visitors, asks the right questions, and drives conversion naturally.</p>
+      <div style="max-width:520px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:16px;text-align:left;">
+        <div id="chatbox" style="height:340px;overflow:auto;display:flex;flex-direction:column;gap:10px;margin-bottom:10px;padding:6px;border:1px solid var(--line);border-radius:12px;background:#f4f8ff;"></div>
+        <div style="display:flex;gap:8px;"><input id="input" type="text" placeholder="Type a message…" style="flex:1;padding:10px 12px;border-radius:10px;border:1px solid var(--line);"><button id="send" class="cta">Send</button></div>
       </div>
     </div>
   </section>
+</div>
 
-  <!-- ===== RESULTS / STATS ===== -->
-  <section id="results">
-    <div class="wrap">
-      <h2 class="center reveal">Outcomes you can point to</h2>
-      <div class="grid stats" style="margin-top:20px">
-        <div class="stat reveal"><div class="num" data-count="34">0</div><div class="cap">Avg. lift in qualified leads</div></div>
-        <div class="stat reveal"><div class="num" data-count="62">0</div><div class="cap">Faster first response</div></div>
-        <div class="stat reveal"><div class="num" data-count="18">0</div><div class="cap">Reduction in no‑shows</div></div>
-        <div class="stat reveal"><div class="num" data-count="3.5">0</div><div class="cap">Weeks to go live</div></div>
-      </div>
-    </div>
-  </section>
+<!-- Page dots -->
+<div class="dots" id="dots"></div>
 
-  <!-- ===== TESTIMONIALS ===== -->
-  <section>
-    <div class="wrap">
-      <h2 class="center reveal">Loved by sales‑minded teams</h2>
-      <div class="carousel" aria-label="Testimonials">
-        <div class="item reveal">
-          <div class="quote">“Auri feels like our best coordinator who never sleeps. Leads are warmer and meetings are fuller.”<div class="who">Practice Manager – Healthcare</div></div>
-        </div>
-        <div class="item reveal">
-          <div class="quote">“Data goes straight into CRM with context. Reps start conversations, not spreadsheets.”<div class="who">Head of Growth – Property</div></div>
-        </div>
-        <div class="item reveal">
-          <div class="quote">“From idea to first demo in 3 weeks. The playbook approach just… works.”<div class="who">Founder – SMB Services</div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== LIVE DEMO (Chat) ===== -->
-  <section id="demo">
-    <div class="wrap chatwrap">
-      <div>
-        <h2 class="reveal">Try Auri now</h2>
-        <p class="muted reveal">Ask anything about your product or book a test appointment. This demo uses a simple webhook and a session‑aware chat panel.</p>
-        <ul class="muted">
-          <li>Type naturally — Auri will clarify if needed</li>
-          <li>Watch how it structures details and proposes next steps</li>
-          <li>Swap the webhook to your n8n endpoint to go live</li>
-        </ul>
-      </div>
-      <div class="mini reveal">
-        <div class="header"><div class="dot"></div> Auri Assistant <div class="typing" id="typing" style="margin-left:6px;font-size:12px;color:var(--muted)" hidden>typing…</div></div>
-        <div class="messages" id="messages"></div>
-        <div class="footer">
-          <input id="input" type="text" placeholder="Type a message and press Enter…" autocomplete="off"/>
-          <button id="send">Send</button>
-        </div>
-        <div class="hint">Powered by n8n • Demo chat</div>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="foot">
-      <div>© <span id="year"></span> Krilay • Auri</div>
-      <div>Need a custom playbook or CRM handoff? <a href="#demo" style="color:var(--accent1)">Talk to Auri</a></div>
-    </div>
-  </footer>
+<footer>© <span id="year"></span> Krilay AI — Auri: Intelligent Sales Advisor for SMB Growth</footer>
 
 <script>
-  // ===== Reveal on scroll
-  const io = new IntersectionObserver((entries)=>{
-    for (const e of entries){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }
-  },{threshold:.16});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-  // ===== Animated counters
-  function animateCount(el){
-    const end = parseFloat(el.dataset.count);
-    const isFloat = !Number.isInteger(end);
-    const dur = 1400, start = performance.now();
-    function tick(t){
-      const p = Math.min(1,(t-start)/dur);
-      const val = end * (0.1 + 0.9 * (1- Math.pow(1-p,3)));
-      el.textContent = isFloat ? val.toFixed(1) : Math.round(val);
-      if(p<1) requestAnimationFrame(tick); else el.textContent = isFloat ? end.toFixed(1) : end;
-    }
-    requestAnimationFrame(tick);
-  }
-  const io2 = new IntersectionObserver((entries)=>{
-    for(const e of entries){ if(e.isIntersecting){ animateCount(e.target.querySelector('.num')); io2.unobserve(e.target);} }
-  },{threshold:.6});
-  document.querySelectorAll('.stat').forEach(s=>io2.observe(s));
-
-  // ===== Simple chat (kept close to your original)
-  const WEBHOOK_URL = "https://63c6eeef6505.ngrok-free.app/webhook/chatbot"; // swap to your n8n endpoint
-  const API_KEY = ""; // optional header
-  const el = {
-    msgs: document.getElementById('messages'),
-    input: document.getElementById('input'),
-    send: document.getElementById('send'),
-    typing: document.getElementById('typing'),
-  };
-  const sessionId = (crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now());
-  function addBubble(text, who='bot'){
-    const b = document.createElement('div'); b.className = 'bubble '+(who==='user'?'user':'bot'); b.textContent = text; el.msgs.appendChild(b); el.msgs.scrollTop = el.msgs.scrollHeight; }
-  async function sendMessage(){
-    const text = el.input.value.trim(); if(!text) return; addBubble(text,'user'); el.input.value=''; el.input.disabled=true; el.send.disabled=true; el.typing.hidden=false;
-    try{
-      const res = await fetch(WEBHOOK_URL,{method:'POST', headers:{'Content-Type':'application/json', ...(API_KEY?{'x-api-key':API_KEY}:{})}, body:JSON.stringify({message:text, sessionId})});
-      if(!res.ok) throw new Error('HTTP '+res.status);
-      const data = await res.json().catch(()=>({}));
-      addBubble((data && data.reply)? data.reply : '(no reply)','bot');
-    }catch(e){ addBubble('Sorry—something went wrong. ('+e.message+')','bot'); }
-    finally{ el.typing.hidden=true; el.input.disabled=false; el.send.disabled=false; el.input.focus(); }
-  }
-  el.send.addEventListener('click', sendMessage);
-  el.input.addEventListener('keydown', e=>{ if(e.key==='Enter') sendMessage();});
-  addBubble('Welcome to Auri! How can I help today?','bot');
-
-  // misc
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Build dot navigation for full-page snap feel
+  const pages = Array.from(document.querySelectorAll('.page'));
+  const dots = document.getElementById('dots');
+  pages.forEach((sec,i)=>{ const d=document.createElement('button'); d.className='dotnav'; d.title=sec.id; d.addEventListener('click',()=>sec.scrollIntoView({behavior:'smooth'})); dots.appendChild(d); });
+
+  // Activate sections as they come into view (page-load feel)
+  const navLinks = Array.from(document.querySelectorAll('nav a'));
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const id = e.target.id;
+        // nav highlight
+        navLinks.forEach(a=>a.classList.toggle('active', a.dataset.goto===id));
+        // dot highlight
+        const idx = pages.indexOf(e.target);
+        document.querySelectorAll('.dotnav').forEach((n,j)=>n.classList.toggle('active', j===idx));
+        // trigger counters when results enters
+        if(id==='results') e.target.querySelectorAll('.num').forEach(animateCount);
+        // add page-in transition class
+        e.target.classList.add('page-in');
+      }
+    });
+  },{threshold:.7});
+  pages.forEach(p=>io.observe(p));
+
+  // Smooth nav buttons
+  document.querySelectorAll('[data-goto]').forEach(el=>el.addEventListener('click',()=>{
+    const id=el.dataset.goto, t=document.getElementById(id); if(t) t.scrollIntoView({behavior:'smooth'});
+  }));
+
+  // Animated counters (only when section rolls in)
+  function animateCount(el){
+    const end=parseFloat(el.dataset.count); const dur=1400; const start=performance.now();
+    function step(t){ const p=Math.min(1,(t-start)/dur); const eased=1-Math.pow(1-p,3); const val=end*eased; el.textContent=Math.round(val); if(p<1) requestAnimationFrame(step); }
+    requestAnimationFrame(step);
+  }
+
+  // Minimal chat demo (neutral)
+  const chat=document.getElementById('chatbox'); const input=document.getElementById('input'); const send=document.getElementById('send');
+  function addMsg(txt,cls='bot'){const d=document.createElement('div');d.textContent=txt;d.style.padding='8px 10px';d.style.borderRadius='10px';d.style.maxWidth='80%';d.style.background=cls==='bot'?'#eef4ff':'#dceaff';d.style.alignSelf=cls==='bot'?'flex-start':'flex-end';chat.appendChild(d);chat.scrollTop=chat.scrollHeight;}
+  function sendMsg(){const t=input.value.trim(); if(!t) return; addMsg(t,'user'); input.value=''; setTimeout(()=>addMsg('Auri: I help capture and qualify more leads so your team closes faster. Ask how to get started.'),'700');}
+  if(send){send.addEventListener('click',sendMsg); input.addEventListener('keydown',e=>{if(e.key==='Enter')sendMsg();}); addMsg('👋 Welcome! See how Auri grows pipeline with smart conversations.');}
 </script>
 </body>
 </html>
