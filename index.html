@@ -67,7 +67,7 @@ html,body{height:100%; overflow:hidden;}
 #fullpage{position:relative;height:100vh;width:100vw;overflow:hidden;}
 #stage{position:absolute;inset:0; display:block; transition:transform .72s cubic-bezier(.22,.61,.36,1); will-change:transform;}
 .page{height:100vh; width:100vw; opacity:0; transform:translateY(12px); transition:opacity .45s ease, transform .45s ease;}
-.page.page-in, #stage{opacity:1; transform:none}
+.page.page-in{opacity:1; transform:none}
 /* Light performance tweaks */
 .card, .benefit, .stat{will-change:transform}
 </style>
@@ -170,8 +170,11 @@ html,body{height:100%; overflow:hidden;}
   pages.forEach((_,i)=>{const d=document.createElement('button');d.className='dotnav';d.title=pages[i].id||('Page '+(i+1));d.addEventListener('click',()=>go(i));dots.appendChild(d)});
 
   function setActive(){
+    // Toggle nav & dots
     document.querySelectorAll('.dotnav').forEach((n,i)=>n.classList.toggle('active', i===index));
     document.querySelectorAll('nav a').forEach(a=>a.classList.toggle('active', Number(a.dataset.goto)===index));
+    // Reveal only the active page (prevents blank look)
+    pages.forEach((p,i)=>p.classList.toggle('page-in', i===index));
     // Animate numbers when entering Results
     if(pages[index].id==='results') pages[index].querySelectorAll('.num').forEach(animateCount);
   }
@@ -190,6 +193,8 @@ html,body{height:100%; overflow:hidden;}
   window.addEventListener('touchmove',(e)=>{ if(touchY==null) return; const dy = e.touches[0].clientY - touchY; if(Math.abs(dy)>60){ e.preventDefault(); if(!animating){ if(dy<0) go(index+1); else go(index-1);} touchY=null; } },{passive:false});
 
   // Initial state
+  // Mark first page visible so content shows immediately
+  pages.forEach((p,i)=>p.classList.toggle('page-in', i===0));
   setActive();
 
   // Counters
