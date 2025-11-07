@@ -1,212 +1,388 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Auri by Krilay — Intelligent Sales Advisor for SMBs</title>
-<meta name="description" content="Auri helps small and medium businesses convert more website visitors into paying customers — intelligently and effortlessly."/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg:#f8fbff; --bg2:#eef5ff; --panel:#ffffff; --ink:#0a2240; --muted:#5a6d8c; --line:#dce7ff;
-    --accent1:#2b74ff; --accent2:#00b3ff; --accent3:#14b87a; --shadow:0 10px 25px rgba(20,62,120,.08);
-  }
-  * { box-sizing: border-box; }
-  html,body { margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Arial; background:var(--bg); color:var(--ink); scroll-behavior:smooth; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auri by Krilay AI | Intelligent Sales Advisor</title>
+    <meta name="description" content="Auri by Krilay AI - Intelligent sales advisor for growing businesses.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #050510;
+            --bg-secondary: #0f1125;
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --accent-primary: #3b82f6;
+            --accent-secondary: #06b6d4;
+            --accent-success: #10b981;
+            --nav-height: 90px;
+        }
 
-  header { position:fixed;top:0;left:0;right:0;z-index:60; backdrop-filter:saturate(140%) blur(8px); background:rgba(248,251,255,0.9); border-bottom:1px solid var(--line); }
-  .nav { max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between; }
-  .brand { display:flex;align-items:center;gap:10px;font-weight:800; }
-  .brand small { display:block;color:var(--muted);font-weight:600; }
-  .logo { width:28px;height:28px;border-radius:8px;background:conic-gradient(from 0deg,var(--accent1),var(--accent2),#7ad1ff,var(--accent3),var(--accent1));box-shadow:0 0 0 2px #fff,0 0 16px rgba(43,116,255,.25); }
-  .nav a { color:var(--muted);margin:0 8px;text-decoration:none;font-weight:600; }
-  .nav a.active { color:var(--ink); }
-  .cta { padding:10px 16px;border-radius:12px;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#fff;font-weight:800;border:0;cursor:pointer;box-shadow:var(--shadow); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html, body {
+            height: 100%;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            overflow: hidden;
+        }
 
-  .page { min-height:100svh;display:grid;place-items:center;padding:120px 20px;scroll-snap-align:start; }
-  .wrap { max-width:1100px;width:100%; }
-  .center { text-align:center; }
-  .headline { font-size:clamp(36px,6vw,68px);font-weight:800;line-height:1.1;letter-spacing:-.5px; }
-  .grad { background:linear-gradient(90deg,var(--accent1),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent; }
-  .sub { max-width:800px;margin:18px auto;color:var(--muted);font-size:18px;line-height:1.6;text-align:center; }
-  .btn { padding:14px 18px;border-radius:14px;border:1px solid var(--line);background:#fff;color:var(--ink);font-weight:700;cursor:pointer;box-shadow:var(--shadow); }
-  .btn.primary { background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#fff;border:0; }
-  .hero-cta { display:flex;gap:12px;justify-content:center;flex-wrap:wrap; }
+        /* --- AI SCANNER TRANSITION EFFECT --- */
+        .ai-scanner {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100vh;
+            pointer-events: none; z-index: 999;
+            opacity: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(6, 182, 212, 0.1) 50%, transparent 100%);
+        }
+        .scan-line {
+            position: absolute; width: 100%; height: 2px;
+            background: var(--accent-secondary);
+            box-shadow: 0 0 15px var(--accent-secondary), 0 0 30px var(--accent-primary);
+            top: 50%; opacity: 0;
+        }
+        .scanning .ai-scanner { opacity: 1; transition: opacity 0.3s ease; }
+        .scanning .scan-line { animation: scanMove 1.5s cubic-bezier(0.645, 0.045, 0.355, 1.000) forwards; }
+        @keyframes scanMove {
+            0% { top: 0%; opacity: 0; width: 0%; left: 50%; }
+            10% { opacity: 1; width: 100%; left: 0%; }
+            90% { opacity: 1; width: 100%; left: 0%; }
+            100% { top: 100%; opacity: 0; width: 100%; left: 0%; }
+        }
+        .scanning section { filter: blur(2px) brightness(0.8); transition: all 0.5s ease; }
+        .scanning section.active { filter: blur(0px) brightness(1); }
 
-  .section-light { background:var(--bg2); }
-  .grid { display:grid;gap:20px; }
-  .features { grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
-  .card { background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow); }
-  .card h3 { margin:6px 0 10px;font-weight:700; }
+        /* --- LAYOUT --- */
+        main { height: 100vh; width: 100%; position: relative; }
 
-  .benefits { grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:24px; }
-  .benefit { background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;text-align:left;box-shadow:var(--shadow); }
-  .benefit h4 { margin:6px 0;font-weight:700; }
-  .benefit p { color:var(--muted);font-size:15px;line-height:1.5; }
+        section {
+            height: 100vh; width: 100%;
+            display: flex; align-items: center; justify-content: center;
+            position: absolute; top: 0; left: 0;
+            opacity: 0; transform: translateY(100px) scale(0.95);
+            transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+            padding: 2rem;
+            padding-top: calc(var(--nav-height) + 2rem); 
+            visibility: hidden;
+        }
+        section.active {
+            opacity: 1; transform: translateY(0px) scale(1);
+            visibility: visible; z-index: 2;
+        }
+        section.previous {
+            opacity: 0; transform: translateY(-100px) scale(0.95); z-index: 1;
+        }
+        
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; z-index: 2; position: relative; }
 
-  .stat-grid { grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:20px; }
-  .stat { text-align:center;padding:20px;border-radius:16px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow); }
-  .stat .num { font-size:34px;font-weight:800;color:var(--accent1); }
-  .stat .cap { color:var(--muted); }
+        /* Typography */
+        h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 900; letter-spacing: -0.03em; line-height: 1.1; }
+        h2 { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 1rem; }
+        h3 { font-size: 1.35rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary); }
+        p { font-size: 1.125rem; line-height: 1.6; color: var(--text-secondary); max-width: 600px; }
+        .gradient-text { background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-secondary) 60%, var(--accent-primary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: inline-block; }
+        .gradient-text-green { background: linear-gradient(135deg, #fff 0%, var(--accent-success) 70%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
-  footer { text-align:center;padding:30px 0;color:var(--muted);font-size:15px; }
-.dots{position:fixed;right:14px;top:50%;transform:translateY(-50%);z-index:70;display:flex;flex-direction:column;gap:10px}
-.dotnav{width:10px;height:10px;border-radius:50%;background:#c8d8ff;border:1px solid #b7ccff;opacity:.9;cursor:pointer}
-.dotnav.active{background:linear-gradient(180deg,var(--accent1),var(--accent2));box-shadow:0 0 0 3px rgba(43,116,255,.15)}
+        /* Content Reveals */
+        section.active .hero-content, section.active .hero-visual-combined, 
+        section.active .grid-3, section.active .stat-grid, section.active .demo-wrapper {
+            opacity: 0; animation: slowReveal 1.5s ease forwards;
+        }
+        .hero-visual-combined { animation-delay: 0.3s !important; }
+        .grid-3, .stat-grid, .chat-interface { animation-delay: 0.4s !important; }
+        @keyframes slowReveal { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-/* Snap scroll container + full-page fade-in */
-.snapper{height:100svh;overflow-y:auto;scroll-snap-type:y mandatory}
-.page{opacity:0;transition:opacity .5s ease, transform .5s ease;transform:translateY(12px)}
-.page.page-in{opacity:1;transform:none}
-.dots{position:fixed;right:14px;top:50%;transform:translateY(-50%);z-index:70;display:flex;flex-direction:column;gap:10px}
-.dotnav{width:10px;height:10px;border-radius:50%;background:#c8d8ff;border:1px solid #b7ccff;opacity:.9;cursor:pointer}
-.dotnav.active{background:linear-gradient(180deg,var(--accent1),var(--accent2));box-shadow:0 0 0 3px rgba(43,116,255,.15)}
+        /* NAVIGATION */
+        nav {
+            position: fixed; top: 0; left: 0; width: 100%; height: var(--nav-height);
+            padding: 0 2rem; display: flex; justify-content: space-between; align-items: center;
+            z-index: 100; backdrop-filter: blur(12px); background: rgba(5, 5, 16, 0.85);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .logo { font-weight: 900; font-size: 1.5rem; letter-spacing: -1px; display: flex; align-items: center; gap: 12px; }
+        .logo-mark { width: 24px; height: 24px; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); border-radius: 6px; }
+        
+        /* NEW: Krilay Branding in Nav */
+        .by-krilay {
+            font-weight: 400;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            color: var(--text-secondary);
+        }
 
-/* FULLPAGE: hide native scrollbars and animate via transform */
-html,body{height:100%; overflow:hidden;}
-#fullpage{position:relative;height:100vh;width:100vw;overflow:hidden;}
-#stage{position:absolute;inset:0; display:block; transition:transform .72s cubic-bezier(.22,.61,.36,1); will-change:transform;}
-.page{height:100vh; width:100vw; opacity:0; transform:translateY(12px); transition:opacity .45s ease, transform .45s ease;}
-.page.page-in{opacity:1; transform:none}
-/* Light performance tweaks */
-.card, .benefit, .stat{will-change:transform}
-</style>
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: color 0.3s; cursor: pointer; }
+        .nav-links a:hover, .nav-links a.active { color: var(--text-primary); }
+        .btn-nav { padding: 0.6rem 1.2rem; background: var(--accent-primary); color: white; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.9rem; transition: all 0.2s ease; }
+
+        /* NEW: Fixed Bottom Krilay Tag */
+        .krilay-tag {
+            position: fixed;
+            bottom: 1.5rem; right: 2rem; z-index: 90;
+            font-size: 0.85rem; font-weight: 600;
+            color: var(--text-secondary); opacity: 0.5;
+            letter-spacing: 0.5px;
+            pointer-events: none; /* Lets clicks pass through if needed */
+            mix-blend-mode: plus-lighter; /* Helps it blend nicely with backgrounds */
+        }
+
+        /* VISUALS & COMPONENTS */
+        .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 2rem; align-items: center; min-height: 60vh; }
+        .hero-visual-combined { position: relative; height: 500px; display: flex; align-items: center; justify-content: center; }
+        .ai-network-bg { position: absolute; width: 120%; height: 120%; opacity: 0.5; z-index: 0; animation: slight-rotate 30s ease-in-out infinite alternate; }
+        .node-core { fill: var(--accent-primary); filter: drop-shadow(0 0 20px var(--accent-primary)); }
+        .link { stroke: var(--accent-primary); stroke-width: 1px; opacity: 0.2; }
+        .pulse { animation: pulse 4s infinite ease-in-out; }
+        .float-card {
+            position: absolute; z-index: 2;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px; padding: 1.2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: float 6s ease-in-out infinite;
+            min-width: 220px;
+        }
+        .fc-1 { top: 15%; right: 5%; animation-delay: 0s; border-color: rgba(6, 182, 212, 0.3); }
+        .fc-2 { bottom: 20%; left: 5%; animation-delay: -2s; z-index: 1; }
+        .fc-3 { top: 50%; right: 35%; animation-delay: -3.5s; z-index: 3; background: rgba(15, 23, 42, 0.9); border-color: var(--accent-success); }
+        .fc-label { font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; font-weight: 700; }
+        .fc-value { font-size: 1rem; font-weight: 700; color: white; display: flex; align-items: center; gap: 8px; }
+
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
+        @keyframes slight-rotate { 0% { transform: rotate(0deg) scale(1); } 100% { transform: rotate(8deg) scale(1.1); } }
+        @keyframes pulse { 0%, 100% { r: 6; opacity: 0.3; } 50% { r: 12; opacity: 0.8; } }
+
+        .btn { display: inline-flex; align-items: center; padding: 1rem 2.5rem; background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary)); color: white; text-decoration: none; font-weight: 700; border-radius: 12px; transition: transform 0.3s ease, box-shadow 0.3s ease; border: none; cursor: pointer; font-size: 1.1rem; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -10px rgba(59, 130, 246, 0.6); }
+        .btn.secondary { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); margin-left: 1rem; }
+        .badge { display: inline-block; padding: 6px 16px; background: rgba(255, 255, 255, 0.05); border-radius: 30px; font-size: 0.9rem; font-weight: 600; color: var(--accent-secondary); margin-bottom: 1.5rem; border: 1px solid rgba(6, 182, 212, 0.2); }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-top: 4rem; }
+        .card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); padding: 2.5rem; border-radius: 20px; transition: all 0.3s ease; position: relative; overflow: hidden; }
+        .card:hover { transform: translateY(-7px); background: rgba(255, 255, 255, 0.04); border-color: var(--accent-primary); }
+        .card-icon { font-size: 2rem; margin-bottom: 1.5rem; display: inline-flex; padding: 12px; background: rgba(59, 130, 246, 0.1); border-radius: 12px; color: var(--accent-primary); }
+        .bg-glow { position: absolute; width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 60%); border-radius: 50%; pointer-events: none; z-index: 0; filter: blur(80px); opacity: 0.5; }
+        
+        .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 4rem; text-align: center; }
+        .stat-card { padding: 2rem; background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent); border: 1px solid rgba(255,255,255,0.05); border-radius: 24px; }
+        .stat-num { font-size: 4.5rem; font-weight: 900; line-height: 1; margin-bottom: 0.5rem; }
+        .demo-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .chat-interface { background: var(--bg-secondary); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; height: 500px; display: flex; flex-direction: column; box-shadow: 0 20px 50px -20px rgba(0,0,0,0.5); }
+        .chat-messages { flex-grow: 1; padding: 1.5rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1rem; }
+        .msg { max-width: 80%; padding: 12px 18px; border-radius: 18px; font-size: 0.95rem; line-height: 1.5; animation: popIn 0.3s ease forwards; }
+        .msg.bot { align-self: flex-start; background: rgba(255,255,255,0.07); border-bottom-left-radius: 4px; }
+        .msg.user { align-self: flex-end; background: var(--accent-primary); border-bottom-right-radius: 4px; }
+        @keyframes popIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 968px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .hero-visual-combined { display: none; }
+            .nav-links { display: none; }
+            h1 { font-size: 3rem; }
+            .hero-content { display: flex; flex-direction: column; align-items: center; }
+            .demo-wrapper, .stat-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .btn.secondary { margin-left: 0; margin-top: 1rem; }
+            nav { padding: 0 1rem; }
+            section { padding: 1rem; padding-top: calc(var(--nav-height) + 1rem); } /* Adjust padding for mobile */
+            .krilay-tag { bottom: 1rem; right: 50%; transform: translateX(50%); width: 100%; text-align: center; font-size: 0.75rem; }
+        }
+    </style>
 </head>
 <body>
-<header>
-  <div class="nav">
-    <div class="brand"><div class="logo"></div> Auri <small>Intelligent Sales Advisor by Krilay</small></div>
+
+    <div class="ai-scanner">
+        <div class="scan-line"></div>
+    </div>
+
     <nav>
-      <a data-goto="0" class="active">Home</a>
-      <a data-goto="1">What is Auri</a>
-      <a data-goto="2">Why Auri</a>
-      <a data-goto="3">Results</a>
-      <a data-goto="4">Demo</a>
+        <div class="logo">
+            <div class="logo-mark"></div>
+            Auri <span class="by-krilay">by Krilay AI</span>
+        </div>
+        <div class="nav-links">
+            <a data-target="0" class="active">Home</a>
+            <a data-target="1">How it Works</a>
+            <a data-target="2">Why Auri</a>
+            <a data-target="3">Impact</a>
+            <a data-target="4" class="btn-nav">Demo</a>
+        </div>
     </nav>
-    <button class="cta" data-goto="4">Try Auri</button>
-  </div>
-</header>
 
-<!-- FULLPAGE: no native scrollbars, fluid transitions -->
-<div id="fullpage" aria-live="polite">
-  <div id="stage">
-    <!-- 0: HERO -->
-    <section class="page p-hero" id="hero">
-      <div class="wrap center">
-        <h1 class="headline">Meet <span class="grad">Auri</span> — the intelligent way to grow your sales pipeline</h1>
-        <p class="sub">Auri helps small and medium businesses capture visitors, qualify intent, and convert conversations into customers — intelligently, instantly, and at scale.</p>
-        <div class="hero-cta"><button class="btn primary" data-goto="4">See Auri in action</button><button class="btn" data-goto="1">Learn More</button></div>
-      </div>
-    </section>
+    <main>
+        <section class="active" id="sec-0">
+            <div class="bg-glow" style="top: -30%; right: -30%;"></div>
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-content">
+                        <div class="badge">✨ Intelligent Sales Advisor</div>
+                        <h1>Curate interest. <br>Empower your <span class="gradient-text">Sales Team.</span></h1>
+                        <p style="margin: 1.5rem 0 2.5rem 0;">Meet Auri. The AI advisor guiding your website visitors and equipping your sales team with deep insights before the first call.</p>
+                        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 1rem;">
+                            <button onclick="scrollToSection(4)" class="btn">Experience Auri</button>
+                            <button onclick="scrollToSection(1)" class="btn secondary" style="margin-left:0">See process</button>
+                        </div>
+                    </div>
+                    <div class="hero-visual-combined">
+                        <svg class="ai-network-bg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                            <g class="links">
+                                <line class="link" x1="200" y1="200" x2="50" y2="100" />
+                                <line class="link" x1="200" y1="200" x2="350" y2="80" />
+                                <line class="link" x1="200" y1="200" x2="300" y2="350" />
+                                <line class="link" x1="200" y1="200" x2="80" y2="320" />
+                            </g>
+                            <circle class="node-core" cx="200" cy="200" r="25" opacity="0.4"/>
+                            <circle cx="200" cy="200" r="8" fill="#fff"/>
+                            <circle class="node pulse" cx="50" cy="100" r="6" stroke="var(--accent-secondary)"/>
+                            <circle class="node pulse" cx="350" cy="80" r="6" stroke="var(--accent-primary)" style="animation-delay: -1s"/>
+                        </svg>
+                        <div class="float-card fc-1"><div class="fc-label" style="color: var(--accent-secondary);">Qualified Lead</div><div class="fc-value">💼 Acme Corp</div></div>
+                        <div class="float-card fc-3"><div class="fc-label" style="color: var(--accent-success);">Intent Score</div><div class="fc-value" style="font-size: 1.5rem;">92/100 🔥</div></div>
+                        <div class="float-card fc-2"><div class="fc-label">Insight</div><div class="fc-value" style="font-weight: 500;">"Comparing pricing."</div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <!-- 1: WHAT -->
-    <section class="page section-light p-what" id="what">
-      <div class="wrap center">
-        <h2>What is Auri?</h2>
-        <p class="sub">Auri is an intelligent sales advisor that engages prospects, qualifies interest, and helps close deals — even while you're offline.</p>
-        <div class="grid features">
-          <div class="card"><h3>Conversational intelligence</h3><p>Understands context and business needs — every conversation feels personal and on‑brand.</p></div>
-          <div class="card"><h3>Revenue‑driven focus</h3><p>Identifies high‑intent prospects and guides them to booking or inquiry while interest is high.</p></div>
-          <div class="card"><h3>Effortless deployment</h3><p>Launch quickly and connect to your existing sales channels with minimal change.</p></div>
-        </div>
-      </div>
-    </section>
+        <section id="sec-1">
+            <div class="container">
+                <h2 style="text-align: center">More than a bot. An <span class="gradient-text">Advisor.</span></h2>
+                <p style="text-align: center; margin: 0 auto 3rem auto;">Auri curates a tailored experience for every visitor.</p>
+                <div class="grid-3">
+                    <div class="card"><div class="card-icon">🧭</div><h3>Guides Conversation</h3><p>Steers visitors toward specific offerings that match their needs.</p></div>
+                    <div class="card"><div class="card-icon">🔍</div><h3>Progressive Profiling</h3><p>Gathers crucial details gradually so you never start blank.</p></div>
+                    <div class="card"><div class="card-icon">⚡</div><h3>Instant Handoffs</h3><p>Delivers rich context directly to your CRM instantly.</p></div>
+                </div>
+            </div>
+        </section>
 
-    <!-- 2: WHY -->
-    <section class="page p-why" id="why">
-      <div class="wrap center">
-        <h2>Why businesses choose Auri</h2>
-        <p class="sub">Designed for growing teams that need sales intelligence, not scripts.</p>
-        <div class="grid benefits">
-          <div class="benefit"><h4>Qualifies in real time</h4><p>Understands intent instantly and filters serious prospects from casual visitors.</p></div>
-          <div class="benefit"><h4>Converts faster</h4><p>Answers intelligently and encourages booking or next steps while interest is high.</p></div>
-          <div class="benefit"><h4>Always available</h4><p>Captures and nurtures inquiries 24/7 so you never miss a lead.</p></div>
-        </div>
-      </div>
-    </section>
+        <section id="sec-2">
+            <div class="bg-glow" style="bottom: -30%; left: -30%;"></div>
+            <div class="container">
+                <div style="max-width: 700px;">
+                    <h2>The Auri <span class="gradient-text">Advantage</span></h2>
+                    <p>Start every sales call with tailored solutions, not discovery questions.</p>
+                </div>
+                <div class="grid-3">
+                    <div class="card"><h3>Scoring Algorithm</h3><p>Analyzes interaction depth to identify genuine interest vs. casual browsing.</p></div>
+                    <div class="card"><h3>No "Blank Slates"</h3><p>Reps get the 'why' behind the visit before they pick up the phone.</p></div>
+                    <div class="card"><h3>Curated Paths</h3><p>Adapts advisory style in real-time based on prospect behavior.</p></div>
+                </div>
+            </div>
+        </section>
 
-    <!-- 3: RESULTS -->
-    <section class="page section-light p-results" id="results">
-      <div class="wrap center">
-        <h2>Results that matter</h2>
-        <p class="sub">Teams using Auri see measurable impact within weeks.</p>
-        <div class="grid stat-grid">
-          <div class="stat"><div class="num" data-count="45">0</div><div class="cap">% more qualified leads</div></div>
-          <div class="stat"><div class="num" data-count="60">0</div><div class="cap">% faster first responses</div></div>
-          <div class="stat"><div class="num" data-count="25">0</div><div class="cap">% fewer missed opportunities</div></div>
-        </div>
-      </div>
-    </section>
+        <section id="sec-3">
+            <div class="container">
+                <h2 style="text-align: center">Measurable <span class="gradient-text-green">Impact</span></h2>
+                <div class="stat-grid">
+                    <div class="stat-card"><div class="stat-num gradient-text-green">3x</div><div class="stat-label">Richer Lead Context</div></div>
+                    <div class="stat-card"><div class="stat-num gradient-text-green">40%</div><div class="stat-label">Higher Engagement</div></div>
+                    <div class="stat-card"><div class="stat-num gradient-text-green">-60%</div><div class="stat-label">Discovery Time</div></div>
+                </div>
+            </div>
+        </section>
 
-    <!-- 4: DEMO -->
-    <section class="page p-demo" id="demo">
-      <div class="wrap center">
-        <h2>Try Auri live</h2>
-        <p class="sub">Experience how Auri engages visitors, asks the right questions, and drives conversion naturally.</p>
-        <div style="max-width:520px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:16px;text-align:left;">
-          <div id="chatbox" style="height:340px;overflow:auto;display:flex;flex-direction:column;gap:10px;margin-bottom:10px;padding:6px;border:1px solid var(--line);border-radius:12px;background:#f4f8ff;"></div>
-          <div style="display:flex;gap:8px;"><input id="input" type="text" placeholder="Type a message…" style="flex:1;padding:10px 12px;border-radius:10px;border:1px solid var(--line);"><button id="send" class="cta">Send</button></div>
-        </div>
-      </div>
-    </section>
-  </div>
-</div>
+        <section id="sec-4">
+            <div class="container">
+                <div class="demo-wrapper">
+                    <div>
+                        <h2>Experience the <span class="gradient-text">Advisor</span></h2>
+                        <p>See how Auri engages visitors not as a support tool, but as a strategic guide.</p>
+                        <ul style="color: var(--text-secondary); line-height: 2; margin: 2rem 0 0 1rem;">
+                            <li>🎯 Identifies goals early</li><li>💡 Recommends solutions</li><li>📊 Captures qualification data</li>
+                        </ul>
+                    </div>
+                    <div class="chat-interface">
+                        <div style="padding: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 700; display: flex; gap: 10px; align-items: center;">
+                            <div style="width:10px; height:10px; background:var(--accent-success); border-radius:50%; box-shadow: 0 0 10px var(--accent-success);"></div>Auri Advisor
+                        </div>
+                        <div class="chat-messages" id="chat-box"></div>
+                        <div style="padding: 1rem; border-top: 1px solid rgba(255,255,255,0.1); display: flex; gap: 10px;">
+                            <input type="text" id="user-input" placeholder="Type a message..." style="flex:1; padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.3); color: white; outline: none;">
+                            <button id="send-btn" style="width: 45px; background: var(--accent-primary); border: none; border-radius: 12px; color: white; cursor: pointer;">➤</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-<!-- Dots -->
-<div class="dots" id="dots"></div>
+    <div class="krilay-tag">Powered by Krilay AI</div>
 
-<footer>© <span id="year"></span> Krilay AI — Auri: Intelligent Sales Advisor for SMB Growth</footer>
+    <script>
+        let currentSection = 0;
+        const sections = document.querySelectorAll('section');
+        const totalSections = sections.length;
+        let isAnimating = false;
 
-<script>
-  // ====== Layout & navigation state ======
-  const yearEl = document.getElementById('year'); if(yearEl) yearEl.textContent = new Date().getFullYear();
-  const stage = document.getElementById('stage');
-  const pages = Array.from(document.querySelectorAll('.page'));
-  const navLinks = Array.from(document.querySelectorAll('nav a,[data-goto].cta,.btn'));
-  const dots = document.getElementById('dots');
-  let index = 0, animating = false;
+        function scrollToSection(index) {
+            if (index < 0 || index >= totalSections || isAnimating) return;
+            isAnimating = true;
+            const outgoing = sections[currentSection];
+            const incoming = sections[index];
+            const direction = index > currentSection ? 'down' : 'up';
+            document.body.classList.add('scanning');
+            setTimeout(() => {
+                outgoing.classList.remove('active');
+                outgoing.classList.toggle('previous', direction === 'down');
+                incoming.classList.add('active');
+                incoming.classList.remove('previous');
+                currentSection = index;
+                updateNav();
+            }, 500);
+            setTimeout(() => {
+                document.body.classList.remove('scanning');
+                isAnimating = false;
+            }, 1500);
+        }
 
-  // Build dots
-  pages.forEach((_,i)=>{const d=document.createElement('button');d.className='dotnav';d.title=pages[i].id||('Page '+(i+1));d.addEventListener('click',()=>go(i));dots.appendChild(d)});
+        window.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            if (isAnimating) return;
+            if (Math.abs(e.deltaY) > 20) {
+                if (e.deltaY > 0) scrollToSection(currentSection + 1);
+                else scrollToSection(currentSection - 1);
+            }
+        }, { passive: false });
 
-  function setActive(){
-    // Toggle nav & dots
-    document.querySelectorAll('.dotnav').forEach((n,i)=>n.classList.toggle('active', i===index));
-    document.querySelectorAll('nav a').forEach(a=>a.classList.toggle('active', Number(a.dataset.goto)===index));
-    // Reveal only the active page (prevents blank look)
-    pages.forEach((p,i)=>p.classList.toggle('page-in', i===index));
-    // Animate numbers when entering Results
-    if(pages[index].id==='results') pages[index].querySelectorAll('.num').forEach(animateCount);
-  }
+        document.addEventListener('keydown', (e) => {
+            if(document.activeElement.tagName === 'INPUT') return;
+            if (['ArrowDown', 'PageDown', 'Space'].includes(e.key)) { e.preventDefault(); scrollToSection(currentSection + 1); }
+            if (['ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); scrollToSection(currentSection - 1); }
+        });
 
-  function go(i){ if(animating||i===index||i<0||i>pages.length-1) return; animating=true; index=i; stage.style.transform = `translate3d(0, ${-index*100}vh, 0)`; setActive(); setTimeout(()=>animating=false, 720); }
+        const navLinks = document.querySelectorAll('.nav-links a');
+        function updateNav() {
+            navLinks.forEach(link => link.classList.toggle('active', parseInt(link.dataset.target) === currentSection));
+        }
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault(); // CRITICAL FIX: Prevent default anchor jump
+                scrollToSection(parseInt(e.target.dataset.target));
+            });
+        });
 
-  // Nav clicks
-  navLinks.forEach(el=>{
-    const tgt = el.dataset.goto; if(tgt!==undefined){ el.addEventListener('click',()=>go(Number(tgt))); }
-  });
+        let touchStartY = 0;
+        document.addEventListener('touchstart', e => touchStartY = e.touches[0].clientY);
+        document.addEventListener('touchend', e => {
+            const touchEndY = e.changedTouches[0].clientY;
+            if (Math.abs(touchStartY - touchEndY) > 50) {
+                if (touchStartY > touchEndY) scrollToSection(currentSection + 1);
+                else scrollToSection(currentSection - 1);
+            }
+        });
 
-  // Wheel / touch handlers for fluid, single-scroll behavior
-  let touchY=null; 
-  window.addEventListener('wheel', (e)=>{ e.preventDefault(); if(animating) return; if(e.deltaY>10) go(index+1); else if(e.deltaY<-10) go(index-1); }, {passive:false});
-  window.addEventListener('touchstart',(e)=>{ touchY = e.touches[0].clientY; },{passive:true});
-  window.addEventListener('touchmove',(e)=>{ if(touchY==null) return; const dy = e.touches[0].clientY - touchY; if(Math.abs(dy)>60){ e.preventDefault(); if(!animating){ if(dy<0) go(index+1); else go(index-1);} touchY=null; } },{passive:false});
-
-  // Initial state
-  // Mark first page visible so content shows immediately
-  pages.forEach((p,i)=>p.classList.toggle('page-in', i===0));
-  setActive();
-
-  // Counters
-  function animateCount(el){ if(el.dataset._done) return; el.dataset._done = '1'; const end=parseFloat(el.dataset.count); const dur=1200; const start=performance.now();
-    function step(t){ const p=Math.min(1,(t-start)/dur); const eased=1-Math.pow(1-p,3); const val=end*eased; el.textContent=Math.round(val); if(p<1) requestAnimationFrame(step); }
-    requestAnimationFrame(step); }
-
-  // Demo chat
-  const chat=document.getElementById('chatbox'); const input=document.getElementById('input'); const send=document.getElementById('send');
-  function addMsg(txt,cls='bot'){const d=document.createElement('div');d.textContent=txt;d.style.padding='8px 10px';d.style.borderRadius='10px';d.style.maxWidth='80%';d.style.background=cls==='bot'?'#eef4ff':'#dceaff';d.style.alignSelf=cls==='bot'?'flex-start':'flex-end';chat.appendChild(d);chat.scrollTop=chat.scrollHeight;}
-  function sendMsg(){const t=input.value.trim(); if(!t) return; addMsg(t,'user'); input.value=''; setTimeout(()=>addMsg('Auri: I help capture and qualify more leads so your team closes faster. Ask how to get started.'),600);} 
-  if(send){send.addEventListener('click',sendMsg); input.addEventListener('keydown',e=>{if(e.key==='Enter')sendMsg();}); addMsg('👋 Welcome! See how Auri grows pipeline with smart conversations.');}
-</script>
+        const chatBox = document.getElementById('chat-box');
+        const addMsg = (txt, sndr) => {
+            const d = document.createElement('div'); d.className = `msg ${sndr}`; d.textContent = txt;
+            chatBox.appendChild(d); chatBox.scrollTop = chatBox.scrollHeight;
+        }
+        setTimeout(() => addMsg("👋 Hi there! I'm Auri. Are you looking to improve lead quality today?", 'bot'), 1500);
+        document.getElementById('send-btn').onclick = () => {
+            const inp = document.getElementById('user-input'); if(!inp.value.trim()) return;
+            addMsg(inp.value, 'user'); inp.value='';
+            setTimeout(() => addMsg("Got it. I recommend our Progressive Profiling feature. Shall I show you how it works?", 'bot'), 1200);
+        }
+    </script>
 </body>
 </html>
