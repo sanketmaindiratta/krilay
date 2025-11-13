@@ -25,6 +25,7 @@
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-main);
             color: var(--text-primary);
+            overflow-x: hidden; 
         }
 
         /* --- AI SCANNER (Desktop Only Visual) --- */
@@ -55,8 +56,14 @@
         h2 { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 1rem; }
         h3 { font-size: 1.35rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary); }
         p { font-size: 1.125rem; line-height: 1.6; color: var(--text-secondary); max-width: 600px; }
-        .gradient-text { background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-secondary) 60%, var(--accent-primary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: inline-block; }
-        .gradient-text-green { background: linear-gradient(135deg, #fff 0%, var(--accent-success) 70%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .gradient-text { 
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-secondary) 60%, var(--accent-primary) 100%); 
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: inline-block; 
+        }
+        .gradient-text-green { 
+            background: linear-gradient(135deg, #fff 0%, var(--accent-success) 70%); 
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; 
+        }
 
         /* NAVIGATION */
         nav {
@@ -64,15 +71,20 @@
             padding: 0 2rem; display: flex; justify-content: space-between; align-items: center;
             z-index: 100; backdrop-filter: blur(12px); background: rgba(5, 5, 16, 0.85);
             border-bottom: 1px solid rgba(255,255,255,0.05);
-            transition: height 0.3s ease;
         }
         .logo { font-weight: 900; font-size: 1.5rem; letter-spacing: -1px; display: flex; align-items: center; gap: 12px; }
         .logo-mark { width: 24px; height: 24px; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); border-radius: 6px; }
         .by-krilay { font-weight: 400; font-size: 0.9rem; opacity: 0.7; color: var(--text-secondary); }
         .nav-links { display: flex; gap: 2rem; }
-        .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: color 0.3s; cursor: pointer; }
+        .nav-links a { 
+            color: var(--text-secondary); text-decoration: none; font-weight: 600; 
+            font-size: 0.9rem; transition: color 0.3s; cursor: pointer; 
+        }
         .nav-links a:hover, .nav-links a.active { color: var(--text-primary); }
-        .btn-nav { padding: 0.6rem 1.2rem; background: var(--accent-primary); color: white; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.9rem; transition: all 0.2s ease; }
+        .btn-nav { 
+            padding: 0.6rem 1.2rem; background: var(--accent-primary); color: white; border-radius: 8px; 
+            font-weight: 700; text-decoration: none; font-size: 0.9rem; transition: all 0.2s ease; 
+        }
 
         /* Fixed Bottom Tag */
         .krilay-tag {
@@ -82,22 +94,61 @@
         }
 
         /* COMPONENTS */
-        .btn { display: inline-flex; align-items: center; padding: 1rem 2.5rem; background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary)); color: white; text-decoration: none; font-weight: 700; border-radius: 12px; transition: transform 0.3s ease, box-shadow 0.3s ease; border: none; cursor: pointer; font-size: 1.1rem; }
+        .btn { 
+            display: inline-flex; align-items: center; padding: 1rem 2.5rem; 
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary)); 
+            color: white; text-decoration: none; font-weight: 700; border-radius: 12px; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease; border: none; cursor: pointer; font-size: 1.1rem; 
+        }
         .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -10px rgba(59, 130, 246, 0.6); }
-        .btn.secondary { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); margin-left: 1rem; }
-        .badge { display: inline-block; padding: 6px 16px; background: rgba(255, 255, 255, 0.05); border-radius: 30px; font-size: 0.9rem; font-weight: 600; color: var(--accent-secondary); margin-bottom: 1.5rem; border: 1px solid rgba(6, 182, 212, 0.2); }
+        .btn.secondary { 
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); 
+            backdrop-filter: blur(10px); margin-left: 1rem; 
+        }
+        .badge { 
+            display: inline-block; padding: 6px 16px; background: rgba(255, 255, 255, 0.05); 
+            border-radius: 30px; font-size: 0.9rem; font-weight: 600; color: var(--accent-secondary); 
+            margin-bottom: 1.5rem; border: 1px solid rgba(6, 182, 212, 0.2); 
+        }
         .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 4rem; }
-        .card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); padding: 2.5rem; border-radius: 20px; transition: all 0.3s ease; position: relative; overflow: hidden; }
+        .card { 
+            background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(12px); 
+            border: 1px solid rgba(255, 255, 255, 0.08); padding: 2.5rem; border-radius: 20px; 
+            transition: all 0.3s ease; position: relative; overflow: hidden; 
+        }
         .card:hover { transform: translateY(-7px); background: rgba(255, 255, 255, 0.04); border-color: var(--accent-primary); }
-        .card-icon { font-size: 2rem; margin-bottom: 1.5rem; display: inline-flex; padding: 12px; background: rgba(59, 130, 246, 0.1); border-radius: 12px; color: var(--accent-primary); }
-        .bg-glow { position: absolute; width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 60%); border-radius: 50%; pointer-events: none; z-index: 0; filter: blur(80px); opacity: 0.5; }
+        .card-icon { 
+            font-size: 2rem; margin-bottom: 1.5rem; display: inline-flex; 
+            padding: 12px; background: rgba(59, 130, 246, 0.1); border-radius: 12px; color: var(--accent-primary); 
+        }
+        .bg-glow { 
+            position: absolute; width: 60vw; height: 60vw; 
+            background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 60%); 
+            border-radius: 50%; pointer-events: none; z-index: 0; filter: blur(80px); opacity: 0.5; 
+        }
         .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 4rem; text-align: center; }
-        .stat-card { padding: 2rem; background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent); border: 1px solid rgba(255,255,255,0.05); border-radius: 24px; }
-        .stat-num { font-size: 4.5rem; font-weight: 900; line-height: 1; margin-bottom: 0.5rem; font-variant-numeric: tabular-nums; }
+        .stat-card { 
+            padding: 2rem; background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent); 
+            border: 1px solid rgba(255,255,255,0.05); border-radius: 24px; 
+        }
+        .stat-num { 
+            font-size: 4.5rem; font-weight: 900; line-height: 1; margin-bottom: 0.5rem; 
+            font-variant-numeric: tabular-nums; 
+        }
         .demo-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-        .chat-interface { background: var(--bg-secondary); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; height: 500px; display: flex; flex-direction: column; box-shadow: 0 20px 50px -20px rgba(0,0,0,0.5); }
-        .chat-messages { flex-grow: 1; padding: 1.5rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1rem; }
-        .msg { max-width: 80%; padding: 12px 18px; border-radius: 18px; font-size: 0.95rem; line-height: 1.5; animation: popIn 0.3s ease forwards; }
+        .chat-interface { 
+            background: var(--bg-secondary); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; 
+            height: 500px; display: flex; flex-direction: column; 
+            box-shadow: 0 20px 50px -20px rgba(0,0,0,0.5); 
+        }
+        .chat-messages { 
+            flex-grow: 1; padding: 1.5rem; overflow-y: auto; 
+            display: flex; flex-direction: column; gap: 1rem; 
+        }
+        .msg { 
+            max-width: 80%; padding: 12px 18px; border-radius: 18px; 
+            font-size: 0.95rem; line-height: 1.5; animation: popIn 0.3s ease forwards; 
+        }
         .msg.bot { align-self: flex-start; background: rgba(255,255,255,0.07); border-bottom-left-radius: 4px; }
         .msg.user { align-self: flex-end; background: var(--accent-primary); border-bottom-right-radius: 4px; }
         @keyframes popIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -128,12 +179,9 @@
         @keyframes slight-rotate { 0% { transform: rotate(0deg) scale(1); } 100% { transform: rotate(8deg) scale(1.1); } }
         @keyframes pulse { 0%, 100% { r: 6; opacity: 0.3; } 50% { r: 12; opacity: 0.8; } }
 
-
-        /* =========================================
-           DESKTOP SPECIFIC STYLES (min-width: 969px)
-        ========================================= */
+        /* DESKTOP (full-page sections) */
         @media (min-width: 969px) {
-            body { overflow: hidden; } /* Disable native scroll on desktop */
+            body { overflow: hidden; } 
             main { height: 100vh; width: 100%; position: relative; }
             section {
                 height: 100vh; width: 100%;
@@ -148,7 +196,6 @@
             section.active { opacity: 1; transform: translateY(0px) scale(1); visibility: visible; z-index: 2; }
             section.previous { opacity: 0; transform: translateY(-100px) scale(0.95); z-index: 1; }
             
-            /* Desktop Content Reveals */
             section.active .hero-content, section.active .hero-visual-combined, 
             section.active .grid-3, section.active .stat-grid, section.active .demo-wrapper {
                 opacity: 0; animation: slowReveal 1.5s ease forwards;
@@ -158,31 +205,19 @@
             @keyframes slowReveal { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         }
 
-        /* =========================================
-           MOBILE SPECIFIC STYLES (max-width: 968px)
-        ========================================= */
+        /* MOBILE */
         @media (max-width: 968px) {
-            :root { --nav-height: 70px; /* Smaller nav on mobile */ }
-
-            /* Enable Native CSS Scroll Snapping for "Section Feel" */
+            :root { --nav-height: 70px; }
             html { scroll-snap-type: y mandatory; }
-            body { overflow-y: scroll; height: 100vh; } /* Necessary for snap to work on body */
+            body { overflow-y: scroll; height: 100vh; }
             main { height: auto; }
-
             section {
-                position: relative;
-                height: auto;
-                min-height: 100vh; /* Ensure it fills screen, but can grow if needed */
-                /* Snap alignment: start guarantees header is visible, but allows scrolling past if tall */
-                scroll-snap-align: start; 
-                scroll-snap-stop: always;
+                position: relative; height: auto; min-height: 100vh; 
+                scroll-snap-align: start; scroll-snap-stop: always;
                 opacity: 1 !important; transform: none !important; visibility: visible !important;
-                padding: 1.5rem;
-                padding-top: calc(var(--nav-height) + 1.5rem);
+                padding: 1.5rem; padding-top: calc(var(--nav-height) + 1.5rem);
                 display: flex; align-items: center;
             }
-
-            /* Condensed Mobile Layouts to fit more on screen */
             .hero-grid { grid-template-columns: 1fr; text-align: center; min-height: auto; gap: 2rem; }
             .hero-visual-combined { display: none; }
             .nav-links { display: none; }
@@ -190,17 +225,12 @@
             h2 { font-size: 2.25rem; }
             .hero-content { display: flex; flex-direction: column; align-items: center; }
             .hero-content p { margin: 1rem 0 2rem 0; }
-            
-            /* Tighter grids for mobile */
             .grid-3 { grid-template-columns: 1fr; gap: 1rem; margin-top: 2rem; }
             .stat-grid { grid-template-columns: 1fr; gap: 1rem; margin-top: 2rem; }
             .demo-wrapper { grid-template-columns: 1fr; gap: 2rem; }
-            
-            /* Smaller cards on mobile */
             .card, .stat-card { padding: 1.5rem; }
             .card-icon { font-size: 1.5rem; margin-bottom: 1rem; padding: 10px; }
             .stat-num { font-size: 3.5rem; }
-            
             .btn.secondary { margin-left: 0; margin-top: 1rem; }
             nav { padding: 0 1.5rem; }
             .krilay-tag { bottom: 1rem; right: 50%; transform: translateX(50%); width: 100%; text-align: center; font-size: 0.75rem; }
@@ -221,10 +251,11 @@
         </div>
         <div class="nav-links">
             <a data-target="0" class="active">Home</a>
-            <a data-target="1">How it Works</a>
-            <a data-target="2">Why Auri</a>
+            <a data-target="1">The New Reality</a>
+            <a data-target="2">Your Wishlist</a>
             <a data-target="3">Impact</a>
-            <a data-target="4" class="btn-nav">Demo</a>
+            <a data-target="4">Demo</a>
+            <a data-target="5" class="btn-nav">Pricing</a>
         </div>
     </nav>
 
@@ -235,11 +266,14 @@
                 <div class="hero-grid">
                     <div class="hero-content">
                         <div class="badge">✨ Intelligent Sales Advisor</div>
-                        <h1>Curate interest. <br>Empower your <span class="gradient-text">Sales Team.</span></h1>
-                        <p>Meet Auri. The AI advisor guiding your website visitors and equipping your sales team with deep insights before the first call.</p>
+                        <h1>Stop treating high-value prospects like <span class="gradient-text">strangers.</span></h1>
+                        <p style="margin: 1.5rem 0 2.5rem 0;">
+                            Your visitors feel lost in generic pages. Your sales team is flying blind on cold calls. 
+                            Auri bridges the gap, turning anonymous traffic into guided, qualified conversations.
+                        </p>
                         <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; justify-content: center;">
-                            <button onclick="scrollToSection(4)" class="btn">Experience Auri</button>
-                            <button onclick="scrollToSection(1)" class="btn secondary" style="margin-left:0">See process</button>
+                            <button onclick="scrollToSection(4)" class="btn">Meet Auri</button>
+                            <button onclick="scrollToSection(1)" class="btn secondary" style="margin-left:0">See the shift</button>
                         </div>
                     </div>
                     <div class="hero-visual-combined">
@@ -255,9 +289,18 @@
                             <circle class="node pulse" cx="50" cy="100" r="6" stroke="var(--accent-secondary)"/>
                             <circle class="node pulse" cx="350" cy="80" r="6" stroke="var(--accent-primary)" style="animation-delay: -1s"/>
                         </svg>
-                        <div class="float-card fc-1"><div class="fc-label" style="color: var(--accent-secondary);">Qualified Lead</div><div class="fc-value">💼 Acme Corp</div></div>
-                        <div class="float-card fc-3"><div class="fc-label" style="color: var(--accent-success);">Intent Score</div><div class="fc-value" style="font-size: 1.5rem;">92/100 🔥</div></div>
-                        <div class="float-card fc-2"><div class="fc-label">Insight</div><div class="fc-value" style="font-weight: 500;">"Comparing pricing."</div></div>
+                        <div class="float-card fc-1">
+                            <div class="fc-label" style="color: var(--accent-secondary);">Visitor ID: 8492</div>
+                            <div class="fc-value">🔎 Exploring Pricing</div>
+                        </div>
+                        <div class="float-card fc-3">
+                            <div class="fc-label" style="color: var(--accent-success);">Ready for Sales</div>
+                            <div class="fc-value" style="font-size: 1.5rem;">High Intent 🔥</div>
+                        </div>
+                        <div class="float-card fc-2">
+                            <div class="fc-label">Auri Action</div>
+                            <div class="fc-value" style="font-weight: 500;">"Offering comparison guide."</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -265,12 +308,28 @@
 
         <section id="sec-1">
             <div class="container">
-                <h2 style="text-align: center">More than a bot. An <span class="gradient-text">Advisor.</span></h2>
-                <p style="text-align: center; margin: 0 auto 3rem auto;">Auri curates a tailored experience for every visitor.</p>
+                <h2 style="text-align: center">
+                    The current world is <span class="gradient-text">broken.</span>
+                </h2>
+                <p style="text-align: center; margin: 0 auto 3rem auto;">
+                    Prospects drown in information. Sales teams drown in noise. Auri is the new reality.
+                </p>
                 <div class="grid-3">
-                    <div class="card"><div class="card-icon">🧭</div><h3>Guides Conversation</h3><p>Steers visitors toward specific offerings that match their needs.</p></div>
-                    <div class="card"><div class="card-icon">🔍</div><h3>Progressive Profiling</h3><p>Gathers crucial details gradually so you never start blank.</p></div>
-                    <div class="card"><div class="card-icon">⚡</div><h3>Instant Handoffs</h3><p>Delivers rich context directly to your CRM instantly.</p></div>
+                    <div class="card">
+                        <div class="card-icon">🧭</div>
+                        <h3>The Shift: Static to Guided</h3>
+                        <p>Visitors don't want to "browse." They want to be guided to exact solutions by an intelligent advisor.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🔍</div>
+                        <h3>The Shift: Blind to Informed</h3>
+                        <p>Stop asking "how can I help?" Auri already knows, and it tells your sales team before they say hello.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">⚡</div>
+                        <h3>The Shift: Cold to Warm</h3>
+                        <p>Replace icy cold outreach with warm, context-rich handoffs that prospects actually welcome.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -279,20 +338,32 @@
             <div class="bg-glow" style="bottom: -30%; left: -30%;"></div>
             <div class="container">
                 <div style="max-width: 700px;">
-                    <h2>The Auri <span class="gradient-text">Advantage</span></h2>
-                    <p>Start every sales call with tailored solutions, not discovery questions.</p>
+                    <h2>What your sales team wished for. <span class="gradient-text">Granted.</span></h2>
+                    <p>We asked sales leaders what they hated about their current tools. Then we built Auri to fix it.</p>
                 </div>
                 <div class="grid-3">
-                    <div class="card"><h3>Scoring Algorithm</h3><p>Analyzes interaction depth to identify genuine interest vs. casual browsing.</p></div>
-                    <div class="card"><h3>No "Blank Slates"</h3><p>Reps get the 'why' behind the visit before they pick up the phone.</p></div>
-                    <div class="card"><h3>Curated Paths</h3><p>Adapts advisory style in real-time based on prospect behavior.</p></div>
+                    <div class="card">
+                        <h3>Wish: "Who is actually serious?"</h3>
+                        <p><strong>Granted:</strong> Auri's proprietary intent scoring separates tire-kickers from ready buyers instantly.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Wish: "Give me the context."</h3>
+                        <p><strong>Granted:</strong> No more blank slate calls. You'll know their pain points before you say hello.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Wish: "Handle the noise for me."</h3>
+                        <p><strong>Granted:</strong> Auri autonomously nurtures early-stage visitors, only alerting you when they are ready.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="sec-3">
             <div class="container">
-                <h2 style="text-align: center">Measurable <span class="gradient-text-green">Impact</span></h2>
+                <h2 style="text-align: center">
+                    The happily ever <span class="gradient-text-green">after.</span>
+                </h2>
+                <p style="text-align: center; margin: 0 auto 3rem auto;">When the struggle ends, real growth begins.</p>
                 <div class="stat-grid">
                     <div class="stat-card">
                         <div class="stat-num gradient-text-green" data-target="3" data-suffix="x">0x</div>
@@ -304,7 +375,7 @@
                     </div>
                     <div class="stat-card">
                         <div class="stat-num gradient-text-green" data-target="-60" data-suffix="%">0%</div>
-                        <div class="stat-label">Discovery Time</div>
+                        <div class="stat-label">Less Discovery Time</div>
                     </div>
                 </div>
             </div>
@@ -314,18 +385,21 @@
             <div class="container">
                 <div class="demo-wrapper">
                     <div>
-                        <h2>Experience the <span class="gradient-text">Advisor</span></h2>
-                        <p>See how Auri engages visitors not as a support tool, but as a strategic guide.</p>
+                        <h2>Step into the <span class="gradient-text">new world.</span></h2>
+                        <p>See how Auri engages visitors not as a support bot, but as a strategic advisor that fuels your pipeline.</p>
                         <ul style="color: var(--text-secondary); line-height: 2; margin: 2rem 0 0 1rem;">
-                            <li>🎯 Identifies goals early</li><li>💡 Recommends solutions</li><li>📊 Captures qualification data</li>
+                            <li>🎯 Identifies visitor goals immediately</li>
+                            <li>💡 Recommends tailored solutions</li>
+                            <li>📊 Captures the data sales needs to close</li>
                         </ul>
                     </div>
                     <div class="chat-interface">
                         <div style="padding: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 700; display: flex; gap: 10px; align-items: center;">
-                            <div style="width:10px; height:10px; background:var(--accent-success); border-radius:50%; box-shadow: 0 0 10px var(--accent-success);"></div>Auri Advisor
+                            <div style="width:10px; height:10px; background:var(--accent-success); border-radius:50%; box-shadow:0 0 10px var(--accent-success);"></div>
+                            Auri Advisor
                         </div>
                         <div class="chat-messages" id="chat-box"></div>
-                        <div style="padding: 1rem; border-top: 1px solid rgba(255,255,255,0.1); display: flex; gap: 10px;">
+                         <div style="padding: 1rem; border-top: 1px solid rgba(255,255,255,0.1); display: flex; gap: 10px;">
                             <input type="text" id="user-input" placeholder="Type a message..." style="flex:1; padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.3); color: white; outline: none;">
                             <button id="send-btn" style="width: 45px; background: var(--accent-primary); border: none; border-radius: 12px; color: white; cursor: pointer;">➤</button>
                         </div>
@@ -333,6 +407,73 @@
                 </div>
             </div>
         </section>
+
+        <!-- ===== PRICING (Section 5) ===== -->
+        <section id="sec-5">
+            <div class="container" style="text-align:center;">
+                <h2 style="text-align:center">Pricing</h2>
+                <p style="margin:0 auto 2.5rem auto;">
+                    Choose how you grow — tiered monthly plans based on Auri-guided conversations. 
+                    Every conversation gives you complete lead details, ready for your pipeline.
+                </p>
+
+                <div class="grid-3" style="margin-top:2rem;">
+                    <!-- Starter -->
+                    <div class="card">
+                        <h3 style="color:var(--accent-secondary); margin-bottom:8px;">Starter</h3>
+                        <p style="margin:0 auto 12px;">
+                            For solo and small teams just getting started with conversation-led selling.
+                        </p>
+                        <p style="margin:0 auto 12px; font-size:0.98rem;">
+                            Includes up to <strong>30 Auri-guided conversations / month</strong> 
+                            delivering complete lead details directly to you.
+                        </p>
+                        <p style="font-weight:700; color:var(--accent-primary); margin-top:6px;">
+                            From AUD 79 / month
+                        </p>
+                    </div>
+
+                    <!-- Growth -->
+                    <div class="card">
+                        <h3 style="color:var(--accent-secondary); margin-bottom:8px;">Growth</h3>
+                        <p style="margin:0 auto 12px;">
+                            For growing teams with regular enquiries and a steady inbound pipeline.
+                        </p>
+                        <p style="margin:0 auto 12px; font-size:0.98rem;">
+                            Includes up to <strong>100 Auri-guided conversations / month</strong> 
+                            delivering complete lead details directly to you.
+                        </p>
+                        <p style="font-weight:700; color:var(--accent-primary); margin-top:6px;">
+                            From AUD 149 / month
+                        </p>
+                    </div>
+
+                    <!-- Scale -->
+                    <div class="card">
+                        <h3 style="color:var(--accent-secondary); margin-bottom:8px;">Scale</h3>
+                        <p style="margin:0 auto 12px;">
+                            For small businesses with high-intent traffic and active sales cycles.
+                        </p>
+                        <p style="margin:0 auto 12px; font-size:0.98rem;">
+                            Includes up to <strong>250 Auri-guided conversations / month</strong> 
+                            delivering complete lead details directly to you.
+                        </p>
+                        <p style="font-weight:700; color:var(--accent-primary); margin-top:6px;">
+                            From AUD 299 / month
+                        </p>
+                    </div>
+                </div>
+
+                <div style="margin-top:2rem;">
+                    <p style="color:var(--text-secondary); font-size:0.98rem; margin-bottom:1rem;">
+                        Need more volume? We can tailor limits and pricing based on how many Auri-guided conversations you expect each month.
+                    </p>
+                    <button class="btn" onclick="scrollToSection(4)">Talk to Auri</button>
+                </div>
+            </div>
+        </section>
+        <!-- ===== /PRICING ===== -->
+
     </main>
 
     <div class="krilay-tag">Powered by Krilay AI</div>
@@ -342,7 +483,6 @@
         const DESKTOP_BREAKPOINT = 969;
         let isDesktop = window.innerWidth >= DESKTOP_BREAKPOINT;
 
-        // --- CUSTOM SCROLL ENGINE (DESKTOP ONLY) ---
         let currentSection = 0;
         const sections = document.querySelectorAll('section');
         const totalSections = sections.length;
@@ -350,16 +490,19 @@
 
         function scrollToSection(index) {
             if (!isDesktop) {
-                 const target = document.getElementById(`sec-${index}`);
-                 if(target) target.scrollIntoView({ behavior: 'smooth' });
-                 return;
+                const target = document.getElementById(`sec-${index}`);
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+                return;
             }
             if (index < 0 || index >= totalSections || isAnimating) return;
             isAnimating = true;
+
             const outgoing = sections[currentSection];
             const incoming = sections[index];
             const direction = index > currentSection ? 'down' : 'up';
+
             document.body.classList.add('scanning');
+
             setTimeout(() => {
                 outgoing.classList.remove('active');
                 outgoing.classList.toggle('previous', direction === 'down');
@@ -367,8 +510,9 @@
                 incoming.classList.remove('previous');
                 currentSection = index;
                 updateNav();
-                if(index === 3) animateStats();
+                if (index === 3) animateStats();
             }, 500);
+
             setTimeout(() => {
                 document.body.classList.remove('scanning');
                 isAnimating = false;
@@ -386,22 +530,28 @@
         }, { passive: false });
 
         document.addEventListener('keydown', (e) => {
-            if(document.activeElement.tagName === 'INPUT') return;
-            if (['ArrowDown', 'PageDown', 'Space'].includes(e.key)) { e.preventDefault(); scrollToSection(currentSection + 1); }
-            if (['ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); scrollToSection(currentSection - 1); }
+            if (document.activeElement.tagName === 'INPUT') return;
+            if (['ArrowDown', 'PageDown', 'Space'].includes(e.key)) {
+                e.preventDefault();
+                scrollToSection(currentSection + 1);
+            }
+            if (['ArrowUp', 'PageUp'].includes(e.key)) {
+                e.preventDefault();
+                scrollToSection(currentSection - 1);
+            }
         });
 
-        // --- SPEEDOMETER STATS ANIMATION ---
+        // --- STATS ANIMATION ---
         let statsAnimated = false;
         function animateStats() {
-            if(statsAnimated) return;
+            if (statsAnimated) return;
             statsAnimated = true;
             const stats = document.querySelectorAll('.stat-num');
             stats.forEach(stat => {
                 const target = parseFloat(stat.dataset.target);
                 const suffix = stat.dataset.suffix;
                 const start = 0;
-                const duration = 2000; 
+                const duration = 2000;
                 const startTime = performance.now();
                 function update(currentTime) {
                     const elapsed = currentTime - startTime;
@@ -416,20 +566,22 @@
             });
         }
 
-        // --- MOBILE INTERSECTION OBSERVER FOR STATS ---
         const statsObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if(entry.isIntersecting && entry.target.id === 'sec-3') {
+                if (entry.isIntersecting && entry.target.id === 'sec-3') {
                     animateStats();
                 }
             });
         }, { threshold: 0.3 });
-        if(!isDesktop) sections.forEach(sec => statsObserver.observe(sec));
+
+        if (!isDesktop) sections.forEach(sec => statsObserver.observe(sec));
 
         // --- NAVIGATION ---
         const navLinks = document.querySelectorAll('.nav-links a');
         function updateNav() {
-            navLinks.forEach(link => link.classList.toggle('active', parseInt(link.dataset.target) === currentSection));
+            navLinks.forEach(link => {
+                link.classList.toggle('active', parseInt(link.dataset.target) === currentSection);
+            });
         }
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
@@ -440,21 +592,26 @@
 
         window.addEventListener('resize', () => {
             isDesktop = window.innerWidth >= DESKTOP_BREAKPOINT;
-            if(!isDesktop) sections.forEach(sec => statsObserver.observe(sec));
+            if (!isDesktop) sections.forEach(sec => statsObserver.observe(sec));
         });
 
         // --- DEMO CHAT ---
         const chatBox = document.getElementById('chat-box');
         const addMsg = (txt, sndr) => {
-            const d = document.createElement('div'); d.className = `msg ${sndr}`; d.textContent = txt;
-            chatBox.appendChild(d); chatBox.scrollTop = chatBox.scrollHeight;
-        }
-        setTimeout(() => addMsg("👋 Hi there! I'm Auri. Are you looking to improve lead quality today?", 'bot'), 1500);
+            const d = document.createElement('div');
+            d.className = `msg ${sndr}`;
+            d.textContent = txt;
+            chatBox.appendChild(d);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        };
+        setTimeout(() => addMsg("👋 Welcome. I noticed you were looking at enterprise features. Would you like a comparison guide?", 'bot'), 1500);
         document.getElementById('send-btn').onclick = () => {
-            const inp = document.getElementById('user-input'); if(!inp.value.trim()) return;
-            addMsg(inp.value, 'user'); inp.value='';
-            setTimeout(() => addMsg("Got it. I recommend our Progressive Profiling feature. Shall I show you how it works?", 'bot'), 1200);
-        }
+            const inp = document.getElementById('user-input');
+            if (!inp.value.trim()) return;
+            addMsg(inp.value, 'user');
+            inp.value = '';
+            setTimeout(() => addMsg("Excellent choice. I've prepared that guide for you. I also noticed you might be a good fit for our volume tier—shall I connect you with a specialist?", 'bot'), 1200);
+        };
     </script>
 </body>
 </html>
