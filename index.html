@@ -4,24 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Auri by Krilay AI | Intelligent Sales Advisor</title>
-  <meta name="description" content="Auri by Krilay AI - Conversation-led sales advisor that turns website visitors into ready-to-close leads." />
+  <meta name="description" content="Auri by Krilay AI - Conversation-led sales advisor that turns website visitors into ready-to-close opportunities." />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --mint-soft: #DFFFDE;
-      --mint-bright: #87F8AE;
-      --ink: #012B3A;
-      --blue: #004963;
-      --orange: #FF4C46;
-      --bg-main: #ffffff;
-      --bg-alt: #f9fafb;
-      --border-subtle: #e5e7eb;
-      --text-main: #111827;
-      --text-muted: #4b5563;
-      --radius-lg: 18px;
+      /* Auri advert-inspired palette */
+      --yellow-main: #ffc94a;      /* hero / background */
+      --yellow-soft: #ffe7a3;      /* subtle sections */
+      --yellow-light: #fff3c7;
+
+      --ink: #12212f;              /* main text */
+      --ink-soft: #374151;
+
+      --purple: #7c3aed;           /* accents */
+      --pink: #ec4899;
+
+      --bg-page: #fff8df;
+      --card-bg: #ffffff;
+
+      --radius-lg: 20px;
       --radius-xl: 26px;
-      --shadow-soft: 0 18px 40px rgba(1, 43, 58, 0.08);
-      --shadow-card: 0 12px 30px rgba(1, 43, 58, 0.08);
+      --shadow-soft: 0 18px 40px rgba(17, 24, 39, 0.14);
+      --shadow-card: 0 10px 26px rgba(17, 24, 39, 0.12);
       --max-width: 1120px;
     }
 
@@ -33,8 +37,8 @@
 
     html, body {
       font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      color: var(--text-main);
-      background: var(--bg-main);
+      color: var(--ink);
+      background: var(--bg-page);
     }
 
     a {
@@ -57,9 +61,9 @@
       position: sticky;
       top: 0;
       z-index: 20;
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 201, 74, 0.96);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(229, 231, 235, 0.9);
+      border-bottom: 1px solid rgba(234, 179, 8, 0.7);
     }
 
     .nav-inner {
@@ -82,8 +86,8 @@
       width: 32px;
       height: 32px;
       border-radius: 999px;
-      background: linear-gradient(135deg, var(--mint-bright), #ffffff);
-      border: 2px solid rgba(0, 73, 99, 0.25);
+      background: radial-gradient(circle at 30% 30%, #fff7cc, #f97316);
+      border: 2px solid rgba(17, 24, 39, 0.18);
       position: relative;
       overflow: hidden;
     }
@@ -91,14 +95,13 @@
     .logo-icon::after {
       content: "";
       position: absolute;
-      inset: 6px;
+      inset: 7px;
       border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, #ffffff, var(--mint-bright));
-      opacity: 0.9;
+      background: radial-gradient(circle at 30% 30%, #ffffff, #fb923c);
     }
 
     .logo-text-main {
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing: -0.04em;
       font-size: 1.25rem;
       color: var(--ink);
@@ -107,7 +110,7 @@
     .logo-text-sub {
       font-size: 0.78rem;
       font-weight: 500;
-      color: var(--text-muted);
+      color: var(--ink-soft);
     }
 
     .nav-links {
@@ -118,7 +121,7 @@
     }
 
     .nav-links a {
-      color: var(--text-muted);
+      color: var(--ink-soft);
       font-weight: 500;
       padding: 0.25rem 0;
       border-bottom: 2px solid transparent;
@@ -127,7 +130,7 @@
     .nav-links a:hover,
     .nav-links a.active {
       color: var(--ink);
-      border-bottom-color: rgba(0, 73, 99, 0.65);
+      border-bottom-color: rgba(124, 58, 237, 0.8);
     }
 
     .nav-cta {
@@ -152,25 +155,25 @@
     }
 
     .btn-primary {
-      background: var(--orange);
+      background: linear-gradient(135deg, var(--purple), var(--pink));
       color: #ffffff;
-      box-shadow: 0 10px 24px rgba(255, 76, 70, 0.45);
+      box-shadow: 0 10px 24px rgba(124, 58, 237, 0.45);
     }
 
     .btn-primary:hover {
-      box-shadow: 0 14px 32px rgba(255, 76, 70, 0.5);
+      box-shadow: 0 14px 32px rgba(124, 58, 237, 0.6);
       transform: translateY(-1px);
     }
 
     .btn-outline {
-      border-color: rgba(0, 73, 99, 0.25);
-      background: #ffffff;
-      color: var(--blue);
+      border-color: rgba(17, 24, 39, 0.35);
+      background: #fff7cc;
+      color: var(--ink);
     }
 
     .btn-outline:hover {
-      border-color: var(--blue);
-      box-shadow: 0 8px 20px rgba(1, 43, 58, 0.12);
+      border-color: var(--purple);
+      box-shadow: 0 8px 20px rgba(17, 24, 39, 0.18);
       transform: translateY(-1px);
     }
 
@@ -181,17 +184,17 @@
     /* HERO */
 
     .hero {
-      background: radial-gradient(circle at top left, var(--mint-bright), var(--mint-soft));
-      border-bottom: 1px solid rgba(209, 213, 219, 0.6);
+      background: var(--yellow-main);
+      border-bottom: 1px solid rgba(234, 179, 8, 0.5);
     }
 
     .hero-inner {
       max-width: var(--max-width);
       margin: 0 auto;
-      padding: 3.5rem 1.5rem 3rem;
+      padding: 3rem 1.5rem 3rem;
       display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-      gap: 3rem;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 2.5rem;
       align-items: center;
     }
 
@@ -201,8 +204,8 @@
       gap: 0.5rem;
       padding: 0.35rem 0.9rem;
       border-radius: 999px;
-      background: rgba(1, 43, 58, 0.08);
-      color: var(--blue);
+      background: rgba(17, 24, 39, 0.06);
+      color: var(--ink);
       font-size: 0.8rem;
       font-weight: 600;
       text-transform: uppercase;
@@ -214,13 +217,13 @@
       width: 8px;
       height: 8px;
       border-radius: 999px;
-      background: var(--orange);
-      box-shadow: 0 0 0 4px rgba(255, 76, 70, 0.35);
+      background: var(--purple);
+      box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.35);
     }
 
     .hero-title {
       font-size: clamp(2.4rem, 4vw, 3.1rem);
-      line-height: 1.05;
+      line-height: 1.1;
       font-weight: 900;
       letter-spacing: -0.04em;
       color: var(--ink);
@@ -228,13 +231,13 @@
     }
 
     .hero-title span {
-      color: var(--blue);
+      color: var(--purple);
     }
 
     .hero-sub {
       font-size: 1rem;
       line-height: 1.7;
-      color: var(--text-muted);
+      color: var(--ink-soft);
       max-width: 34rem;
       margin-bottom: 1.5rem;
     }
@@ -250,9 +253,9 @@
       font-size: 0.78rem;
       padding: 0.35rem 0.8rem;
       border-radius: 999px;
-      border: 1px solid rgba(1, 43, 58, 0.16);
-      background: rgba(255, 255, 255, 0.8);
-      color: var(--blue);
+      border: 1px solid rgba(17, 24, 39, 0.16);
+      background: rgba(255, 255, 255, 0.85);
+      color: var(--ink-soft);
       font-weight: 500;
     }
 
@@ -261,12 +264,12 @@
       flex-wrap: wrap;
       gap: 0.75rem;
       align-items: center;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
     }
 
     .hero-footnote {
-      font-size: 0.8rem;
-      color: var(--text-muted);
+      font-size: 0.82rem;
+      color: var(--ink-soft);
     }
 
     .hero-footnote strong {
@@ -276,141 +279,68 @@
     .hero-visual {
       position: relative;
       border-radius: var(--radius-xl);
-      background: #ffffff;
-      padding: 1.25rem;
+      background: var(--yellow-soft);
+      padding: 1.5rem 1.3rem;
       box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(1, 43, 58, 0.08);
+      border: 1px solid rgba(234, 179, 8, 0.7);
+      overflow: hidden;
+    }
+
+    .auri-img-wrap {
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      margin-bottom: 1.1rem;
+    }
+
+    .auri-img-wrap img {
+      max-height: 220px;
+      object-fit: contain;
+    }
+
+    .auri-shadow {
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70%;
+      height: 18px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(0, 0, 0, 0.25), transparent);
+      opacity: 0.35;
+      filter: blur(3px);
     }
 
     .hero-tagline {
-      font-size: 0.88rem;
-      font-weight: 600;
-      color: var(--blue);
-      margin-bottom: 0.75rem;
-    }
-
-    .hero-mini-metrics {
-      display: flex;
-      gap: 0.75rem;
-      margin-bottom: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .mini-metric {
-      flex: 1 1 45%;
-      min-width: 0;
-      background: var(--bg-alt);
-      border-radius: 12px;
-      padding: 0.65rem 0.75rem;
-      border: 1px solid rgba(229, 231, 235, 0.9);
-    }
-
-    .mini-metric-label {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      margin-bottom: 0.2rem;
-    }
-
-    .mini-metric-value {
+      font-size: 0.9rem;
       font-weight: 700;
-      font-size: 0.95rem;
       color: var(--ink);
+      margin-bottom: 0.35rem;
+      text-align: center;
     }
 
-    .mini-metric-value span {
-      color: var(--orange);
+    .hero-caption {
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      text-align: center;
     }
 
-    .hero-chat {
-      margin-top: 0.75rem;
-      border-radius: 16px;
-      border: 1px solid rgba(209, 213, 219, 0.9);
-      background: #ffffff;
-      overflow: hidden;
+    .hero-badge-strip {
+      margin-top: 1rem;
       display: flex;
-      flex-direction: column;
-      height: 260px;
-    }
-
-    .hero-chat-header {
-      padding: 0.65rem 0.9rem;
-      display: flex;
-      align-items: center;
-      gap: 0.45rem;
-      border-bottom: 1px solid rgba(229, 231, 235, 0.9);
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--blue);
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: #10b981;
-      box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.25);
-    }
-
-    .hero-chat-body {
-      padding: 0.75rem 0.9rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.55rem;
-      font-size: 0.8rem;
-      overflow-y: auto;
-    }
-
-    .bubble {
-      max-width: 80%;
-      padding: 0.55rem 0.75rem;
-      border-radius: 12px;
-      line-height: 1.5;
-    }
-
-    .bubble.bot {
-      align-self: flex-start;
-      background: var(--bg-alt);
-      border: 1px solid rgba(229, 231, 235, 0.9);
-      color: var(--text-muted);
-    }
-
-    .bubble.user {
-      align-self: flex-end;
-      background: var(--orange);
-      color: #ffffff;
-      border-radius: 12px 12px 2px 12px;
-    }
-
-    .hero-chat-footer {
-      margin-top: auto;
-      border-top: 1px solid rgba(229, 231, 235, 0.9);
-      padding: 0.55rem 0.75rem;
-      display: flex;
+      flex-wrap: wrap;
       gap: 0.5rem;
-      align-items: center;
-    }
-
-    .hero-chat-footer input {
-      flex: 1;
-      border-radius: 999px;
-      border: 1px solid rgba(209, 213, 219, 0.9);
-      padding: 0.4rem 0.75rem;
-      font-size: 0.78rem;
-      outline: none;
-    }
-
-    .hero-chat-footer button {
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      border: none;
-      background: var(--blue);
-      color: white;
-      font-size: 0.8rem;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
       justify-content: center;
+    }
+
+    .hero-badge {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(17, 24, 39, 0.2);
+      background: rgba(255, 255, 255, 0.8);
+      color: var(--ink-soft);
     }
 
     /* SECTION WRAPPERS */
@@ -434,7 +364,7 @@
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      color: var(--blue);
+      color: var(--purple);
       margin-bottom: 0.3rem;
     }
 
@@ -448,12 +378,78 @@
 
     .section-sub {
       font-size: 0.98rem;
-      color: var(--text-muted);
+      color: var(--ink-soft);
       line-height: 1.7;
     }
 
     .section--alt {
-      background: var(--bg-alt);
+      background: var(--yellow-light);
+      border-top: 1px solid rgba(250, 204, 21, 0.4);
+      border-bottom: 1px solid rgba(250, 204, 21, 0.35);
+    }
+
+    /* PROBLEM STRIP */
+
+    .problem-strip {
+      background: var(--yellow-soft);
+      border-top: 1px solid rgba(234, 179, 8, 0.6);
+      border-bottom: 1px solid rgba(234, 179, 8, 0.6);
+    }
+
+    .problem-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .problem-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+      color: var(--ink);
+    }
+
+    .problem-sub {
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+      margin-bottom: 1rem;
+    }
+
+    .hero-list {
+      list-style: none;
+      margin-bottom: 0;
+    }
+
+    .hero-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .hero-list li span {
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      background: #0f172a;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: #ffd166;
+    }
+
+    .problem-note {
+      font-size: 0.88rem;
+      color: var(--ink-soft);
+      margin-top: 0.75rem;
     }
 
     /* FEATURES GRID */
@@ -465,10 +461,10 @@
     }
 
     .feature-card {
-      background: #ffffff;
+      background: var(--card-bg);
       border-radius: var(--radius-lg);
       padding: 1.4rem 1.5rem;
-      border: 1px solid rgba(229, 231, 235, 0.9);
+      border: 1px solid rgba(250, 204, 21, 0.7);
       box-shadow: var(--shadow-card);
     }
 
@@ -479,8 +475,8 @@
       width: 30px;
       height: 30px;
       border-radius: 999px;
-      background: var(--mint-soft);
-      color: var(--blue);
+      background: rgba(124, 58, 237, 0.08);
+      color: var(--purple);
       font-size: 0.9rem;
       font-weight: 700;
       margin-bottom: 0.7rem;
@@ -495,7 +491,7 @@
 
     .feature-body {
       font-size: 0.92rem;
-      color: var(--text-muted);
+      color: var(--ink-soft);
       line-height: 1.7;
     }
 
@@ -508,10 +504,10 @@
     }
 
     .stat-card {
-      background: #ffffff;
+      background: var(--card-bg);
       border-radius: var(--radius-lg);
       padding: 1.6rem 1.5rem;
-      border: 1px solid rgba(229, 231, 235, 0.9);
+      border: 1px solid rgba(250, 204, 21, 0.7);
       text-align: left;
       box-shadow: var(--shadow-card);
     }
@@ -520,7 +516,7 @@
       font-size: 2.1rem;
       font-weight: 900;
       letter-spacing: -0.04em;
-      color: var(--blue);
+      color: var(--purple);
       margin-bottom: 0.25rem;
     }
 
@@ -533,7 +529,7 @@
 
     .stat-desc {
       font-size: 0.9rem;
-      color: var(--text-muted);
+      color: var(--ink-soft);
       line-height: 1.6;
     }
 
@@ -548,7 +544,7 @@
 
     .demo-note {
       font-size: 0.9rem;
-      color: var(--text-muted);
+      color: var(--ink-soft);
       margin-top: 1.25rem;
     }
 
@@ -557,10 +553,10 @@
     }
 
     .demo-card {
-      background: #ffffff;
+      background: var(--card-bg);
       border-radius: var(--radius-xl);
       padding: 1.5rem;
-      border: 1px solid rgba(209, 213, 219, 0.9);
+      border: 1px solid rgba(250, 204, 21, 0.8);
       box-shadow: var(--shadow-card);
     }
 
@@ -573,7 +569,7 @@
 
     .demo-card p {
       font-size: 0.9rem;
-      color: var(--text-muted);
+      color: var(--ink-soft);
       margin-bottom: 0.8rem;
     }
 
@@ -581,8 +577,102 @@
       margin-top: 0.5rem;
       padding-left: 1.1rem;
       font-size: 0.9rem;
-      color: var(--text-muted);
+      color: var(--ink-soft);
       line-height: 1.7;
+    }
+
+    /* SIMPLE INLINE CHAT (kept as a small demo) */
+
+    .chat-shell {
+      border-radius: 16px;
+      border: 1px solid rgba(250, 204, 21, 0.9);
+      background: #fffaf1;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 260px;
+    }
+
+    .chat-header {
+      padding: 0.65rem 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      border-bottom: 1px solid rgba(250, 204, 21, 0.7);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
+    }
+
+    .chat-body {
+      padding: 0.75rem 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      font-size: 0.8rem;
+      overflow-y: auto;
+    }
+
+    .bubble {
+      max-width: 80%;
+      padding: 0.55rem 0.75rem;
+      border-radius: 14px;
+      line-height: 1.5;
+    }
+
+    .bubble.bot {
+      align-self: flex-start;
+      background: #fff7e0;
+      border: 1px solid rgba(234, 179, 8, 0.9);
+      color: var(--ink-soft);
+    }
+
+    .bubble.user {
+      align-self: flex-end;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      color: #ffffff;
+      border-radius: 14px 14px 2px 14px;
+    }
+
+    .chat-footer {
+      margin-top: auto;
+      border-top: 1px solid rgba(250, 204, 21, 0.7);
+      padding: 0.55rem 0.75rem;
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      background: #fffaf1;
+    }
+
+    .chat-footer input {
+      flex: 1;
+      border-radius: 999px;
+      border: 1px solid rgba(209, 213, 219, 0.9);
+      padding: 0.4rem 0.75rem;
+      font-size: 0.78rem;
+      outline: none;
+    }
+
+    .chat-footer button {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      border: none;
+      background: var(--purple);
+      color: white;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
     /* PRICING */
@@ -594,10 +684,10 @@
     }
 
     .pricing-card {
-      background: #ffffff;
+      background: var(--card-bg);
       border-radius: var(--radius-xl);
       padding: 1.8rem 1.6rem;
-      border: 1px solid rgba(209, 213, 219, 0.9);
+      border: 1px solid rgba(250, 204, 21, 0.9);
       box-shadow: var(--shadow-card);
       display: flex;
       flex-direction: column;
@@ -608,11 +698,11 @@
       display: inline-flex;
       padding: 0.25rem 0.7rem;
       border-radius: 999px;
-      border: 1px solid rgba(0, 73, 99, 0.15);
+      border: 1px solid rgba(17, 24, 39, 0.14);
       font-size: 0.75rem;
       font-weight: 600;
-      color: var(--blue);
-      background: rgba(223, 255, 222, 0.7);
+      color: var(--ink);
+      background: #fff7cc;
       margin-bottom: 0.7rem;
     }
 
@@ -625,26 +715,26 @@
 
     .pricing-desc {
       font-size: 0.9rem;
-      color: var(--text-muted);
+      color: var(--ink-soft);
       margin-bottom: 0.7rem;
     }
 
     .pricing-usage {
       font-size: 0.88rem;
-      color: var(--text-muted);
+      color: var(--ink-soft);
       margin-bottom: 0.9rem;
     }
 
     .pricing-price {
       font-size: 0.95rem;
       font-weight: 700;
-      color: var(--orange);
+      color: var(--purple);
       margin-bottom: 0.4rem;
     }
 
     .pricing-note {
       font-size: 0.82rem;
-      color: var(--text-muted);
+      color: var(--ink-soft);
     }
 
     .pricing-footer {
@@ -659,9 +749,9 @@
     /* FOOTER */
 
     .footer {
-      border-top: 1px solid rgba(229, 231, 235, 0.9);
+      border-top: 1px solid rgba(234, 179, 8, 0.6);
       padding: 1.5rem 1.5rem 2rem;
-      background: #ffffff;
+      background: var(--yellow-main);
       margin-top: 1rem;
     }
 
@@ -673,13 +763,348 @@
       gap: 1rem;
       align-items: center;
       font-size: 0.8rem;
-      color: var(--text-muted);
+      color: var(--ink-soft);
       flex-wrap: wrap;
     }
 
     .footer-inner a {
-      color: var(--blue);
+      color: var(--ink);
       font-weight: 500;
+    }
+
+    /* ============ AURI OVERLAY (3-PANE CHAT) ============ */
+
+    .auri-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 220ms ease-out;
+    }
+
+    .auri-overlay.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .auri-overlay-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.55);
+    }
+
+    .auri-overlay-panel {
+      position: relative;
+      width: min(1120px, 100vw - 32px);
+      height: min(680px, 100vh - 40px);
+      background: #ffe7a3;
+      border-radius: 26px;
+      box-shadow: 0 30px 70px rgba(15, 23, 42, 0.55);
+      overflow: hidden;
+      transform: translateY(16px) scale(0.96);
+      transition: transform 220ms ease-out;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(234, 179, 8, 0.85);
+    }
+
+    .auri-overlay.is-open .auri-overlay-panel {
+      transform: translateY(0) scale(1);
+    }
+
+    .auri-overlay-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      border: none;
+      background: rgba(15, 23, 42, 0.8);
+      color: #fef9c3;
+      font-size: 18px;
+      cursor: pointer;
+      z-index: 3;
+    }
+
+    .auri-overlay-header {
+      padding: 10px 18px 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      background: linear-gradient(135deg, #facc15, #fbbf24);
+      color: #111827;
+      font-size: 0.86rem;
+      font-weight: 600;
+    }
+
+    .auri-overlay-header span strong {
+      font-weight: 800;
+    }
+
+    .ao-layout {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 70% 30%;
+      grid-template-rows: 100%;
+      height: 100%;
+      background: #fff7d6;
+    }
+
+    .ao-left {
+      display: flex;
+      padding: 12px;
+    }
+
+    .ao-right {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      gap: 10px;
+      padding: 10px;
+    }
+
+    .ao-chat-card {
+      background: #fffdf5;
+      border-radius: 20px;
+      border: 1px solid rgba(250, 204, 21, 0.9);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.35);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .ao-header {
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: #111827;
+    }
+
+    .ao-header-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ao-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 12px #22c55e;
+    }
+
+    .ao-logo {
+      height: 32px;
+      width: auto;
+    }
+
+    .ao-typing {
+      font-size: 0.78rem;
+      color: #6b7280;
+    }
+
+    .ao-messages-wrap {
+      flex: 1;
+      min-height: 0;
+      margin-top: 6px;
+    }
+
+    .ao-messages {
+      height: 100%;
+      overflow: auto;
+      padding: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 0.86rem;
+    }
+
+    .ao-bubble {
+      max-width: 80%;
+      padding: 8px 10px;
+      border-radius: 14px;
+      line-height: 1.35;
+      white-space: pre-wrap;
+    }
+
+    .ao-bubble a {
+      color: #7c3aed;
+      text-decoration: underline;
+    }
+
+    .ao-bubble-user {
+      align-self: flex-end;
+      background: #fef3c7;
+      color: #111827;
+      border-radius: 14px 14px 2px 14px;
+      border: 1px solid rgba(245, 158, 11, 0.8);
+    }
+
+    .ao-bubble-bot {
+      align-self: flex-start;
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      color: #111827;
+    }
+
+    .ao-footer {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .ao-input {
+      flex: 1;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid #fbbf24;
+      background: #0f172a;
+      color: #e5e7eb;
+      outline: none;
+      font-size: 0.86rem;
+    }
+
+    .ao-send {
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 0;
+      background: linear-gradient(135deg, #7c3aed, #ec4899);
+      color: #fefce8;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.86rem;
+    }
+
+    .ao-hint {
+      color: #6b7280;
+      font-size: 0.75rem;
+      margin-top: 4px;
+      text-align: center;
+    }
+
+    .ao-panel {
+      background: #fffef5;
+      border-radius: 20px;
+      border: 1px solid rgba(250, 204, 21, 0.9);
+      padding: 14px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.18);
+      font-size: 0.9rem;
+    }
+
+    .ao-ads {
+      background: radial-gradient(circle at 0% 0%, #fef9c3 0, #fffbeb 36%, #fff7ed 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ao-ad-link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .ao-ad-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.18;
+      filter: saturate(1.05) contrast(1.02);
+    }
+
+    .ao-ad-img.hidden {
+      display: none;
+    }
+
+    .ao-ad-fallback {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #fef9c3, #fef3c7);
+    }
+
+    .ao-ad-overlay {
+      position: relative;
+      background: rgba(255, 255, 255, 0.97);
+      border-radius: 16px;
+      padding: 18px 20px;
+      border: 1px solid rgba(250, 204, 21, 0.85);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.18);
+      width: min(92%, 560px);
+      z-index: 1;
+    }
+
+    .ao-ad-title {
+      font-weight: 800;
+      font-size: 1rem;
+      margin-bottom: 4px;
+      color: #111827;
+    }
+
+    .ao-ad-tag {
+      font-size: 0.86rem;
+      color: #4b5563;
+      margin-bottom: 10px;
+    }
+
+    .ao-cta {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 0;
+      font-weight: 700;
+      cursor: pointer;
+      background: linear-gradient(135deg, #7c3aed, #ec4899);
+      color: #fefce8;
+      font-size: 0.82rem;
+      box-shadow: 0 6px 18px rgba(124, 58, 237, 0.35);
+    }
+
+    .ao-facts {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: left;
+    }
+
+    .ao-fact {
+      font-size: 0.9rem;
+      line-height: 1.4;
+      color: #111827;
+    }
+
+    .ao-fact small {
+      display: block;
+      color: #6b7280;
+      margin-top: 6px;
+    }
+
+    .ao-fade {
+      animation: ao-fade 600ms ease;
+    }
+
+    @keyframes ao-fade {
+      from { opacity: 0; }
+      to   { opacity: 1; }
     }
 
     /* RESPONSIVE */
@@ -712,6 +1137,11 @@
         margin: 0 auto;
       }
 
+      .problem-inner {
+        grid-template-columns: minmax(0, 1fr);
+        padding-inline: 1rem;
+      }
+
       .section {
         padding-inline: 1rem;
       }
@@ -727,6 +1157,15 @@
         max-width: 420px;
         margin: 0 auto;
       }
+
+      .ao-layout {
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto auto;
+      }
+
+      .ao-right {
+        grid-template-rows: 200px 200px;
+      }
     }
 
     @media (max-width: 640px) {
@@ -735,7 +1174,7 @@
       }
 
       .hero-title {
-        font-size: 2rem;
+        font-size: 2.1rem;
       }
 
       .hero-actions {
@@ -746,10 +1185,6 @@
       .hero-actions .btn {
         width: 100%;
         justify-content: center;
-      }
-
-      .hero-pills {
-        gap: 0.4rem;
       }
     }
   </style>
@@ -768,14 +1203,14 @@
         </a>
         <nav class="nav-links">
           <a href="#how" class="active">How it helps</a>
-          <a href="#wishlist">Sales wishlist</a>
+          <a href="#problem">The problem</a>
           <a href="#impact">Impact</a>
           <a href="#demo">Live demo</a>
           <a href="#pricing">Pricing</a>
         </nav>
         <div class="nav-cta">
-          <button class="btn btn-outline" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">
-            Watch Auri in action
+          <button class="btn btn-outline" onclick="openAuriOverlay()">
+            Experience Auri
           </button>
           <button class="btn btn-primary" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">
             Start a trial chat
@@ -797,9 +1232,8 @@
               Turn <span>anonymous visitors</span> into ready-to-close opportunities.
             </h1>
             <p class="hero-sub">
-              Auri sits on your website like a control center for sales —
-              understanding each visitor, guiding them through choices, and handing your team
-              complete, ready-to-act lead context.
+              Auri sits on your website like a control center for sales — understanding each visitor,
+              guiding them through choices, and handing your team complete, ready-to-act lead context.
             </p>
 
             <div class="hero-pills">
@@ -809,8 +1243,8 @@
             </div>
 
             <div class="hero-actions">
-              <button class="btn btn-primary" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">
-                Try a sample conversation →
+              <button class="btn btn-primary" onclick="openAuriOverlay()">
+                Experience Auri →
               </button>
               <button class="btn btn-outline" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">
                 See how Auri helps sales
@@ -823,44 +1257,49 @@
             </div>
           </div>
 
-          <aside class="hero-visual" aria-label="Auri insight panel">
-            <div class="hero-tagline">Current visitor snapshot</div>
-
-            <div class="hero-mini-metrics">
-              <div class="mini-metric">
-                <div class="mini-metric-label">Intent</div>
-                <div class="mini-metric-value"><span>High</span> · Pricing &amp; features</div>
-              </div>
-              <div class="mini-metric">
-                <div class="mini-metric-label">Next best action</div>
-                <div class="mini-metric-value">Offer comparison + suggest call</div>
-              </div>
+          <aside class="hero-visual" aria-label="Auri mascot and snapshot">
+            <div class="auri-img-wrap">
+              <!-- Ensure this file exists next to index.html, or update the src -->
+              <img src="auri-mascot.png" alt="Auri mascot" />
+              <div class="auri-shadow"></div>
             </div>
-
-            <div class="hero-chat">
-              <div class="hero-chat-header">
-                <div class="status-dot"></div>
-                Auri · Live on your website
-              </div>
-              <div class="hero-chat-body" id="hero-chat-log">
-                <div class="bubble bot">
-                  Hi! 👋 I see you're comparing your options. Are you more focused on getting
-                  <strong>more leads</strong> or improving <strong>conversion quality</strong>?
-                </div>
-                <div class="bubble user">
-                  Mostly improving lead quality. We’re getting enquiries but they’re all over the place.
-                </div>
-                <div class="bubble bot">
-                  Perfect — that’s exactly where Auri helps. I can capture every lead with clear
-                  context (budget, timeline, use case) and send it straight to your CRM. Want a quick example?
-                </div>
-              </div>
-              <div class="hero-chat-footer">
-                <input id="hero-chat-input" type="text" placeholder="Type: Show me an example lead summary" />
-                <button id="hero-chat-send" title="Send">➤</button>
-              </div>
+            <div class="hero-tagline">Meet Auri — your always-on website advisor.</div>
+            <div class="hero-caption">
+              Friendly on the surface. Powerful, lead-capturing intelligence underneath.
+            </div>
+            <div class="hero-badge-strip">
+              <div class="hero-badge">Captures full lead details</div>
+              <div class="hero-badge">Keeps visitors engaged</div>
+              <div class="hero-badge">Hands sales a clear summary</div>
             </div>
           </aside>
+        </div>
+      </section>
+
+      <!-- PROBLEM SECTION -->
+      <section class="problem-strip" id="problem">
+        <div class="problem-inner">
+          <div>
+            <div class="problem-title">Website chats are often challenging…</div>
+            <p class="problem-sub">
+              They’re supposed to help sales, but in reality most chats end with nothing useful captured.
+              Auri is designed specifically to fix that.
+            </p>
+            <ul class="hero-list">
+              <li><span>✔</span> Slow response times</li>
+              <li><span>✔</span> Generic replies</li>
+              <li><span>✔</span> No lead capture</li>
+            </ul>
+            <p class="problem-note">
+              Auri replaces “just chatting” with conversations that are always helpful, engaging and insightful.
+            </p>
+          </div>
+          <div>
+            <p class="problem-sub">
+              Instead of a chat bubble that looks nice but doesn’t move the needle, Auri focuses on what sales
+              teams actually need: intent, context and clear next steps.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -869,79 +1308,38 @@
         <div class="section-inner">
           <div class="section-header">
             <div class="section-eyebrow">How Auri works for you</div>
-            <h2 class="section-title">A single, guided experience — from first hello to CRM-ready lead.</h2>
+            <h2 class="section-title">From “just a chat bubble” to a true sales assistant.</h2>
             <p class="section-sub">
-              Think of Auri as the conversation layer for your website: one place where every visitor journey
-              is understood, structured and handed over to your team with zero guesswork.
+              Auri keeps the warm, welcoming feel of your mascot, but behind the scenes it’s doing serious work:
+              understanding each visitor, guiding them and turning every chat into structured, usable information.
             </p>
           </div>
 
           <div class="feature-grid">
             <article class="feature-card">
               <div class="feature-pill">1</div>
-              <h3 class="feature-title">Understands what the visitor really wants</h3>
+              <h3 class="feature-title">Understands what visitors really need</h3>
               <p class="feature-body">
-                Auri asks smart, natural questions to uncover intent, budget, timing and key constraints — 
-                the things your reps normally spend the first 10 minutes extracting on a call.
+                Auri asks natural questions that uncover intent, urgency, budget and key details —
+                the information your team needs to know before they call or email.
               </p>
             </article>
 
             <article class="feature-card">
               <div class="feature-pill">2</div>
-              <h3 class="feature-title">Guides them through options like a human</h3>
+              <h3 class="feature-title">Guides them like a friendly expert</h3>
               <p class="feature-body">
-                Instead of throwing FAQs at people, Auri narrows choices, explains trade-offs and
-                matches them to the right product, plan or service based on your playbook.
+                Instead of generic replies, Auri walks people through options, explains trade-offs and nudges them
+                towards the right product, plan or service.
               </p>
             </article>
 
             <article class="feature-card">
               <div class="feature-pill">3</div>
-              <h3 class="feature-title">Sends your team a complete, concise summary</h3>
+              <h3 class="feature-title">Captures complete lead details for you</h3>
               <p class="feature-body">
-                Before your team ever talks to the prospect, they see a clear summary: who they are,
-                what they were trying to do, what they’ve seen, and what they’re likely to say yes to next.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- WISHLIST -->
-      <section class="section" id="wishlist">
-        <div class="section-inner">
-          <div class="section-header">
-            <div class="section-eyebrow">The sales wishlist</div>
-            <h2 class="section-title">Everything your team keeps asking for — in one place.</h2>
-            <p class="section-sub">
-              We spoke with sales and marketing teams who live in CRMs and spreadsheets all day.
-              Auri is built to remove the most common “I wish we had…” pain points.
-            </p>
-          </div>
-
-          <div class="feature-grid">
-            <article class="feature-card">
-              <h3 class="feature-title">“I wish I knew who is actually serious.”</h3>
-              <p class="feature-body">
-                Auri scores each conversation based on intent signals: urgency, problem clarity, budget,
-                and decision-maker presence. You see which conversations deserve a fast response, and which
-                can be nurtured.
-              </p>
-            </article>
-
-            <article class="feature-card">
-              <h3 class="feature-title">“Give me context, not just a form submit.”</h3>
-              <p class="feature-body">
-                Instead of one-line “message” fields, Auri hands over structured, narrative context:
-                what they tried, what blocked them, and what they hope your team will do.
-              </p>
-            </article>
-
-            <article class="feature-card">
-              <h3 class="feature-title">“Please don’t add another tool to learn.”</h3>
-              <p class="feature-body">
-                Auri works quietly in the background. Leads, notes and scores can appear directly in your CRM
-                or inbox — no additional dashboards unless you want them.
+                Every useful piece of information — name, contact, needs, timeframe — is captured and ready to send
+                straight into your CRM or email inbox.
               </p>
             </article>
           </div>
@@ -953,10 +1351,10 @@
         <div class="section-inner">
           <div class="section-header">
             <div class="section-eyebrow">Impact in practice</div>
-            <h2 class="section-title">From scattered enquiries to a healthy, predictable pipeline.</h2>
+            <h2 class="section-title">From “nice to have” chat to a real lead engine.</h2>
             <p class="section-sub">
-              Auri doesn’t magically create demand — it makes sure you don’t <em>waste</em> the demand you
-              already have by turning each visit into a structured, actionable conversation.
+              Auri doesn’t magically create new visitors. But it stops warm, interested people from slipping away
+              with nothing captured.
             </p>
           </div>
 
@@ -965,8 +1363,7 @@
               <div class="stat-value">3×</div>
               <div class="stat-label">Richer conversation data</div>
               <div class="stat-desc">
-                Every lead comes with a short story, not just an email and phone number — so follow-ups feel
-                personal from day one.
+                Each lead comes with context and story — not just a phone number — so follow-ups feel personal from day one.
               </div>
             </div>
 
@@ -974,8 +1371,7 @@
               <div class="stat-value">40%</div>
               <div class="stat-label">Higher engagement</div>
               <div class="stat-desc">
-                Visitors are more willing to talk when they feel guided, not interrogated. Auri keeps the tone
-                helpful and on-brand.
+                Visitors stay longer and share more when replies feel tailored and helpful instead of robotic.
               </div>
             </div>
 
@@ -983,7 +1379,7 @@
               <div class="stat-value">-60%</div>
               <div class="stat-label">Less “discovery” time</div>
               <div class="stat-desc">
-                Your team starts calls at “here’s what we recommend” instead of “so tell me about your business…”.
+                Your team starts at “here’s what we recommend” instead of spending the first 10 minutes asking basic questions.
               </div>
             </div>
           </div>
@@ -995,10 +1391,10 @@
         <div class="section-inner">
           <div class="section-header">
             <div class="section-eyebrow">Live experience</div>
-            <h2 class="section-title">See how Auri runs a real conversation.</h2>
+            <h2 class="section-title">Quick peek into Auri.</h2>
             <p class="section-sub">
-              Below is a simplified version of how Auri would talk to a new visitor. In your deployment,
-              it uses your products, your tone and your qualification rules.
+              Use the mini chat below for a one-on-one exchange, or click “Experience Auri” to open the full
+              3-pane view with live ads and insights.
             </p>
           </div>
 
@@ -1008,33 +1404,35 @@
                 What Auri learns in 2–3 minutes:
               </h3>
               <ul class="demo-list">
-                <li>Who they are (role, company, location if relevant)</li>
-                <li>What brought them to you today</li>
-                <li>What success looks like in their words</li>
-                <li>Budget, timeline and decision constraints</li>
-                <li>Which product / plan Auri recommends</li>
+                <li>Who the visitor is (role, company, location if needed)</li>
+                <li>What brought them to your site today</li>
+                <li>What “success” looks like in their own words</li>
+                <li>Budget, timing and decision constraints</li>
+                <li>Which product / plan Auri recommends next</li>
               </ul>
               <p class="demo-note">
                 <strong>Output:</strong> your team receives a clean summary with all of the above, ready to
-                drop into CRM or a shared inbox — no extra copy-paste work.
+                paste into CRM or reply to directly.
+              </p>
+              <p class="demo-note" style="margin-top:0.75rem;">
+                Prefer the full view? <button class="btn btn-outline" style="margin-top:0.5rem;" onclick="openAuriOverlay()">Experience Auri →</button>
               </p>
             </div>
 
             <div class="demo-card">
-              <h3>Sample Auri conversation</h3>
-              <p>Type a message and see how Auri might respond:</p>
-              <div class="hero-chat" style="height:260px; margin-top:0.6rem;">
-                <div class="hero-chat-header">
-                  <div class="status-dot"></div> Auri · Sales Advisor
+              <h3>Mini Auri conversation</h3>
+              <p>Ask Auri anything about capturing and qualifying leads from your website:</p>
+              <div class="chat-shell" style="margin-top:0.6rem;">
+                <div class="chat-header">
+                  <div class="status-dot"></div> Auri · Mini Demo
                 </div>
-                <div class="hero-chat-body" id="demo-chat-log">
+                <div class="chat-body" id="demo-chat-log">
                   <div class="bubble bot">
-                    Hi! 👋 I’m Auri. In a couple of quick questions, I’ll figure out whether we can help —
-                    and if yes, what the best next step is. What are you hoping to improve right now?
+                    Hi! 👋 I’m Auri. Tell me a bit about your website or lead challenges and I’ll show you how I can help.
                   </div>
                 </div>
-                <div class="hero-chat-footer">
-                  <input id="demo-chat-input" type="text" placeholder="e.g. We want more qualified leads, not just clicks" />
+                <div class="chat-footer">
+                  <input id="demo-chat-input" type="text" placeholder="e.g. We get many enquiries but lead quality is low" />
                   <button id="demo-chat-send">➤</button>
                 </div>
               </div>
@@ -1073,8 +1471,8 @@
                 </div>
               </div>
               <div class="pricing-footer">
-                <button class="btn btn-outline" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">
-                  See how 30 conversations feel
+                <button class="btn btn-outline" onclick="openAuriOverlay()">
+                  Try Auri now
                 </button>
               </div>
             </article>
@@ -1096,7 +1494,7 @@
                 </div>
               </div>
               <div class="pricing-footer">
-                <button class="btn btn-primary" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">
+                <button class="btn btn-primary" onclick="openAuriOverlay()">
                   Talk to Auri on your site →
                 </button>
               </div>
@@ -1119,7 +1517,7 @@
                 </div>
               </div>
               <div class="pricing-footer">
-                <button class="btn btn-outline" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">
+                <button class="btn btn-outline" onclick="openAuriOverlay()">
                   Discuss a custom tier
                 </button>
               </div>
@@ -1133,74 +1531,296 @@
     <footer class="footer">
       <div class="footer-inner">
         <div>© <span id="year"></span> Krilay AI · Auri</div>
-        <div>Built to turn everyday website traffic into meaningful sales conversations.</div>
+        <div>Built to turn everyday website chats into real, usable leads.</div>
       </div>
     </footer>
   </div>
 
+  <!-- ============ AURI 3-PANE OVERLAY ============ -->
+  <div id="auri-overlay" class="auri-overlay" aria-hidden="true">
+    <div class="auri-overlay-backdrop" onclick="closeAuriOverlay()"></div>
+    <div class="auri-overlay-panel">
+      <button class="auri-overlay-close" type="button" onclick="closeAuriOverlay()">×</button>
+      <div class="auri-overlay-header">
+        <span><strong>Experience Auri:</strong> live 3-pane view (chat · promo panel · insight panel).</span>
+        <span>Press <strong>ESC</strong> to close</span>
+      </div>
+      <div class="ao-layout">
+        <!-- Left: chat -->
+        <section class="ao-left">
+          <div class="ao-chat-card">
+            <div class="ao-header">
+              <div class="ao-header-left">
+                <div class="ao-dot"></div>
+                <div>Auri by Krilay</div>
+              </div>
+              <img src="auri-mascot.png" alt="Auri" class="ao-logo" />
+              <div class="ao-typing" id="ao-typing" hidden>typing…</div>
+            </div>
+            <div class="ao-messages-wrap">
+              <div class="ao-messages" id="ao-messages"></div>
+            </div>
+            <div class="ao-footer">
+              <input id="ao-input" class="ao-input" type="text" placeholder="Type a message and press Enter…" autocomplete="off" />
+              <button id="ao-send" class="ao-send" type="button">Send</button>
+            </div>
+            <div class="ao-hint">Powered by n8n · Demo session only.</div>
+          </div>
+        </section>
+
+        <!-- Right: ads + facts -->
+        <aside class="ao-right">
+          <div class="ao-panel ao-ads">
+            <a id="ao-adLink" class="ao-ad-link" href="#" target="_blank" rel="noopener">
+              <img id="ao-adImage" class="ao-ad-img" alt="Auri banner" />
+              <div id="ao-adFallback" class="ao-ad-fallback"></div>
+              <div class="ao-ad-overlay">
+                <div id="ao-adTitle" class="ao-ad-title"></div>
+                <div id="ao-adTag" class="ao-ad-tag"></div>
+                <button id="ao-adCta" class="ao-cta" type="button">Learn more</button>
+              </div>
+            </a>
+          </div>
+
+          <div class="ao-panel ao-facts">
+            <div id="ao-factBox" class="ao-fact"></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // year
+    // Footer year
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // simple "fake" Auri reply in hero chat
-    const heroLog = document.getElementById("hero-chat-log");
-    const heroInput = document.getElementById("hero-chat-input");
-    const heroSend = document.getElementById("hero-chat-send");
+    // ========= Mini demo chat (inline) – uses same backend =========
+    const MINI_API_URL = "https://e8f4548c87a4.ngrok-free.app/webhook/Zoho";
+    const miniLog = document.getElementById("demo-chat-log");
+    const miniInput = document.getElementById("demo-chat-input");
+    const miniSend = document.getElementById("demo-chat-send");
+    const miniSessionId = crypto.randomUUID ? crypto.randomUUID() : String(Date.now());
 
-    function addHeroBubble(text, sender) {
+    function miniAddBubble(text, sender) {
       const div = document.createElement("div");
       div.className = "bubble " + sender;
       div.textContent = text;
-      heroLog.appendChild(div);
-      heroLog.scrollTop = heroLog.scrollHeight;
+      miniLog.appendChild(div);
+      miniLog.scrollTop = miniLog.scrollHeight;
     }
 
-    heroSend.addEventListener("click", () => {
-      const value = heroInput.value.trim();
-      if (!value) return;
-      addHeroBubble(value, "user");
-      heroInput.value = "";
-      setTimeout(() => {
-        addHeroBubble(
-          "Here’s how that looks as a lead summary: goal, key challenges, timeframe, and your recommended next step — all captured automatically for your team.",
-          "bot"
-        );
-      }, 900);
-    });
-
-    heroInput.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") heroSend.click();
-    });
-
-    // demo chat
-    const demoLog = document.getElementById("demo-chat-log");
-    const demoInput = document.getElementById("demo-chat-input");
-    const demoSend = document.getElementById("demo-chat-send");
-
-    function addDemoBubble(text, sender) {
-      const div = document.createElement("div");
-      div.className = "bubble " + sender;
-      div.textContent = text;
-      demoLog.appendChild(div);
-      demoLog.scrollTop = demoLog.scrollHeight;
+    async function miniSendToBackend(message) {
+      try {
+        const res = await fetch(MINI_API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams({ message, sessionId: miniSessionId })
+        });
+        const text = await res.text();
+        let reply = text;
+        try {
+          const data = JSON.parse(text);
+          reply = data.reply || data.message || data.response || data.answer || text;
+        } catch (_) {}
+        miniAddBubble(reply, "bot");
+      } catch (err) {
+        miniAddBubble("Hmm, I couldn’t reach Auri just now. Please try again in a moment.", "bot");
+      }
     }
 
-    demoSend.addEventListener("click", () => {
-      const value = demoInput.value.trim();
+    miniSend.addEventListener("click", () => {
+      const value = miniInput.value.trim();
       if (!value) return;
-      addDemoBubble(value, "user");
-      demoInput.value = "";
-      setTimeout(() => {
-        addDemoBubble(
-          "Thanks, that helps. I’d capture that as: “Wants higher-quality leads, currently getting volume without fit.” From there I’d ask 2–3 targeted questions and then suggest the best path for your team.",
-          "bot"
-        );
-      }, 900);
+      miniAddBubble(value, "user");
+      miniInput.value = "";
+      miniSendToBackend(value);
     });
 
-    demoInput.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") demoSend.click();
+    miniInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        miniSend.click();
+      }
     });
+
+    // ========= Overlay open / close =========
+    const overlay = document.getElementById("auri-overlay");
+
+    function openAuriOverlay() {
+      overlay.classList.add("is-open");
+      overlay.setAttribute("aria-hidden", "false");
+      // focus input
+      setTimeout(() => {
+        const inp = document.getElementById("ao-input");
+        if (inp) inp.focus();
+      }, 260);
+    }
+
+    function closeAuriOverlay() {
+      overlay.classList.remove("is-open");
+      overlay.setAttribute("aria-hidden", "true");
+    }
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && overlay.classList.contains("is-open")) {
+        closeAuriOverlay();
+      }
+    });
+
+    // ========= 3-pane overlay chat wiring (from your Auri_3_Sections file, yellow themed) =========
+    const WEBHOOK_URL = "https://e8f4548c87a4.ngrok-free.app/webhook/Zoho";
+
+    const ao = {
+      msgs: document.getElementById("ao-messages"),
+      input: document.getElementById("ao-input"),
+      send: document.getElementById("ao-send"),
+      typing: document.getElementById("ao-typing")
+    };
+
+    const aoSessionId = crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + "-ao";
+
+    function aoEscapeHTML(s) {
+      return String(s).replace(/[&<>"']/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
+    }
+
+    function aoRenderRichText(text) {
+      let safe = aoEscapeHTML(text ?? "");
+      safe = safe.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+      safe = safe.replace(/\n/g, "<br>");
+      return safe;
+    }
+
+    function aoAddBubble(text, who = "bot") {
+      const b = document.createElement("div");
+      b.className = "ao-bubble " + (who === "user" ? "ao-bubble-user" : "ao-bubble-bot");
+      b.innerHTML = aoRenderRichText(text);
+      ao.msgs.appendChild(b);
+      ao.msgs.scrollTop = ao.msgs.scrollHeight;
+    }
+
+    async function aoSendMessage() {
+      const text = ao.input.value.trim();
+      if (!text) return;
+      aoAddBubble(text, "user");
+      ao.input.value = "";
+      ao.input.disabled = true;
+      ao.send.disabled = true;
+      ao.typing.hidden = false;
+      try {
+        const res = await fetch(WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams({ message: text, sessionId: aoSessionId })
+        });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const raw = await res.text();
+        let reply = raw;
+        try {
+          const data = JSON.parse(raw);
+          reply = (data && typeof data.reply === "string") ? data.reply :
+                  data.message || data.response || data.answer || raw;
+        } catch (_) {}
+        aoAddBubble(reply, "bot");
+      } catch (e) {
+        aoAddBubble("Sorry, something went wrong. (" + e.message + ")", "bot");
+      } finally {
+        ao.typing.hidden = true;
+        ao.input.disabled = false;
+        ao.send.disabled = false;
+        ao.input.focus();
+      }
+    }
+
+    ao.send.addEventListener("click", aoSendMessage);
+    ao.input.addEventListener("keydown", (e) => { if (e.key === "Enter") aoSendMessage(); });
+
+    aoAddBubble("Welcome to Auri — your conversation-led sales advisor. How can I help today?", "bot");
+
+    // ========= Right column rotation content =========
+    const ads = [
+      {
+        image: "assets/auri-conversation.png",
+        href: "https://krilay.com",
+        title: "Turn visitors into ready-to-close opportunities",
+        tag: "Auri guides each person with helpful, tailored answers — not generic replies.",
+        cta: "See how Auri helps"
+      },
+      {
+        image: "assets/auri-lead-capture.png",
+        href: "https://krilay.com",
+        title: "Every chat becomes a usable lead",
+        tag: "Auri captures complete lead details — name, contact, needs, timing — ready for your CRM.",
+        cta: "What gets captured?"
+      },
+      {
+        image: "assets/auri-small-teams.png",
+        href: "https://krilay.com",
+        title: "Built for small teams",
+        tag: "Keep your stack simple — no extra dashboards to learn or manage.",
+        cta: "Keep it simple"
+      },
+      {
+        image: "assets/auri-pricing.png",
+        href: "https://krilay.com",
+        title: "Auri-guided conversations",
+        tag: "Pricing based on meaningful conversations that capture all the lead data you need.",
+        cta: "Try a sample chat"
+      }
+    ];
+
+    const facts = [
+      "Auri runs conversation-led selling — guiding visitors with clear, helpful answers so they don’t bounce.",
+      "Leads include full context (goals, constraints, timing) so follow-ups start at recommendations, not discovery.",
+      "Teams see higher engagement when the chat feels like a friendly expert, not a script.",
+      "You’re billed on Auri-guided conversations, not pageviews — simple and scalable for small teams."
+    ];
+
+    const ROTATE_MS = 30000;
+    let adIdx = 0, factIdx = 0;
+
+    const adLink = document.getElementById("ao-adLink");
+    const adImage = document.getElementById("ao-adImage");
+    const adTitle = document.getElementById("ao-adTitle");
+    const adTag = document.getElementById("ao-adTag");
+    const adCta = document.getElementById("ao-adCta");
+    const adFallback = document.getElementById("ao-adFallback");
+
+    function showAd(i) {
+      const a = ads[i % ads.length];
+      adLink.href = a.href;
+      adImage.classList.remove("hidden");
+      adImage.src = a.image || "";
+      adImage.onerror = () => { adImage.classList.add("hidden"); };
+      adImage.onload = () => { adImage.classList.remove("hidden"); };
+      adFallback.style.background = "linear-gradient(135deg,#fef9c3,#fef3c7)";
+      adTitle.textContent = a.title;
+      adTag.textContent = a.tag;
+      adCta.textContent = a.cta || "Learn more";
+      [adTitle, adTag, adCta].forEach(n => { n.classList.remove("ao-fade"); void n.offsetWidth; n.classList.add("ao-fade"); });
+    }
+
+    function rotateAd() {
+      adIdx = (adIdx + 1) % ads.length;
+      showAd(adIdx);
+    }
+
+    const factBox = document.getElementById("ao-factBox");
+
+    function showFact(i) {
+      const text = facts[i % facts.length];
+      const p = document.createElement("div");
+      p.textContent = text;
+      p.className = "ao-fade";
+      factBox.replaceChildren(p);
+    }
+
+    function rotateFact() {
+      factIdx = (factIdx + 1) % facts.length;
+      showFact(factIdx);
+    }
+
+    if (ads.length) { showAd(adIdx); setInterval(rotateAd, ROTATE_MS); }
+    if (facts.length) { showFact(factIdx); setInterval(rotateFact, ROTATE_MS); }
   </script>
 </body>
 </html>
